@@ -1,7 +1,9 @@
+import '../CSS/default.css'
+
 export default function Sidebar() {
     return <nav>
-        <ul>
-            <li>Home</li>
+        <ul class = "buttonBox">
+            <li >Home</li>
             <li>Search</li>
             <li>Explore</li>
             <li>Reels</li>

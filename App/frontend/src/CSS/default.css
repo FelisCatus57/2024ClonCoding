@@ -1,0 +1,16 @@
+.buttonBox li{
+    width: 160px; /* 너비 설정 */
+    height: 48px; /* 높이 설정 */
+    flex-shrink: 0; /* flex 아이템이 축소되지 않도록 설정 */
+    background: #D9D9D9; /* 배경색 설정 */
+    border-radius: 10px; /* 테두리 둥글기 설정 */
+    list-style-type: none; /* 기본 리스트 스타일 제거 */
+    display: flex; /* Flexbox 모델 적용 */
+    align-items: center; /* 내부 아이템을 세로 중앙으로 정렬 */
+    justify-content: center; /* 내부 아이템을 가로 중앙으로 정렬 */
+    margin: 8px; /* 주변 마진 설정 */
+}
+
+.buttonBox {
+    
+}
