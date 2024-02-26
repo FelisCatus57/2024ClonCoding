@@ -1,4 +1,5 @@
 import '../CSS/default.css'
+import {BrowserRouter, Routes, Route, Link} from "react-router-dom"
 
 import IconHome from '../assets/home.svg'
 import IconSearch from '../assets/search.svg'
@@ -10,15 +11,16 @@ import IconMenu from '../assets/Vector.svg'
 
 
 export default function Sidebar() {
-    return <nav>
+    return  <nav>
         <ul className = "buttonBox">
-            <li><img src={IconHome}/>Home</li>
-            <li><img src={IconSearch}/>Search</li>
-            <li><img src={IconExplore}/>Explore</li>
-            <li><img src={IconReels}/>Reels</li>
-            <li><img src={IconMassage}/>Massage</li>
-            <li><img src={IconAlarm}/>Alarm</li>
-            <li><img src={IconHome}/>User</li>
+            <li><Link to={'/'}><img src={IconHome}/>Home</Link></li>
+            <li><Link to={'/search'}><img src={IconSearch}/>Search</Link></li>
+            <li><Link to={'/explore'}><img src={IconExplore}/>Explore</Link></li>
+            <li><Link to={'/reels'}><img src={IconReels}/>Reels</Link></li>
+            <li><Link to={'/massage'}><img src={IconMassage}/>Massage</Link></li>
+            <li><Link to={'/alarm'}><img src={IconAlarm}/>Alarm</Link></li>
+            <li><Link to={'/user'}><img src={IconHome}/>User</Link></li>
         </ul>
     </nav>
+    
 };

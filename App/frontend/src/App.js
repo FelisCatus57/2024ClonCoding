@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Sidebar from'./component/SideBar'
+import Main from'./component/Main'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
@@ -11,7 +12,7 @@ function App() {
     <BrowserRouter>
       <Sidebar/>
       <Routes>
-        <Route path='/'></Route>
+        <Route path='/' element={<Main />}/>
       </Routes>
     </BrowserRouter>
     
