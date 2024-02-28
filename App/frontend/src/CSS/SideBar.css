@@ -1,4 +1,20 @@
-.buttonBox li{
+.buttonBox {
+    box-sizing: border-box;
+    width: 210px;
+    height: 100vh;
+    flex-shrink: 0;
+    background: #FFF;
+    border: 1px solid #949494;
+    padding-left: 5px;
+    margin: 0;
+    padding: 0px;
+}
+
+.buttonBox ul {
+    position: relative;
+}
+
+.buttonBox li {
     box-sizing: border-box; /* 최대 사이즈 고정*/
     width: 160px; /* 너비 설정 */
     height: 48px; /* 높이 설정 */
@@ -12,10 +28,16 @@
     margin: 8px; 
     padding: 0px 10px; 
 }
+.buttonBox li:last-child {
+    position: absolute;
+    bottom: 52px;
+}
 .buttonBox li img {
     margin-right: 4px; /* 이미지 요소에만 적용 */
 }
-
-.buttonBox {
-    padding-left: 9px;
+.nav {
+    display: flex;
+    flex-direction: column;
+    align-items: first-start;
 }
+
