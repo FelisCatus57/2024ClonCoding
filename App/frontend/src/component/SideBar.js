@@ -14,7 +14,7 @@ export default function Sidebar() {
     return  <nav>
        
         <ul className = "buttonBox">
-             v   ChosunGram
+            ChosunGram
             <li><Link to={'/'}><img src={IconHome}/>Home</Link></li>
             <li><Link to={'/search'}><img src={IconSearch}/>Search</Link></li>
             <li><Link to={'/explore'}><img src={IconExplore}/>Explore</Link></li>

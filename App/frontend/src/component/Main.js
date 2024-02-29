@@ -1,5 +1,10 @@
+import StoryContent from "./StoryContent"
+
 export default function Main() {
     return <main>
-        메인
+        <div className="mainContainers">
+            <StoryContent/>
+            df
+        </div>
     </main>
 }
