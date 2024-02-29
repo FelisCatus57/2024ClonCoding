@@ -1,24 +1,30 @@
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+const onNaverLogin = () => {
+
+  window.location.href = "http://localhost:8080/oauth2/authorization/naver"
+}
+
+const getData = () => {
+  fetch("http://localhost:8080/my" , {
+    method: "GET",
+    credentials: "include"
+  })
+      .then((res) => res.json())
+      .then((data)=> {
+        alert(data)
+      })
+      .catch((error)=> alert(error))
+}
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <button onClick={onNaverLogin}> Naver Login</button>
+      <button onClick={getData}>Get Data</button>
+    </>
   );
 }
 
