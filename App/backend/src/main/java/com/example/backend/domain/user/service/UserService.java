@@ -1,5 +1,6 @@
 package com.example.backend.domain.user.service;
 
+import com.example.backend.domain.user.Enum.Gender;
 import com.example.backend.domain.user.Enum.Role;
 import com.example.backend.domain.user.dto.UserSignUpDTO;
 import com.example.backend.domain.user.entity.User;
@@ -34,6 +35,7 @@ public class UserService {
                 .nickname(userSignUpDTO.getNickname())
                 .email(userSignUpDTO.getEmail())
                 .role(Role.USER)
+                .gender(Gender.PRIVATE)
                 .build();
 
         user.setEncPassword(bCryptPasswordEncoder);
