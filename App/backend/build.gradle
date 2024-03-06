@@ -46,6 +46,9 @@ dependencies {
 
 	// Spring JWT
 	implementation 'com.auth0:java-jwt:4.4.0'
+
+	// Spring IO
+	implementation 'commons-io:commons-io:2.6'
 }
 
 tasks.named('test') {

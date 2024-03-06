@@ -1,19 +1,22 @@
 package com.example.backend.domain.feed.entity;
 
 import com.example.backend.domain.user.entity.User;
-import com.example.backend.global.BaseTime;
+import com.example.backend.global.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Entity
 @Table(name = "posts")
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Post extends BaseTime {
+public class Post extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,5 +27,10 @@ public class Post extends BaseTime {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Lob
+    private String content;
+
+    @OneToMany(mappedBy = "post")
+    private List<> images = new ArrayList<>();
 
 }
