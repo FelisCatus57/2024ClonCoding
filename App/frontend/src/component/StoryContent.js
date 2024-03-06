@@ -1,6 +1,8 @@
 import React, { Component, component } from 'react';
 import dummyData from './data.json';
 
+import '../CSS/StoryContent.css'
+
 class StoryContent extends Component {
     /*constructor(props) {
         super(props);
