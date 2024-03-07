@@ -5,6 +5,7 @@ import com.example.backend.domain.user.Enum.Role;
 import com.example.backend.domain.user.dto.UserSignUpDTO;
 import com.example.backend.domain.user.entity.User;
 import com.example.backend.domain.user.repository.UserRepository;
+import com.example.backend.global.image.Image;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 @Transactional
 @RequiredArgsConstructor
 public class UserService {
+
+    private final static String filePath = "D:/savefile";
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -31,11 +34,16 @@ public class UserService {
         User user = User.builder()
                 .username(userSignUpDTO.getUsername())
                 .password(userSignUpDTO.getPassword())
-                .name(userSignUpDTO.getName())
                 .nickname(userSignUpDTO.getNickname())
+                .name(userSignUpDTO.getName())
                 .email(userSignUpDTO.getEmail())
                 .role(Role.USER)
                 .gender(Gender.PRIVATE)
+                .image(Image.builder()
+                        .saveFilePath(filePath)
+                        .originFileName("insta_basic_people_image")
+                        .saveFileName("basic")
+                        .build())
                 .build();
 
         user.setEncPassword(bCryptPasswordEncoder);

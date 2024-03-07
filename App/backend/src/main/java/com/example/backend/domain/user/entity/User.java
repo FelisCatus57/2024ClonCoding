@@ -4,10 +4,13 @@ import com.example.backend.domain.user.Enum.Gender;
 import com.example.backend.domain.user.Enum.Role;
 import com.example.backend.domain.user.Enum.SocialType;
 import com.example.backend.global.BaseTimeEntity;
+import com.example.backend.global.image.Image;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import javax.naming.Name;
 
 @Getter
 @Entity
@@ -23,16 +26,16 @@ public class User extends BaseTimeEntity {
     @Column(name = "user_id")
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 10)
     private String username; // 아이디 (UNIQUE)
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 200)
     private String password; // 비밀번호
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10)
     private String name; // 이름
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 12)
     private String nickname; // 닉네임 (UNIQUE)
 
     @Column(nullable = false)
@@ -43,15 +46,23 @@ public class User extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     private Gender gender; // 성별 (처음에는 자동으로 PRIVATE)
-    
+
+    @Column(length = 11)
     private String phoneNo; // 전화번호
 
     @Column(length = 500)
     private String introduce; // 자기소개
-    
+
+    @Column(length = 50)
     private String website; // 웹사이트
 
-    private String profileImgUrl; // 프로필 이미지
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "saveFilePath", column = @Column(name = "user_img_path")),
+            @AttributeOverride(name = "originFileName", column = @Column(name = "user_img_origin_name")),
+            @AttributeOverride(name = "saveFileName", column = @Column(name = "user_img_save_name"))
+    })
+    private Image image; // 프로필 이미지
 
     @Enumerated(EnumType.STRING)
     private SocialType socialType; // 소셜로그인 시 플랫폼
@@ -60,10 +71,21 @@ public class User extends BaseTimeEntity {
 
     private String refreshToken; // JWT 리프레시 토큰 저장
 
-    // 유저 권한 설정 메소드
-//    public void authorizeUser() {
-//        this.role = Role.USER;
-//    }
+    @Builder
+    public User(String username, String password, String name, String nickname, String email) {
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.name = name;
+        this.email = email;
+        this.role = Role.USER;
+        this.gender = Gender.PRIVATE;
+        this.image = Image.builder()
+                .saveFilePath("D:/savefile")
+                .originFileName("insta_basic_people_image")
+                .saveFileName("basic")
+                .build();
+    }
 
     // 비밀번호 암호화
     public void setEncPassword(BCryptPasswordEncoder bCryptPasswordEncoder) {
