@@ -1,9 +1,9 @@
-package com.example.backend.global.jwt;
+package com.example.backend.global.util;
 
 import java.util.Random;
 
 // 임의의 랜덤 비밀번호 생성을 위한 클래스
-public class RandPassword {
+public class PasswordUtil {
 
     public static String generateRandomPassword() {
         int idx = 0;

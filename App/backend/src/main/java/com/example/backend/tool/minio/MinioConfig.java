@@ -1,4 +1,4 @@
-package com.example.backend.global.minio;
+package com.example.backend.tool.minio;
 
 import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;

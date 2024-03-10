@@ -23,14 +23,15 @@ public class Post extends BaseTimeEntity {
     @Column(name = "post_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
-
     @Lob
     private String content;
 
     @OneToMany(mappedBy = "post")
     private List<PostImage> images = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
 }

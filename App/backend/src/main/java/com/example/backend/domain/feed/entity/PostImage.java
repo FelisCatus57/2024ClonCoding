@@ -7,6 +7,8 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
 @Entity
@@ -21,6 +23,7 @@ public class PostImage extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 
     @Embedded

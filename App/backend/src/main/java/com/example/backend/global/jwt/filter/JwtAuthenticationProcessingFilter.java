@@ -2,7 +2,7 @@ package com.example.backend.global.jwt.filter;
 
 import com.example.backend.domain.user.entity.User;
 import com.example.backend.domain.user.repository.UserRepository;
-import com.example.backend.global.jwt.RandPassword;
+import com.example.backend.global.util.PasswordUtil;
 import com.example.backend.global.jwt.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -101,7 +101,7 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
 
         if (password == null) {
             // 소셜로그인의 경우 로그인시 password 값이 null 인데 인증 처리 시 비밀번호가 null 값이 들어가서는 안된다.
-            password = RandPassword.generateRandomPassword();
+            password = PasswordUtil.generateRandomPassword();
             // 임의의 패스워드를 만들어 비밀번호를 설정시켜준다.
         }
 

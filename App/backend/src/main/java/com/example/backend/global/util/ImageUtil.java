@@ -1,5 +1,7 @@
-package com.example.backend.global.image;
+package com.example.backend.global.util;
 
+import com.example.backend.global.image.Image;
+import com.example.backend.global.image.ImageType;
 import com.google.common.base.Enums;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -8,7 +10,7 @@ import java.util.UUID;
 
 public class ImageUtil {
 
-    public static Image convert(MultipartFile file) {
+    public static Image to(MultipartFile file) {
 
         final String originName = file.getOriginalFilename();
         final String name = FilenameUtils.getBaseName(originName);
