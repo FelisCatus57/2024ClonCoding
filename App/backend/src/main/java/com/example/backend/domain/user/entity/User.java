@@ -5,6 +5,7 @@ import com.example.backend.domain.user.Enum.Role;
 import com.example.backend.domain.user.Enum.SocialType;
 import com.example.backend.global.BaseTimeEntity;
 import com.example.backend.global.image.Image;
+import com.example.backend.global.image.ImageType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -58,9 +59,10 @@ public class User extends BaseTimeEntity {
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "saveFilePath", column = @Column(name = "user_img_path")),
-            @AttributeOverride(name = "originFileName", column = @Column(name = "user_img_origin_name")),
-            @AttributeOverride(name = "saveFileName", column = @Column(name = "user_img_save_name"))
+            @AttributeOverride(name = "imageUrl", column = @Column(name = "user_img_url")),
+            @AttributeOverride(name = "imageType", column = @Column(name = "user_img_type")),
+            @AttributeOverride(name = "imageName", column = @Column(name = "user_img_name")),
+            @AttributeOverride(name = "imageUUID", column = @Column(name = "user_img_uuid"))
     })
     private Image image; // 프로필 이미지
 
@@ -81,9 +83,10 @@ public class User extends BaseTimeEntity {
         this.role = Role.USER;
         this.gender = Gender.PRIVATE;
         this.image = Image.builder()
-                .saveFilePath("D:/savefile")
-                .originFileName("insta_basic_people_image")
-                .saveFileName("basic")
+                .imageUrl("http://uncertain.shop:9000/sample/base_image.jpg")
+                .imageType(ImageType.JPG)
+                .imageName("base")
+                .imageUUID("base-UUID")
                 .build();
     }
 

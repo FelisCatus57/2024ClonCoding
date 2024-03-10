@@ -25,9 +25,10 @@ public class PostImage extends BaseTimeEntity {
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "saveFilePath", column = @Column(name = "post_image_path")),
-            @AttributeOverride(name = "originFileName", column = @Column(name = "post_image_origin_name")),
-            @AttributeOverride(name = "saveFileName", column = @Column(name = "post_image_save_name"))
+            @AttributeOverride(name = "imageUrl", column = @Column(name = "user_img_url")),
+            @AttributeOverride(name = "imageType", column = @Column(name = "user_img_type")),
+            @AttributeOverride(name = "imageName", column = @Column(name = "user_img_name")),
+            @AttributeOverride(name = "imageUUID", column = @Column(name = "user_img_uuid"))
     })
     private Image image;
 

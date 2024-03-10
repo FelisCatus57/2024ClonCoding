@@ -6,6 +6,7 @@ import com.example.backend.domain.user.dto.UserSignUpDTO;
 import com.example.backend.domain.user.entity.User;
 import com.example.backend.domain.user.repository.UserRepository;
 import com.example.backend.global.image.Image;
+import com.example.backend.global.image.ImageType;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -40,9 +41,10 @@ public class UserService {
                 .role(Role.USER)
                 .gender(Gender.PRIVATE)
                 .image(Image.builder()
-                        .saveFilePath(filePath)
-                        .originFileName("insta_basic_people_image")
-                        .saveFileName("basic")
+                        .imageUrl("http://uncertain.shop:9000/sample/base_image.jpg")
+                        .imageType(ImageType.JPG)
+                        .imageName("base")
+                        .imageUUID("base-UUID")
                         .build())
                 .build();
 

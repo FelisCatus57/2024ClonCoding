@@ -1,22 +1,39 @@
 package com.example.backend.global.image;
 
+import com.google.common.base.Enums;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
-import java.util.Random;
 import java.util.UUID;
 
 public class ImageUtil {
 
-    public static Image convert(MultipartFile multipartFile) {
+    public static Image convert(MultipartFile file) {
 
-        final String originFileName = multipartFile.getOriginalFilename();
-        final String name = FilenameUtils.getBaseName(originFileName);
+        final String originName = file.getOriginalFilename();
+        final String name = FilenameUtils.getBaseName(originName);
+        final String type = FilenameUtils.getExtension(originName).toUpperCase();
+
+        // 확장자가 일치 하지 않으면
+        if (!Enums.getIfPresent(ImageType.class, type).isPresent()) {
+            throw new RuntimeException();
+            //TODO 나중에 커스텀 Exception 넣기
+        }
 
         return Image.builder()
-                .originFileName(name)
-                .saveFileName(UUID.randomUUID().toString())
+                .imageType(ImageType.valueOf(type))
+                .imageName(name)
+                .imageUUID(UUID.randomUUID().toString())
                 .build();
     }
+
+    public static Image getBaseImage() {
+        return Image.builder()
+                .imageName("base")
+                .imageType(ImageType.JPG)
+                .imageUrl("http://uncertain.shop:9000/sample/base_image.jpg")
+                .imageUUID("base-UUID")
+                .build();
+    }
+
 }

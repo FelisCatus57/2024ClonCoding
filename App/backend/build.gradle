@@ -49,6 +49,11 @@ dependencies {
 
 	// Spring IO
 	implementation 'commons-io:commons-io:2.6'
+
+	// Spring minio
+	implementation 'io.minio:minio:8.5.4'
+//	implementation group: 'com.jlefebure', name: 'spring-boot-starter-minio', version: '1.10'
+
 }
 
 tasks.named('test') {
