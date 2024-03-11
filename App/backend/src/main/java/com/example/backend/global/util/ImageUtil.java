@@ -33,7 +33,7 @@ public class ImageUtil {
         return Image.builder()
                 .imageName("base")
                 .imageType(ImageType.JPG)
-                .imageUrl("http://uncertain.shop:9000/sample/base_image.jpg")
+                .imageUrl("http://uncertain.shop:9000/sample/base-UUID.jpg")
                 .imageUUID("base-UUID")
                 .build();
     }

@@ -1,5 +1,7 @@
 package com.example.backend.domain.user.service;
 
+import com.example.backend.common.minio.MinioConfig;
+import com.example.backend.common.minio.MinioUploader;
 import com.example.backend.domain.user.Enum.Gender;
 import com.example.backend.domain.user.Enum.Role;
 import com.example.backend.domain.user.dto.UserSignUpDTO;
@@ -7,6 +9,7 @@ import com.example.backend.domain.user.entity.User;
 import com.example.backend.domain.user.repository.UserRepository;
 import com.example.backend.global.image.Image;
 import com.example.backend.global.image.ImageType;
+import io.minio.MinioClient;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,8 +19,6 @@ import org.springframework.stereotype.Service;
 @Transactional
 @RequiredArgsConstructor
 public class UserService {
-
-    private final static String filePath = "D:/savefile";
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -41,7 +42,7 @@ public class UserService {
                 .role(Role.USER)
                 .gender(Gender.PRIVATE)
                 .image(Image.builder()
-                        .imageUrl("http://uncertain.shop:9000/sample/base_image.jpg")
+                        .imageUrl("http://uncertain.shop:9000/sample/base-UUID.jpg")
                         .imageType(ImageType.JPG)
                         .imageName("base")
                         .imageUUID("base-UUID")

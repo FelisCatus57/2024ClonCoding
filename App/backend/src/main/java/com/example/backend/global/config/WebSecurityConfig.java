@@ -1,15 +1,15 @@
 package com.example.backend.global.config;
 
 import com.example.backend.domain.user.repository.UserRepository;
-import com.example.backend.global.jwt.filter.JwtAuthenticationProcessingFilter;
-import com.example.backend.global.jwt.service.JwtService;
-import com.example.backend.global.login.filter.CustomJsonUsernamePasswordAuthenticationFilter;
-import com.example.backend.global.login.handler.LoginFailureHandler;
-import com.example.backend.global.login.handler.LoginSuccessHandler;
-import com.example.backend.global.login.service.CustomLoginService;
-import com.example.backend.global.oauth2.handler.OAuth2LoginFailureHandler;
-import com.example.backend.global.oauth2.handler.OAuth2LoginSuccessHandler;
-import com.example.backend.global.oauth2.service.CustomOAuth2UserService;
+import com.example.backend.global.authorization.jwt.filter.JwtAuthenticationProcessingFilter;
+import com.example.backend.global.authorization.jwt.service.JwtService;
+import com.example.backend.global.authorization.login.filter.CustomJsonUsernamePasswordAuthenticationFilter;
+import com.example.backend.global.authorization.login.handler.LoginFailureHandler;
+import com.example.backend.global.authorization.login.handler.LoginSuccessHandler;
+import com.example.backend.global.authorization.login.service.CustomLoginService;
+import com.example.backend.global.authorization.oauth2.handler.OAuth2LoginFailureHandler;
+import com.example.backend.global.authorization.oauth2.handler.OAuth2LoginSuccessHandler;
+import com.example.backend.global.authorization.oauth2.service.CustomOAuth2UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -93,7 +93,7 @@ public class WebSecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http
                 .authorizeHttpRequests( (auth) -> auth
-                        .requestMatchers("/", "/sign-up", "/miniotest").permitAll()
+                        .requestMatchers("/", "/sign-up", "/miniotest", "/upload").permitAll()
                         .anyRequest().authenticated());
 
         http

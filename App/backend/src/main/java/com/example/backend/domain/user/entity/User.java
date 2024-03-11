@@ -83,7 +83,7 @@ public class User extends BaseTimeEntity {
         this.role = Role.USER;
         this.gender = Gender.PRIVATE;
         this.image = Image.builder()
-                .imageUrl("http://uncertain.shop:9000/sample/base_image.jpg")
+                .imageUrl("http://uncertain.shop:9000/sample/base-UUID.jpg")
                 .imageType(ImageType.JPG)
                 .imageName("base")
                 .imageUUID("base-UUID")
