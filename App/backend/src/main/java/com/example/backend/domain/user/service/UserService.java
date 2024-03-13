@@ -1,15 +1,14 @@
 package com.example.backend.domain.user.service;
 
-import com.example.backend.common.minio.MinioConfig;
-import com.example.backend.common.minio.MinioUploader;
 import com.example.backend.domain.user.Enum.Gender;
 import com.example.backend.domain.user.Enum.Role;
-import com.example.backend.domain.user.dto.UserSignUpDTO;
+import com.example.backend.domain.user.dto.UserRegisterRequest;
 import com.example.backend.domain.user.entity.User;
 import com.example.backend.domain.user.repository.UserRepository;
+import com.example.backend.global.error.ErrorCodeMessage;
+import com.example.backend.global.error.exception.EntityExistedException;
 import com.example.backend.global.image.Image;
 import com.example.backend.global.image.ImageType;
-import io.minio.MinioClient;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,22 +22,22 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public void signUp(UserSignUpDTO userSignUpDTO) throws Exception{
+    public void signUp(UserRegisterRequest userRegisterRequest) throws Exception{
 
-        if (userRepository.findByUsername(userSignUpDTO.getUsername()).isPresent()) {
-            throw new Exception("이미 존재하는 아이디 입니다.");
+        if (userRepository.existsUserByUsername(userRegisterRequest.getUsername())) {
+            throw new EntityExistedException(ErrorCodeMessage.USERNAME_EXIST);
         }
 
-        if (userRepository.findByNickname(userSignUpDTO.getNickname()).isPresent()) {
-            throw new Exception("이미 존재하는 닉네임 입니다.");
+        if (userRepository.existsUsersByNickname(userRegisterRequest.getNickname())) {
+            throw new EntityExistedException(ErrorCodeMessage.NICKNAME_EXIST);
         }
 
         User user = User.builder()
-                .username(userSignUpDTO.getUsername())
-                .password(userSignUpDTO.getPassword())
-                .nickname(userSignUpDTO.getNickname())
-                .name(userSignUpDTO.getName())
-                .email(userSignUpDTO.getEmail())
+                .username(userRegisterRequest.getUsername())
+                .password(userRegisterRequest.getPassword())
+                .nickname(userRegisterRequest.getNickname())
+                .name(userRegisterRequest.getName())
+                .email(userRegisterRequest.getEmail())
                 .role(Role.USER)
                 .gender(Gender.PRIVATE)
                 .image(Image.builder()

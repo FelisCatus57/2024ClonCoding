@@ -24,4 +24,15 @@ public class MinioTest {
         return ResponseEntity.ok(new ResultResponseDTO(ResultCodeMessage.POST_SUCCESS, image));
     }
 
+    @PostMapping("/delete")
+    public ResponseEntity<ResultResponseDTO> delete(@RequestParam("file") MultipartFile file) throws FileNotFoundException {
+
+        Image image = minioUploader.toImage(file);
+
+        minioUploader.deleteImage(image, "post");
+
+        return ResponseEntity.ok(new ResultResponseDTO(ResultCodeMessage.POST_DELETE_SUCCESS, "성공!"));
+    }
+
+
 }

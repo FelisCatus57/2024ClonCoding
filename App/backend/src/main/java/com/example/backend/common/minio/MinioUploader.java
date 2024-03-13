@@ -34,10 +34,17 @@ public class MinioUploader {
 
     // 
     public Image to(MultipartFile multipartFile, String dir) throws FileNotFoundException {
-        final Image image = ImageUtil.to(multipartFile); // MultipartFile 을 Image 객체로 변환
-        final String filename = convertToFilename(dir, image); // 경로와 이미지 객체의 정보를 가지고 파일 이름 생성
-        final String url = upload(multipartFile, filename); // 경로 반환후 설정
+        Image image = ImageUtil.to(multipartFile); // MultipartFile 을 Image 객체로 변환
+        String filename = convertToFilename(dir, image); // 경로와 이미지 객체의 정보를 가지고 파일 이름 생성
+        String url = upload(multipartFile, filename); // 경로 반환후 설정
         image.setUrl(url);
+
+        return image;
+    }
+
+    public Image toImage(MultipartFile multipartFile) throws FileNotFoundException {
+
+        Image image = ImageUtil.to(multipartFile);
 
         return image;
     }
@@ -76,7 +83,9 @@ public class MinioUploader {
             return; // 종료 시킨다.
         }
 
-        final String filename = convertToFilename(dir, image);
+        String filename = convertToFilename(dir, image);
+
+        System.out.println(filename);
 
         try {
             minioClient.removeObject(

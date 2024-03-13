@@ -1,6 +1,6 @@
 package com.example.backend.domain.user.controller;
 
-import com.example.backend.domain.user.dto.UserSignUpDTO;
+import com.example.backend.domain.user.dto.UserRegisterRequest;
 import com.example.backend.domain.user.entity.User;
 import com.example.backend.domain.user.repository.UserRepository;
 import com.example.backend.domain.user.service.UserService;
@@ -19,9 +19,9 @@ public class UserController {
 
     @PostMapping("/sign-up")
     @ResponseBody
-    public ResponseEntity<ResultResponseDTO> signUp(@RequestBody UserSignUpDTO userSignUpDTO) throws Exception {
-        userService.signUp(userSignUpDTO);
-        User user = userRepository.findByUsername(userSignUpDTO.getUsername()).get();
+    public ResponseEntity<ResultResponseDTO> signUp(@RequestBody UserRegisterRequest userRegisterRequest) throws Exception {
+        userService.signUp(userRegisterRequest);
+        User user = userRepository.findByUsername(userRegisterRequest.getUsername()).get();
         return ResponseEntity.ok(ResultResponseDTO.of(ResultCodeMessage.REGISTER_SUCCESS, user));
     }
 
