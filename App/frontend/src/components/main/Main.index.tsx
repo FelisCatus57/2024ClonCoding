@@ -8,6 +8,10 @@ export default function Main(): JSX.Element {
       <MainBody>
         <Story />
         <Contents />
+        {/* 스크롤 테스트 */}
+        <Contents />
+        <Contents />
+        {/* 스크롤 테스트 */}
       </MainBody>
     </>
   );

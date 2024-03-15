@@ -12,29 +12,20 @@ const Body = styled.div`
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-
   width: 100vw;
   min-height: 100vh;
 `;
 
+const Space = styled.div`
+  width: calc(100vw- 1258px);
+`;
 const MainWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 79vw;
-  background-color: #f9f9f9;
+  width: 1013px;
 `;
 
 const LeftWrapper = styled.div`
-  width: 21vw;
-  background-color: #f9f9f9;
-  display: flex;
-  justify-content: flex-start;
+  width: 245px;
 `;
-
-// const RightWrapper = styled.div`
-//   width: 35vw;
-//   background-color: #f9f9f9;
-// `;
 
 export default function Layout(props: ILayoutProps): JSX.Element {
   return (
@@ -42,10 +33,10 @@ export default function Layout(props: ILayoutProps): JSX.Element {
       <LeftWrapper>
         <Sidebar />
       </LeftWrapper>
+      <Space />
       <MainWrapper>
         <Body>{props.children}</Body>
       </MainWrapper>
-      {/* <RightWrapper></RightWrapper> */}
     </Wrapper>
   );
 }

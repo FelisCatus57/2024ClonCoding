@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
+  position: fixed;
+  left: 0;
   height: 100vh;
-  width: 14.6vw;
+  width: 17vw;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -11,18 +13,19 @@ export const Wrapper = styled.div`
 
 export const Title = styled.span`
   font-family: 'Lobster';
-  font-size: 2.08vw;
-  font-weight: 400;
-  margin-left: 1.2vw;
-  width: 13.4vw;
-  height: 6.5vh;
+  font-size: 25px;
   display: flex;
   align-items: center;
+  margin-top: 10%;
+  margin-bottom: 15%;
+  margin-left: 10%;
 `;
 
 export const NavBoxWrapper = styled.div`
-  height: 88.4vh;
-  margin-left: 0.6vw;
+  height: 100%;
+  padding-top: 1%;
+  padding-bottom: 11%;
+  margin-left: 3%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -33,12 +36,9 @@ export const Spacer = styled.div`
 `;
 
 export const NavBox = styled.div`
-  width: 11.1vw;
-  height: 4.7vh;
+  height: 48px;
   border-radius: 10px;
-  background-color: #d9d9d9;
-  font-size: 1.22vw;
-  margin-bottom: 1.45vh;
+  margin-bottom: 7%;
   display: flex;
   align-items: center;
   padding-left: 7%;
@@ -46,5 +46,6 @@ export const NavBox = styled.div`
 `;
 
 export const NavBoxText = styled.span`
-  margin-left: 4%;
+  margin-left: 8%;
+  font-size: 15px;
 `;
