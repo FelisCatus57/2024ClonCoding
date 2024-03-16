@@ -5,6 +5,7 @@ import com.example.backend.global.BaseTimeEntity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -34,5 +35,10 @@ public class Post extends BaseTimeEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Builder
+    public Post(User user, String content) {
+        this.user = user;
+        this.content = content;
+    }
 
 }

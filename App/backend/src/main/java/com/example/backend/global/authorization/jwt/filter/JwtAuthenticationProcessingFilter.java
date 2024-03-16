@@ -52,7 +52,7 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
             return; // RefreshToken 을 보낸 경우에는 AccessToken 을 재발급 하고 인증 처리는 하지 않게 하기위해 바로 return  으로 필터 진행 막기
         }
 
-        if (refreshToken == null) { // RefreshToKEN 이 없거나 유효 하지 않으면 AccessToken 을 검사하고 인증하는 로직을 수행한다.
+        if (refreshToken == null) { // RefreshToken 이 없거나 유효 하지 않으면 AccessToken 을 검사하고 인증하는 로직을 수행한다.
             checkAccessTokenAndAuthentication(request, response, filterChain);
             // AccessToken 이 없거나 유효하지 않으면 인증 객체가 담기지 않기 때문에 오류가 발생한다.
             // AccessToken 이 유효하다면 인증 객체가 담긴 상태로 다음 필터로 넘어가기 때문에 인증에 성공한다.

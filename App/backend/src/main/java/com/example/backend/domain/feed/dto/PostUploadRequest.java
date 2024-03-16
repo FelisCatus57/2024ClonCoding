@@ -15,5 +15,5 @@ public class PostUploadRequest {
 
     private String content;
 
-    private List<MultipartFile>  postImages = new ArrayList<>();
+    private List<MultipartFile> postImages = new ArrayList<>();
 }
