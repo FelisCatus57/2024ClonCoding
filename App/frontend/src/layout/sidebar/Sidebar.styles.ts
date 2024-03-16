@@ -4,11 +4,13 @@ export const Wrapper = styled.div`
   position: fixed;
   left: 0;
   height: 100vh;
-  width: 17vw;
-  background-color: white;
+  width: 16vw;
   display: flex;
   flex-direction: column;
   border-right: 1.5px solid #e6e6e6;
+  @media only screen and (max-width: 1210px) {
+    width: 6.8vw;
+  }
 `;
 
 export const Title = styled.span`
@@ -19,6 +21,9 @@ export const Title = styled.span`
   margin-top: 10%;
   margin-bottom: 15%;
   margin-left: 10%;
+  @media only screen and (max-width: 1210px) {
+    display: none;
+  }
 `;
 
 export const NavBoxWrapper = styled.div`
@@ -29,6 +34,10 @@ export const NavBoxWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  @media only screen and (max-width: 1210px) {
+    align-items: center;
+    margin-left: 0%;
+  }
 `;
 
 export const Spacer = styled.div`
@@ -37,15 +46,31 @@ export const Spacer = styled.div`
 
 export const NavBox = styled.div`
   height: 48px;
-  border-radius: 10px;
   margin-bottom: 7%;
   display: flex;
   align-items: center;
   padding-left: 7%;
   cursor: pointer;
+  @media only screen and (max-width: 1210px) {
+    padding-left: 0%;
+  }
 `;
 
 export const NavBoxText = styled.span`
   margin-left: 8%;
   font-size: 15px;
+  @media only screen and (max-width: 1210px) {
+    display: none;
+  }
+`;
+
+export const LogoBox = styled.div`
+  display: none;
+  @media only screen and (max-width: 1210px) {
+    display: flex;
+    justify-content: center;
+    margin-top: 4vh;
+    margin-bottom: 2vh;
+    /* margin-bottom: ; */
+  }
 `;
