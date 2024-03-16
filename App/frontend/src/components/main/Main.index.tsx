@@ -14,14 +14,12 @@ export default function Main(): JSX.Element {
   return (
     <>
       <Wrapper>
-        {/* <MainBody> */}
         <Story />
         <Contents />
         {/* 스크롤 테스트 */}
         <Contents />
         <Contents />
         {/* 스크롤 테스트 */}
-        {/* </MainBody> */}
       </Wrapper>
     </>
   );
