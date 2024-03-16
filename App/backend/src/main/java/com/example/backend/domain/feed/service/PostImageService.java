@@ -22,24 +22,33 @@ public class PostImageService {
     private final MinioUploader minioUploader;
     private final PostImageRepository postImageRepository;
 
-//    @Transactional
-//    public void deleteAll(Post post) {
-//        final List<PostImage> postImages = postImageRepository.findAllByPost(post);
-//        postImages.forEach(image -> minioUploader.deleteImage(image.getImage(), "post"));
-//        postImageRepository.deleteAllInBatch(postImages);
-//    }
 
-//    @Transactional
-//    public void saveAll(Post post, List<MultipartFile> multipartFiles) {
-//        List<Image> images = multipartFiles.stream()
-//                .map(image -> {
-//                    try {
-//                        return minioUploader.to(image, "post");
-//                    } catch (FileNotFoundException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                })
-//                .collect(Collectors.toList());
-//
-//    }
+    @Transactional
+    public void saveAll(Post post, List<MultipartFile> multipartFiles) {
+
+        List<Image> images = multipartFiles.stream()
+                .map(i -> minioUploader.to(i, "post"))
+                .collect(Collectors.toList());
+
+
+        images.forEach( image -> {
+            PostImage postImage = PostImage.builder()
+                    .post(post)
+                    .image(image)
+                    .build();
+            postImageRepository.save(postImage);
+        });
+    }
+
+    @Transactional
+    public void deleteAll(Post post) {
+
+        List<PostImage> allPosts = postImageRepository.findAllByPost(post);
+
+        allPosts.forEach( image -> minioUploader.deleteImage(image.getImage(), "post"));
+
+        postImageRepository.deleteAllInBatch(allPosts);
+    }
+
+
 }

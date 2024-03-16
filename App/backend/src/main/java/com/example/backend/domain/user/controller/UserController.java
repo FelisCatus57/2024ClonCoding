@@ -25,10 +25,4 @@ public class UserController {
         return ResponseEntity.ok(ResultResponseDTO.of(ResultCodeMessage.REGISTER_SUCCESS, user));
     }
 
-
-
-    @GetMapping("/jwt-test")
-    public String jwtTest() {
-        return "JWTTest 요청 성공";
-    }
 }

@@ -1,6 +1,7 @@
 package com.example.backend.common.minio;
 
 
+import com.example.backend.global.error.exception.FileConvertException;
 import com.example.backend.global.image.Image;
 import com.example.backend.global.util.ImageUtil;
 import io.minio.GetPresignedObjectUrlArgs;
@@ -33,7 +34,7 @@ public class MinioUploader {
     private String bucket;
 
     // 
-    public Image to(MultipartFile multipartFile, String dir) throws FileNotFoundException {
+    public Image to(MultipartFile multipartFile, String dir) {
         Image image = ImageUtil.to(multipartFile); // MultipartFile 을 Image 객체로 변환
         String filename = convertToFilename(dir, image); // 경로와 이미지 객체의 정보를 가지고 파일 이름 생성
         String url = upload(multipartFile, filename); // 경로 반환후 설정
@@ -42,7 +43,7 @@ public class MinioUploader {
         return image;
     }
 
-    public Image toImage(MultipartFile multipartFile) throws FileNotFoundException {
+    public Image toImage(MultipartFile multipartFile) {
 
         Image image = ImageUtil.to(multipartFile);
 
@@ -50,7 +51,7 @@ public class MinioUploader {
     }
 
     // TODO Exception 교체
-    private String upload(MultipartFile multipartFile, String filename) throws FileNotFoundException {
+    private String upload(MultipartFile multipartFile, String filename) {
         File localFile = convertMultiToLocal(multipartFile);
         String url = putMinio(localFile, filename);
         deleteLocalFile(localFile);
@@ -71,7 +72,7 @@ public class MinioUploader {
                         .build()
         );
 
-        String fileUrl = "http://uncertain.shop:9000/" + "sample" + "/" + filename;
+        String fileUrl = "http://uncertain.shop:9000/" + bucket + "/" + filename;
 //        System.out.println(fileUrl);
 
         return fileUrl;
@@ -109,6 +110,7 @@ public class MinioUploader {
 
     // TODO 수정해야함 스프링부트가 작동중일 경우 파일 삭제가 안됌; 오류 발생
     private void deleteLocalFile(File localFile) {
+
         if (localFile.delete()) {
             return;
         }
@@ -116,8 +118,10 @@ public class MinioUploader {
         log.error("Local File Delete Failed : " + localFile.getName());
     }
 
+
+
     // TODO EXCEPTION 교체
-    private File convertMultiToLocal(MultipartFile file) throws FileNotFoundException {
+    private File convertMultiToLocal(MultipartFile file) {
         try {
             String path = System.getProperty("user.dir") + File.separator + "upload" + File.separator + file.getOriginalFilename();
 
@@ -131,9 +135,9 @@ public class MinioUploader {
                 log.info("complete write to local file");
                 return convertFile;
             }
-            throw new FileNotFoundException(); // Custom Exception
+            throw new FileConvertException(); // Custom Exception
         } catch (IOException e) {
-            throw new FileNotFoundException(); // Custom Exception
+            throw new FileConvertException(); // Custom Exception
         }
     }
 

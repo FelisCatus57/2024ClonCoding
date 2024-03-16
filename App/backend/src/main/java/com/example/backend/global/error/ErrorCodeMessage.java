@@ -18,9 +18,13 @@ public enum ErrorCodeMessage {
     AUTHORITY_INVALID(403,  "권한이 없습니다."),
     ACCOUNT_MISMATCH(401,  "회원 정보가 일치하지 않습니다."),
 
+    FILE_CONVERT_FAIL(500, "변환할 수 없는 파일입니다."),
+
     // TODO Status 변환하기
     INVALID_TOKEN( 401, "유효하지 않은 토큰입니다."),
     EXPIRED_TOKEN( 401, "만료된 토큰입니다.");
+
+
 
     private final int status;
     private final String message;

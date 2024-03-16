@@ -2,6 +2,7 @@ package com.example.backend.domain.feed.entity;
 
 import com.example.backend.domain.user.entity.User;
 import com.example.backend.global.BaseTimeEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

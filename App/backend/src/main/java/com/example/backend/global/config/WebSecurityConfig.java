@@ -93,7 +93,7 @@ public class WebSecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http
                 .authorizeHttpRequests( (auth) -> auth
-                        .requestMatchers("/", "/sign-up", "/miniotest", "/upload").permitAll()
+                        .requestMatchers("/", "/sign-up", "/test1" , "/test2").permitAll()
                         .anyRequest().authenticated());
 
         http

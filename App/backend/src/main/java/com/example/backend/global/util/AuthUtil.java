@@ -45,4 +45,16 @@ public class AuthUtil {
         return findUser.getNickname();
     }
 
+    public User getLoginUser() {
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails) principal;
+
+        User user = userRepository.findByUsername(userDetails.getUsername()).orElseThrow(
+                () -> new UsernameNotFoundException("존재하지 않는 유저입니다.")
+        );
+
+        return user;
+    }
+
 }
