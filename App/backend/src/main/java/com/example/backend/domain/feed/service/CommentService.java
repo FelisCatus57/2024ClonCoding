@@ -17,6 +17,4 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
 
-    @Transactional
-    public
 }

@@ -58,9 +58,9 @@ public class MinioUploader {
         return url;
     }
 
-    @SneakyThrows
     //TODO Exception
-    private String putMinio(File file, String filename){
+    @SneakyThrows
+    private String putMinio(File file, String filename) throws FileConvertException{
 
         InputStream inputStream = new FileInputStream(file);
 
