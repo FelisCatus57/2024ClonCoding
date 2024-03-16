@@ -7,8 +7,6 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border: 1.5px solid #e6e6e6;
-  border-radius: 6px;
   overflow: hidden;
   padding-left: 0.5%;
   position: relative;
@@ -20,7 +18,7 @@ export const StoryBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 1vw;
+  margin-right: 1.45vw;
 `;
 export const StoryCircle = styled.div`
   width: 66px;

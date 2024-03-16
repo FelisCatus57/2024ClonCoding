@@ -19,6 +19,7 @@ export default function Main(): JSX.Element {
         {/* 스크롤 테스트..*/}
         <Contents />
         {/* 스크롤 테스트..*/}
+        <Contents />
       </Wrapper>
     </>
   );
