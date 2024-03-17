@@ -27,7 +27,7 @@ export default function ContentsFooter(): JSX.Element {
         <S.Comment>귀여운 강아지</S.Comment>
       </S.CommentBox>
       <S.ShowComment>댓글 70개 모두보기</S.ShowComment>
-      <S.InputComment type="text" placeholder="댓글 달기..." />
+      <S.InputComment type="text" placeholder="댓글 달기..." style={{ fontSize: '14px' }} />
     </S.Wrapper>
   );
 }

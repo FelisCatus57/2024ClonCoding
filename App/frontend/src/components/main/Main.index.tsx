@@ -4,7 +4,8 @@ import Story from './story/Story.index';
 
 export default function Main(): JSX.Element {
   const Wrapper = styled.div`
-    width: 630px;
+    max-width: 630px;
+    width: auto;
     height: auto;
     display: flex;
     flex-direction: column;

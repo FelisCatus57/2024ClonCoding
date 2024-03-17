@@ -9,7 +9,14 @@ export const Wrapper = styled.div`
   align-items: center;
   overflow: hidden;
   padding-left: 0.5%;
-  position: relative;
+
+  @media only screen and (max-width: 738px) {
+    width: 468px;
+    margin-top: 60px;
+  }
+  @media only screen and (max-width: 475px) {
+    width: 100vw;
+  }
 `;
 
 export const StoryBox = styled.div`
@@ -21,8 +28,8 @@ export const StoryBox = styled.div`
   margin-right: 1.45vw;
 `;
 export const StoryCircle = styled.div`
-  width: 66px;
-  height: 66px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   border: 1px solid #ff0080;
   cursor: pointer;

@@ -3,6 +3,9 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   height: 38px;
   display: flex;
+  @media only screen and (max-width: 475px) {
+    padding: 0 3px;
+  }
 `;
 
 export const UserImg = styled.div`

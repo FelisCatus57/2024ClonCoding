@@ -15,10 +15,6 @@ export default function Sidebar(): JSX.Element {
           <S.NavBoxText>Home</S.NavBoxText>
         </S.NavBox>
         <S.NavBox>
-          <Image src={'/navicon/search.svg'} width={22} height={22} />
-          <S.NavBoxText>Search</S.NavBoxText>
-        </S.NavBox>
-        <S.NavBox>
           <Image src={'/navicon/Adventures.png'} width={22} height={22} />
           <S.NavBoxText>Explore</S.NavBoxText>
         </S.NavBox>
@@ -30,19 +26,19 @@ export default function Sidebar(): JSX.Element {
           <Image src={'/navicon/Email Send.png'} width={22} height={22} />
           <S.NavBoxText>Message</S.NavBoxText>
         </S.NavBox>
-        <S.NavBox>
+        <S.ResponseImgBox>
           <Image src={'/navicon/Heart.png'} width={22} height={22} />
           <S.NavBoxText>Alarm</S.NavBoxText>
-        </S.NavBox>
+        </S.ResponseImgBox>
         <S.NavBox>
           <Image src={'/navicon/user.png'} width={22} height={22} />
           <S.NavBoxText>User</S.NavBoxText>
         </S.NavBox>
         <S.Spacer />
-        <S.NavBox style={{ marginBottom: '0' }}>
+        <S.ResponseImgBox style={{ marginBottom: '0' }}>
           <Image src={'/navicon/Vector.svg'} width={19} height={19} />
           <S.NavBoxText>Menu</S.NavBoxText>
-        </S.NavBox>
+        </S.ResponseImgBox>
       </S.NavBoxWrapper>
     </S.Wrapper>
   );

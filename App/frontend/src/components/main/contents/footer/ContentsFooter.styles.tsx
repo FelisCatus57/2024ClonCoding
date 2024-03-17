@@ -4,6 +4,10 @@ export const Wrapper = styled.div`
   height: 144px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 3%;
+  @media only screen and (max-width: 475px) {
+    padding: 0 3px;
+  }
 `;
 
 export const IconWrapper = styled.div`
@@ -51,6 +55,7 @@ export const ShowComment = styled.span`
 `;
 
 export const InputComment = styled.input`
+  padding-left: 0;
   margin-top: 5px;
   height: 18px;
   border: none;

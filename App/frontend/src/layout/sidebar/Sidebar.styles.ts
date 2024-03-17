@@ -8,8 +8,19 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-right: 1.5px solid #e6e6e6;
+  z-index: 1000;
+  background-color: white;
   @media only screen and (max-width: 1210px) {
     width: 6.8vw;
+  }
+
+  @media only screen and (max-width: 738px) {
+    width: 100%;
+    height: 49px;
+    display: flex;
+    border-top: 1.5px solid #e6e6e6;
+    position: fixed;
+    bottom: 0;
   }
 `;
 
@@ -38,10 +49,22 @@ export const NavBoxWrapper = styled.div`
     align-items: center;
     margin-left: 0%;
   }
+
+  @media only screen and (max-width: 738px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 10%;
+    margin: 0;
+  }
 `;
 
 export const Spacer = styled.div`
   flex-grow: 1;
+
+  @media only screen and (max-width: 738px) {
+    display: none;
+  }
 `;
 
 export const NavBox = styled.div`
@@ -53,6 +76,10 @@ export const NavBox = styled.div`
   cursor: pointer;
   @media only screen and (max-width: 1210px) {
     padding-left: 0%;
+  }
+  @media only screen and (max-width: 738px) {
+    padding-left: 0%;
+    margin-bottom: 0%;
   }
 `;
 
@@ -71,6 +98,23 @@ export const LogoBox = styled.div`
     justify-content: center;
     margin-top: 4vh;
     margin-bottom: 2vh;
-    /* margin-bottom: ; */
+  }
+  @media only screen and (max-width: 738px) {
+    display: none;
+  }
+`;
+
+export const ResponseImgBox = styled.div`
+  height: 48px;
+  margin-bottom: 7%;
+  display: flex;
+  align-items: center;
+  padding-left: 7%;
+  cursor: pointer;
+  @media only screen and (max-width: 1210px) {
+    padding-left: 0%;
+  }
+  @media only screen and (max-width: 738px) {
+    display: none;
   }
 `;
