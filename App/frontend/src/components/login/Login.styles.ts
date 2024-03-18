@@ -17,6 +17,17 @@ export const LoginBox = styled.div`
 
   align-items: center;
 `;
+
+export const SignupBox = styled.div`
+  width: 350px;
+  height: 500px;
+  border: 1px solid #d8d8d8;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+`;
+
 export const Title = styled.span`
   font-family: 'Lobster';
   font-size: 40px;
@@ -28,11 +39,11 @@ export const Input = styled.input`
   width: 80%;
   border-radius: 5px;
   border: 1px solid #d8d8d8;
-
   height: 38px;
   padding-left: 3%;
   &:focus {
     border-color: #bdbdbd;
+    outline: none;
   }
   ::placeholder {
     color: #bdbdbd;
@@ -56,10 +67,11 @@ export const LoginButton = styled.button`
   cursor: pointer;
 `;
 
-export const SignupBox = styled.div`
+export const SignupDiv = styled.div`
   margin-top: 10%;
 `;
 
 export const SignupText = styled.span`
   font-size: 14px;
+  cursor: pointer;
 `;

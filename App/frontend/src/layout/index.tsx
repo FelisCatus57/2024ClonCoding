@@ -18,28 +18,17 @@ const Wrapper = styled.div`
   min-height: 100vh;
 `;
 
-// const Space = styled.div`
-//   width: calc(100vw- 1258px);
-// `;
 const MainWrapper = styled.div``;
-
-// const LeftWrapper = styled.div`
-//   width: 245px;
-//   background-color: beige;
-// `;
 
 export default function Layout(props: ILayoutProps): JSX.Element {
   const router = useRouter();
   const isLoginPage = router.pathname === '/login';
-
+  const isSignupPage = router.pathname === '/signup';
+  const isMypage = router.pathname === '/mypage';
   return (
     <Wrapper>
-      {!isLoginPage && <Headerbar />}
-
-      {/* <LeftWrapper> */}
-      {!isLoginPage && <Sidebar />}
-      {/* </LeftWrapper> */}
-      {/* <Space /> */}
+      {!isLoginPage && !isSignupPage && !isMypage && <Headerbar />}
+      {!isLoginPage && !isSignupPage && <Sidebar />}
       <MainWrapper>
         <Body>{props.children}</Body>
       </MainWrapper>
