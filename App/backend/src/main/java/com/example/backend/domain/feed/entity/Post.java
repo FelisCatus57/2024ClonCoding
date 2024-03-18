@@ -29,6 +29,9 @@ public class Post extends BaseTimeEntity {
     private String content;
 
     @OneToMany(mappedBy = "post")
+    private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "post")
     private List<PostImage> images = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)

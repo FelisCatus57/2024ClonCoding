@@ -16,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "comments")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+
 public class Comment extends BaseTimeEntity {
 
     @Id
@@ -27,8 +28,6 @@ public class Comment extends BaseTimeEntity {
     @JoinColumn(name = "parent_id")
     private Comment parent;
 
-    @OneToMany(mappedBy = "parent")
-    private List<Comment> children = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -42,12 +41,22 @@ public class Comment extends BaseTimeEntity {
     @Column(name = "comment_content")
     private String content;
 
+    @OneToMany(mappedBy = "parent")
+    private List<Comment> children = new ArrayList<>();
+
+    public Comment(User user, Post post, String content) {
+        this.parent = null;
+        this.user = user;
+        this.post = post;
+        this.content = content;
+    }
 
     @Builder
-    public Comment(Comment parent ,User user, Post post, String content) {
+    public Comment(Comment parent, User user, Post post, String content) {
         this.parent = parent;
         this.user = user;
         this.post = post;
         this.content = content;
     }
+
 }

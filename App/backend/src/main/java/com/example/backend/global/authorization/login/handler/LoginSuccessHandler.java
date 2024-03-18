@@ -3,11 +3,13 @@ package com.example.backend.global.authorization.login.handler;
 import com.example.backend.domain.user.entity.User;
 import com.example.backend.domain.user.repository.UserRepository;
 import com.example.backend.global.authorization.jwt.service.JwtService;
+import com.example.backend.global.result.ResultResponseDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,7 +28,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                        Authentication authentication) {
+                                                                     Authentication authentication) {
         String username = extractUsername(authentication); // 인증 정보에서 Username 추출
 
         String nickname = extractNickname(username); // Username 을 사용하여 Nickname 추출
@@ -42,6 +44,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
                     user.updateRefreshToken(refreshToken);
                     userRepository.saveAndFlush(user);
                 });
+        
         // 발급한 RefreshToken 을 저장한다.
         log.info("로그인에 성공하였습니다. 아이디 : {}", username);
         log.info("로그인에 성공하였습니다. AccessToken : {}", accessToken);

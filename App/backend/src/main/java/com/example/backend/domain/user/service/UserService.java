@@ -6,7 +6,7 @@ import com.example.backend.domain.user.dto.UserRegisterRequest;
 import com.example.backend.domain.user.entity.User;
 import com.example.backend.domain.user.repository.UserRepository;
 import com.example.backend.global.error.ErrorCodeMessage;
-import com.example.backend.global.error.exception.EntityExistedException;
+import com.example.backend.global.error.exception.EntityNotExistedException;
 import com.example.backend.global.image.Image;
 import com.example.backend.global.image.ImageType;
 import jakarta.transaction.Transactional;
@@ -25,11 +25,11 @@ public class UserService {
     public void signUp(UserRegisterRequest userRegisterRequest) throws Exception{
 
         if (userRepository.existsUserByUsername(userRegisterRequest.getUsername())) {
-            throw new EntityExistedException(ErrorCodeMessage.USERNAME_EXIST);
+            throw new EntityNotExistedException(ErrorCodeMessage.USERNAME_EXIST);
         }
 
         if (userRepository.existsUsersByNickname(userRegisterRequest.getNickname())) {
-            throw new EntityExistedException(ErrorCodeMessage.NICKNAME_EXIST);
+            throw new EntityNotExistedException(ErrorCodeMessage.NICKNAME_EXIST);
         }
 
         User user = User.builder()

@@ -76,7 +76,7 @@ public class JwtService {
         response.setStatus(HttpServletResponse.SC_OK);
 
         response.setHeader(accessHeader, accessToken);
-        log.info("재발급된 Access Token : {}", accessToken);
+        log.info("재발급된 Access Token : {}", BEARER + accessToken);
     }
 
     // AccessToken + RefreshToken 헤더에 실어서 보내기
@@ -144,12 +144,12 @@ public class JwtService {
 
     // AccessToken 헤더 설정
     public void setAccessTokenHeader(HttpServletResponse response, String accessToken) {
-        response.setHeader(accessHeader, accessToken);
+        response.setHeader(accessHeader,  BEARER + accessToken);
     }
 
     // RefreshToken 헤더 설정
     public void setRefreshTokenHeader(HttpServletResponse response, String refreshToken) {
-        response.setHeader(refreshHeader, refreshToken);
+        response.setHeader(refreshHeader, BEARER + refreshToken);
     }
 
     // RefreshToken DB 저장(업데이트)

@@ -35,7 +35,7 @@ public class PostService {
 
         Post save = postRepository.save(postDTO.toEntity());
 
-        postImageService.saveAll(save, postUploadRequest.getPostImages());
+        postImageService.saveAll(save, postUploadRequest.getFiles());
 
 
     }

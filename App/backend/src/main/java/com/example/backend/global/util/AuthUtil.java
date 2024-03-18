@@ -2,6 +2,8 @@ package com.example.backend.global.util;
 
 import com.example.backend.domain.user.entity.User;
 import com.example.backend.domain.user.repository.UserRepository;
+import com.example.backend.global.error.ErrorCodeMessage;
+import com.example.backend.global.error.exception.EntityNotExistedException;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.metamodel.internal.MemberResolver;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,7 +22,7 @@ public class AuthUtil {
         UserDetails userDetails = (UserDetails) principal;
 
         User findUser = userRepository.findByUsername(((UserDetails) principal).getUsername()).orElseThrow(
-                () -> new UsernameNotFoundException("존재하지 않는 유저입니다.")
+                () -> new EntityNotExistedException(ErrorCodeMessage.USER_NOT_FOUND)
         );
 
         return findUser.getId();
@@ -39,7 +41,7 @@ public class AuthUtil {
         UserDetails userDetails = (UserDetails) principal;
 
         User findUser = userRepository.findByUsername(userDetails.getUsername()).orElseThrow(
-                () -> new UsernameNotFoundException("존재하지 않는 유저입니다.")
+                () -> new EntityNotExistedException(ErrorCodeMessage.USER_NOT_FOUND)
         );
 
         return findUser.getNickname();
@@ -51,7 +53,7 @@ public class AuthUtil {
         UserDetails userDetails = (UserDetails) principal;
 
         User user = userRepository.findByUsername(userDetails.getUsername()).orElseThrow(
-                () -> new UsernameNotFoundException("존재하지 않는 유저입니다.")
+                () -> new EntityNotExistedException(ErrorCodeMessage.USER_NOT_FOUND)
         );
 
         return user;

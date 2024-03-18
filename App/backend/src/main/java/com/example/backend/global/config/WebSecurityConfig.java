@@ -11,7 +11,10 @@ import com.example.backend.global.authorization.oauth2.handler.OAuth2LoginFailur
 import com.example.backend.global.authorization.oauth2.handler.OAuth2LoginSuccessHandler;
 import com.example.backend.global.authorization.oauth2.service.CustomOAuth2UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.filters.CorsFilter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,6 +26,13 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -36,7 +46,6 @@ public class WebSecurityConfig {
     private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
     private final OAuth2LoginFailureHandler oAuth2LoginFailureHandler;
     private final CustomOAuth2UserService customOAuth2UserService;
-
 
     @Bean
     public AuthenticationManager authenticationManager() {
@@ -79,8 +88,29 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        http
+                .cors( (cors) -> cors
+                        .configurationSource(new CorsConfigurationSource() {
+
+                            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+
+                                CorsConfiguration config = new CorsConfiguration();
+
+                                config.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000"));
+                                config.setAllowedMethods(Arrays.asList("*"));
+                                config.setAllowCredentials(true);
+                                config.setAllowedHeaders(Arrays.asList("*"));
+                                config.setExposedHeaders(Arrays.asList("Authorization", "Authorization-refresh"));
+                                config.setMaxAge(3600L);
+
+
+                                return config;
+                            }
+                        }));
 
         http
                 .csrf( (csrf) -> csrf.disable());
@@ -93,7 +123,7 @@ public class WebSecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http
                 .authorizeHttpRequests( (auth) -> auth
-                        .requestMatchers("/", "/sign-up", "/postup1" , "/postup2").permitAll()
+                        .requestMatchers("/", "/sign-up", "/test1" , "/postup2").permitAll()
                         .anyRequest().authenticated());
 
         http
