@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
-import * as S from './Story.styles';
+import * as S from './MyStory.styles';
 import useEmblaCarousel from 'embla-carousel-react';
 
-export default function Story() {
+export default function MyStory() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
@@ -20,9 +20,9 @@ export default function Story() {
   }, [emblaApi, setScrollSnaps, onSelect]);
 
   // 샘플 데이터
-  const stories = new Array(13).fill(null).map((_, index) => ({
+  const stories = new Array(6).fill(null).map((_, index) => ({
     id: index,
-    name: `user ${index + 1}`,
+    name: `mystory${index + 1}`,
   }));
 
   return (

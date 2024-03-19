@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  width: 43.7vw;
-  height: 100vh;
+  height: auto;
+  margin-top: 2%;
+  border-radius: 4px;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
 `;

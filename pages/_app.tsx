@@ -2,6 +2,8 @@ import type { AppProps } from 'next/app';
 import { GlobalStyles } from '../src/commons/globalstyles/GlobalStyles';
 import Head from 'next/head';
 import Layout from '../src/layout/index';
+import React from 'react';
+
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <>

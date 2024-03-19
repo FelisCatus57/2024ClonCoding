@@ -9,14 +9,13 @@ export const Wrapper = styled.div`
   align-items: center;
   overflow: hidden;
   padding-left: 0.5%;
-
-  @media only screen and (max-width: 738px) {
+  /* @media only screen and (max-width: 738px) {
     width: 468px;
     margin-top: 60px;
   }
   @media only screen and (max-width: 475px) {
     width: 100vw;
-  }
+  } */
 `;
 
 export const StoryBox = styled.div`
@@ -25,13 +24,13 @@ export const StoryBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 1.45vw;
+  margin-right: 5%;
 `;
 export const StoryCircle = styled.div`
   width: 58px;
   height: 58px;
   border-radius: 50%;
-  border: 1px solid #ff0080;
+  border: 1px solid #e6e6e6;
   cursor: pointer;
 `;
 

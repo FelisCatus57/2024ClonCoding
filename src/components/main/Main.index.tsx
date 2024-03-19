@@ -1,14 +1,27 @@
+import styled from 'styled-components';
 import Contents from './contents/Contents.index';
-import MainBody from './mainbody/MainBody.index';
 import Story from './story/Story.index';
 
 export default function Main(): JSX.Element {
+  const Wrapper = styled.div`
+    max-width: 630px;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `;
+
   return (
     <>
-      <MainBody>
+      <Wrapper>
         <Story />
         <Contents />
-      </MainBody>
+        {/* 스크롤 테스트..*/}
+        <Contents />
+        {/* 스크롤 테스트..*/}
+        <Contents />
+      </Wrapper>
     </>
   );
 }
