@@ -36,26 +36,45 @@ export const SearchBar = styled.div`
   align-items: center;
   color: gray;
   cursor: pointer;
-`;
-
-export const PostWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-export const Post = styled.div`
-  width: 33.333%;
-  padding-top: 33.333%;
   position: relative;
 `;
 
-export const Img = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: #f2f2f2;
-  border: 1px solid #ffffff;
+export const SearchInput = styled.input`
+  border: none;
+  outline: none;
+  background: none;
+  padding-bottom: 2.5px;
+  font-size: 16px;
+  width: 90%;
+`;
+
+export const UserBox = styled.div`
+  height: 50px;
+  display: flex;
+  margin-top: 5%;
+  width: 100%;
+`;
+
+export const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 1%;
+`;
+
+export const UserImg = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid grey;
+  margin-right: 1.5%;
+`;
+
+export const UserId = styled.span`
+  font-size: 13px;
+  font-weight: 700;
+`;
+
+export const UserName = styled.span`
+  font-size: 12px;
+  color: #6e6e6e;
 `;

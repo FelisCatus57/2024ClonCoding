@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import * as S from './Explore.styles';
 import { SearchOutlined } from '@ant-design/icons';
 export default function Explore(): JSX.Element {
@@ -5,10 +6,12 @@ export default function Explore(): JSX.Element {
   return (
     <S.Wrapper>
       <S.Header>
-        <S.SearchBar>
-          <SearchOutlined style={{ marginRight: '8px' }} />
-          <S.SearchInput placeholder="검색" />
-        </S.SearchBar>
+        <Link href={'/search'}>
+          <S.SearchBar>
+            <SearchOutlined style={{ marginRight: '8px' }} />
+            검색
+          </S.SearchBar>
+        </Link>
       </S.Header>
       <S.PostWrapper>
         {test.map((index) => (
