@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+
   padding: 0 4%;
 
   @media only screen and (max-width: 765px) {
@@ -21,13 +21,14 @@ export const Header = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
   margin-top: 1vh;
   margin-bottom: 1vh;
+  font-size: 19px;
+  font-weight: 500;
 `;
 
 export const SearchBar = styled.div`
-  width: 95%;
+  width: 100%;
   height: 40px;
   border-radius: 10px;
   background-color: #efefef;
@@ -37,8 +38,15 @@ export const SearchBar = styled.div`
   color: gray;
   cursor: pointer;
   position: relative;
+  margin-top: 3%;
+  margin-bottom: 3%;
 `;
 
+export const MessageTitle = styled.span`
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 3%;
+`;
 export const SearchInput = styled.input`
   border: none;
   outline: none;
@@ -48,37 +56,38 @@ export const SearchInput = styled.input`
   width: 90%;
 `;
 
-export const UserBox = styled.div`
-  height: 80px;
+export const MessageBox = styled.div`
   display: flex;
-  align-items: center;
   width: 100%;
+  min-height: 80px;
+  align-items: center;
   cursor: pointer;
   &:hover {
     background-color: #fafafa;
   }
 `;
 
-export const UserInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 1%;
-`;
-
 export const UserImg = styled.div`
-  width: 50px;
-  height: 50px;
+  min-width: 50px;
+  min-height: 50px;
   border-radius: 50%;
   border: 1px solid grey;
   margin-right: 1.5%;
 `;
 
 export const UserId = styled.span`
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 600;
 `;
 
-export const UserName = styled.span`
-  font-size: 12px;
+export const Message = styled.span`
+  font-size: 15px;
   color: #6e6e6e;
+  width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @media only screen and (max-width: 600px) {
+    width: 50vw;
+  }
 `;

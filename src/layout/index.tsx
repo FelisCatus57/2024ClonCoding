@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Sidebar from './sidebar/SideBar.index';
 import Headerbar from './headerbar/HeaderBar.index';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 interface ILayoutProps {
   children: JSX.Element;
@@ -24,12 +25,31 @@ export default function Layout(props: ILayoutProps): JSX.Element {
   const router = useRouter();
   const isLoginPage = router.pathname === '/login';
   const isSignupPage = router.pathname === '/signup';
-  const isMypage = router.pathname === '/mypage';
   const isHomePage = router.pathname === '/';
+
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 816 && router.pathname.startsWith('/message/')) {
+        setIsSidebarVisible(false);
+      } else {
+        setIsSidebarVisible(true);
+        console.log(isSidebarVisible);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [router.pathname]);
+
   return (
     <Wrapper>
       {isHomePage && <Headerbar />}
-      {!isLoginPage && !isSignupPage && <Sidebar />}
+      {!isLoginPage && !isSignupPage && isSidebarVisible && <Sidebar />}
       <MainWrapper>
         <Body>{props.children}</Body>
       </MainWrapper>

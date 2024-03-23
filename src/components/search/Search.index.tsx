@@ -21,7 +21,7 @@ export default function Search(): JSX.Element {
     setInputId('');
   };
 
-  const SkeletonMap = Array.from({ length: 8 }, (_, index) => index);
+  const skeletonMap = Array.from({ length: 8 }, (_, index) => index);
   return (
     <S.Wrapper>
       <S.Header>
@@ -35,18 +35,25 @@ export default function Search(): JSX.Element {
 
       {/* 검색중일때 스켈레톤 */}
 
-      {SkeletonMap.map((index) => (
+      {/* {skeletonMap.map((index) => (
         <Skeleton active avatar paragraph={{ rows: 1 }} style={{ marginTop: '3%' }} key={index} />
-      ))}
+      ))} */}
 
       {/* 검색 결과가 있을때 */}
-      {/* <S.UserBox>
+      <S.UserBox>
         <S.UserImg></S.UserImg>
         <S.UserInfo>
           <S.UserId>__frinedid__</S.UserId>
           <S.UserName>길동이</S.UserName>
         </S.UserInfo>
-      </S.UserBox> */}
+      </S.UserBox>
+      <S.UserBox>
+        <S.UserImg></S.UserImg>
+        <S.UserInfo>
+          <S.UserId>__frinedid__</S.UserId>
+          <S.UserName>길동이</S.UserName>
+        </S.UserInfo>
+      </S.UserBox>
       {/* 검색 결과가 있을때 */}
     </S.Wrapper>
   );

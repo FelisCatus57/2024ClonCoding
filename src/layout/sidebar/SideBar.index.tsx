@@ -27,15 +27,18 @@ export default function Sidebar(): JSX.Element {
           <Image src={'/navicon/Cinema.png'} width={22} height={22} />
           <S.NavBoxText>Reels</S.NavBoxText>
         </S.NavBox>
-        <S.NavBox>
-          <Image src={'/navicon/Email Send.png'} width={22} height={22} />
-          <S.NavBoxText>Message</S.NavBoxText>
-        </S.NavBox>
-        <S.ResponseImgBox>
-          <Image src={'/navicon/Heart.png'} width={22} height={22} />
-          <S.NavBoxText>Alarm</S.NavBoxText>
-        </S.ResponseImgBox>
-
+        <Link href={'/message'}>
+          <S.NavBox>
+            <Image src={'/navicon/Email Send.png'} width={22} height={22} />
+            <S.NavBoxText>Message</S.NavBoxText>
+          </S.NavBox>
+        </Link>
+        <Link href={'/notify'}>
+          <S.ResponseImgBox>
+            <Image src={'/navicon/Heart.png'} width={22} height={22} />
+            <S.NavBoxText>Alarm</S.NavBoxText>
+          </S.ResponseImgBox>
+        </Link>
         <Link href={'/mypage'}>
           <S.NavBox>
             <Image src={'/navicon/user.png'} width={22} height={22} />
