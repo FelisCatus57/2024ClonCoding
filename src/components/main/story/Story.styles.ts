@@ -38,3 +38,15 @@ export const StoryCircle = styled.div`
 export const StoryUser = styled.span`
   font-size: 12px;
 `;
+
+export const AddStoryCircle = styled.div`
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 1px solid grey;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+`;

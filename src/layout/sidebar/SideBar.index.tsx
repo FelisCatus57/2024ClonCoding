@@ -14,32 +14,37 @@ export default function Sidebar(): JSX.Element {
         <Link href={'/'}>
           <S.NavBox>
             <Image src={'/navicon/home.svg'} width={22} height={22} />
-            <S.NavBoxText>Home</S.NavBoxText>
+            <S.NavBoxText>홈</S.NavBoxText>
           </S.NavBox>
         </Link>
         <Link href={'/explore'}>
           <S.NavBox>
             <Image src={'/navicon/Adventures.png'} width={22} height={22} />
-            <S.NavBoxText>Explore</S.NavBoxText>
+            <S.NavBoxText>탐색</S.NavBoxText>
           </S.NavBox>
         </Link>
-        <S.NavBox>
-          <Image src={'/navicon/Cinema.png'} width={22} height={22} />
-          <S.NavBoxText>Reels</S.NavBoxText>
-        </S.NavBox>
-        <S.NavBox>
-          <Image src={'/navicon/Email Send.png'} width={22} height={22} />
-          <S.NavBoxText>Message</S.NavBoxText>
-        </S.NavBox>
-        <S.ResponseImgBox>
-          <Image src={'/navicon/Heart.png'} width={22} height={22} />
-          <S.NavBoxText>Alarm</S.NavBoxText>
-        </S.ResponseImgBox>
-
+        <Link href={'/postboard'}>
+          <S.NavBox>
+            <Image src={'/navicon/add.png'} width={22} height={22} />
+            <S.NavBoxText>만들기</S.NavBoxText>
+          </S.NavBox>
+        </Link>
+        <Link href={'/message'}>
+          <S.NavBox>
+            <Image src={'/navicon/Email Send.png'} width={22} height={22} />
+            <S.NavBoxText>메시지</S.NavBoxText>
+          </S.NavBox>
+        </Link>
+        <Link href={'/notify'}>
+          <S.ResponseImgBox>
+            <Image src={'/navicon/Heart.png'} width={22} height={22} />
+            <S.NavBoxText>알림</S.NavBoxText>
+          </S.ResponseImgBox>
+        </Link>
         <Link href={'/mypage'}>
           <S.NavBox>
             <Image src={'/navicon/user.png'} width={22} height={22} />
-            <S.NavBoxText>User</S.NavBoxText>
+            <S.NavBoxText>__userid_</S.NavBoxText>
           </S.NavBox>
         </Link>
         <S.Spacer />

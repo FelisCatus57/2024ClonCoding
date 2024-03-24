@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import * as S from './Story.styles';
 import useEmblaCarousel from 'embla-carousel-react';
+import Link from 'next/link';
 
 export default function Story() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
@@ -20,7 +21,7 @@ export default function Story() {
   }, [emblaApi, setScrollSnaps, onSelect]);
 
   // 샘플 데이터
-  const stories = new Array(13).fill(null).map((_, index) => ({
+  const stories = new Array(10).fill(null).map((_, index) => ({
     id: index,
     name: `user ${index + 1}`,
   }));
@@ -28,6 +29,12 @@ export default function Story() {
   return (
     <S.Wrapper ref={emblaRef}>
       <div style={{ display: 'flex', width: '100%' }}>
+        <Link href={'/poststory'}>
+          <S.StoryBox>
+            <S.AddStoryCircle>+</S.AddStoryCircle>
+            <S.StoryUser>내 스토리</S.StoryUser>
+          </S.StoryBox>
+        </Link>
         {stories.map((story, index) => (
           <S.StoryBox key={story.id}>
             <S.StoryCircle></S.StoryCircle>

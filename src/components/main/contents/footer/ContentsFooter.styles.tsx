@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  height: 144px;
+  min-height: 144px;
+  height: auto;
   display: flex;
   flex-direction: column;
-  margin-bottom: 3%;
+  margin-bottom: 2%;
   @media only screen and (max-width: 475px) {
     padding: 0 3px;
   }
@@ -54,10 +55,27 @@ export const ShowComment = styled.span`
   cursor: pointer;
 `;
 
-export const InputComment = styled.input`
-  padding-left: 0;
-  margin-top: 5px;
-  height: 18px;
+export const CommentForm = styled.form`
+  display: flex;
+  align-items: center;
+  margin-top: 9px;
+`;
+
+export const InputComment = styled.textarea`
+  width: 100%;
   border: none;
   outline: none;
+  resize: none;
+  overflow-y: hidden;
+  font-size: 14px;
+`;
+
+export const Button = styled.div`
+  width: 70px;
+  height: 50px;
+  border: none;
+  /* background-color: red; */
+  color: #3498db;
+  cursor: pointer;
+  font-size: 14px;
 `;

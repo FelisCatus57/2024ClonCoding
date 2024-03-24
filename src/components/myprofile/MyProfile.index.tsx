@@ -1,13 +1,18 @@
 import Image from 'next/image';
 import * as S from './MyProfile.styles';
 import MyStory from './story/MyStory.index';
+import Link from 'next/link';
 
 export default function MyProfile(): JSX.Element {
   return (
     <S.Wrapper>
       <S.Header>
         <S.UserId>__userid__</S.UserId>
-        <Image src={'/navicon/Heart.png'} width={25} height={25} />
+        <Link href={'/notify'}>
+          <div style={{ cursor: 'pointer' }}>
+            <Image src={'/navicon/Heart.png'} width={25} height={25} />
+          </div>
+        </Link>
       </S.Header>
       <S.InfoWrapper>
         <S.UserImg />
