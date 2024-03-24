@@ -4,12 +4,10 @@ import io, { Socket } from 'socket.io-client';
 import Image from 'next/image';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
+import { useRouterBack } from '../../../hooks/useRouterBack';
 
 export default function ChatRoom(): JSX.Element {
-  const router = useRouter();
-  const handleBack = () => {
-    router.back();
-  };
+  const goBack = useRouterBack();
 
   // 테스트용 데이터
   const initialMessages = [
@@ -52,7 +50,7 @@ export default function ChatRoom(): JSX.Element {
   return (
     <S.Wrapper>
       <S.Header>
-        <ArrowLeftOutlined onClick={handleBack} style={{ marginRight: '30px', cursor: 'pointer', marginTop: '4px' }} />
+        <ArrowLeftOutlined onClick={goBack} style={{ marginRight: '30px', cursor: 'pointer', marginTop: '4px' }} />
         ChatUserId
       </S.Header>
       <S.ChatContainer>
@@ -71,7 +69,7 @@ export default function ChatRoom(): JSX.Element {
         ))}
       </S.ChatContainer>
       <S.MessageForm onSubmit={sendMessage}>
-        <S.Input type="text" value={inputMessage} onChange={(e) => setInputMessage(e.target.value)} />
+        <S.Input value={inputMessage} onChange={(e) => setInputMessage(e.target.value)} />
         <S.Button type="submit">보내기</S.Button>
       </S.MessageForm>
     </S.Wrapper>

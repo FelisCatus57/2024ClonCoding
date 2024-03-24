@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import * as S from './ContentsFooter.styles';
 import { UserId } from '../header/ContentsHeader.styles';
+import { useInputResize } from '../../../../hooks/useInputResize';
 
 export default function ContentsFooter(): JSX.Element {
+  const { handleResizeHeight } = useInputResize();
   return (
     <S.Wrapper>
       <S.IconWrapper>
@@ -27,7 +29,10 @@ export default function ContentsFooter(): JSX.Element {
         <S.Comment>귀여운 강아지</S.Comment>
       </S.CommentBox>
       <S.ShowComment>댓글 70개 모두보기</S.ShowComment>
-      <S.InputComment type="text" placeholder="댓글 달기..." style={{ fontSize: '14px' }} />
+      <S.CommentForm>
+        <S.InputComment placeholder="댓글 달기..." onInput={handleResizeHeight} />
+        <S.Button>게시</S.Button>
+      </S.CommentForm>
     </S.Wrapper>
   );
 }

@@ -1,19 +1,16 @@
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import * as S from '../notify/Notify.styles';
 import { useRouter } from 'next/router';
+import { useRouterBack } from '../../hooks/useRouterBack';
 
 export default function Notify(): JSX.Element {
-  const router = useRouter();
-  const handleBack = () => {
-    router.back();
-  };
-
+  const goBack = useRouterBack();
   const testMap = Array.from({ length: 8 }, (_, index) => index);
 
   return (
     <S.Wrapper>
       <S.Header>
-        <ArrowLeftOutlined onClick={handleBack} style={{ marginRight: '30px', cursor: 'pointer', marginTop: '4px' }} />
+        <ArrowLeftOutlined onClick={goBack} style={{ marginRight: '30px', cursor: 'pointer', marginTop: '4px' }} />
         알림
       </S.Header>
 

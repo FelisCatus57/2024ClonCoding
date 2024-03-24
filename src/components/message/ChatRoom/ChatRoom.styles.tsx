@@ -31,8 +31,7 @@ export const ChatContainer = styled.div`
   flex-direction: column-reverse;
   padding: 0 2.5%;
   width: 100%;
-  height: 100vh;
-  margin-bottom: 6vh;
+  height: 87vh;
 `;
 
 export const Message = styled.div`
@@ -69,14 +68,16 @@ export const ReceivedMessage = styled(Message)`
 export const MessageForm = styled.form`
   display: flex;
   position: fixed;
-  bottom: 10px;
+  bottom: 1vh;
   width: 700px;
+  height: 43px;
+
   @media only screen and (max-width: 816px) {
     width: 95vw;
   }
 `;
 
-export const Input = styled.input`
+export const Input = styled.textarea`
   flex-grow: 1;
   padding: 10px;
   border-radius: 10px;
@@ -90,6 +91,8 @@ export const Input = styled.input`
     color: #bdbdbd;
     font-size: 14px;
   }
+  resize: none; /* 사용자가 수동으로 크기를 조절하는 것을 방지 */
+  overflow-y: auto; /* 필요할 때만 스크롤바 표시 */
 `;
 
 export const Button = styled.button`

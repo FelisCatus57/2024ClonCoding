@@ -3,14 +3,11 @@ import * as S from '../message/Message.styles';
 import { useRouter } from 'next/router';
 import { SetStateAction, useState } from 'react';
 import Link from 'next/link';
+import { useRouterBack } from '../../hooks/useRouterBack';
 
 export default function Message(): JSX.Element {
   const [inputId, setInputId] = useState('');
-  const router = useRouter();
-  const handleBack = () => {
-    router.back();
-  };
-
+  const goBack = useRouterBack();
   const testMap = Array.from({ length: 8 }, (_, index) => index);
 
   const handleChange = (e: { target: { value: SetStateAction<string> } }) => {
@@ -23,7 +20,7 @@ export default function Message(): JSX.Element {
   return (
     <S.Wrapper>
       <S.Header>
-        <ArrowLeftOutlined onClick={handleBack} style={{ marginRight: '30px', cursor: 'pointer', marginTop: '4px' }} />
+        <ArrowLeftOutlined onClick={goBack} style={{ marginRight: '30px', cursor: 'pointer', marginTop: '4px' }} />
         __userid__
       </S.Header>
       <S.SearchBar>
