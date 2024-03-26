@@ -45,6 +45,7 @@ export default function PostStoryModal(props: PostStoryModalProps) {
           onChange={(e) => props.onImageSelect(e.target.files ? e.target.files[0] : null)}
         />
       </S.ModalContainer>
+      <S.CloseButton>x</S.CloseButton>
     </S.ModalBackdrop>
   );
 }

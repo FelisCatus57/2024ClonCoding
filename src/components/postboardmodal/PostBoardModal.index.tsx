@@ -47,6 +47,7 @@ export default function PostBoardModal(props: PostBoardModalProps) {
         <S.InputText style={{ marginTop: '20px' }} placeholder="내용을 작성해주세요" />
         <S.InputText placeholder="사진 속 장소를 작성해주세요" />
       </S.ModalContainer>
+      <S.CloseButton>x</S.CloseButton>
     </S.ModalBackdrop>
   );
 }

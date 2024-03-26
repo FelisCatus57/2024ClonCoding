@@ -80,12 +80,22 @@ export const ModalContainer = styled.div`
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-
   align-items: center;
-
   overflow: hidden;
+
   @media only screen and (max-width: 650px) {
     width: 75vw;
     height: 520px;
   }
+`;
+
+export const CloseButton = styled.span`
+  position: fixed;
+  top: 5px;
+  right: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 27px;
+  font-weight: 400;
+  color: white;
 `;
