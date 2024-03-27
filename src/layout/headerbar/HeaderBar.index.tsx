@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import * as S from './HeaderBar.styles';
-import Image from 'next/image';
+import { HeartOutlined } from '@ant-design/icons';
 
 export default function Headerbar(): JSX.Element {
   return (
@@ -8,9 +8,7 @@ export default function Headerbar(): JSX.Element {
       <S.Title>Chosungram</S.Title>
 
       <Link href={'/notify'}>
-        <div style={{ cursor: 'pointer' }}>
-          <Image src={'/navicon/Heart.png'} width={25} height={25} />
-        </div>
+        <HeartOutlined style={{ fontSize: '24px' }} />
       </Link>
     </S.Wrapper>
   );
