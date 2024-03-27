@@ -97,3 +97,14 @@ export const InputText = styled.textarea`
   font-size: 14px;
   border-radius: 10px;
 `;
+
+export const CloseButton = styled.span`
+  position: fixed;
+  top: 5px;
+  right: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 27px;
+  font-weight: 400;
+  color: white;
+`;

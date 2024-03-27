@@ -1,17 +1,34 @@
-import { useCallback, useEffect, useState } from 'react';
+import { SetStateAction, useCallback, useEffect, useState } from 'react';
 import * as S from './Story.styles';
 import useEmblaCarousel from 'embla-carousel-react';
-import Link from 'next/link';
 import axios from 'axios';
 import PostStoryModal from '../../poststorymodal/PostStoryModal.index';
+import StoryModal from '../../storymodal/StoryModal.index';
 
 export default function Story() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isStoryModalOpen, setIsStoryModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+
   const openModal = () => setIsModalOpen(true);
+
+  const openStoryModal = (index: SetStateAction<number>) => {
+    setSelectedIndex(index); // 여기에서 클릭된 스토리의 인덱스를 상태에 저장.
+    setIsStoryModalOpen(true);
+  };
+
+  const [stories, setStories] = useState(
+    new Array(10).fill(null).map((_, index) => ({
+      id: index,
+      name: `user ${index + 1}`,
+    }))
+  );
+  const closeStoryModal = () => {
+    setIsStoryModalOpen(false);
+  };
   const closeModal = () => {
     setSelectedImage(null); // 모달을 닫을 때 이미지 선택 상태 초기화
     setIsModalOpen(false);
@@ -57,10 +74,6 @@ export default function Story() {
   }, [emblaApi, setScrollSnaps, onSelect]);
 
   // 샘플 데이터
-  const stories = new Array(10).fill(null).map((_, index) => ({
-    id: index,
-    name: `user ${index + 1}`,
-  }));
 
   return (
     <>
@@ -72,7 +85,7 @@ export default function Story() {
           </S.StoryBox>
 
           {stories.map((story, index) => (
-            <S.StoryBox key={story.id}>
+            <S.StoryBox key={story.id} onClick={() => openStoryModal(index)}>
               <S.StoryCircle></S.StoryCircle>
               <S.StoryUser>{story.name}</S.StoryUser>
             </S.StoryBox>
@@ -85,6 +98,12 @@ export default function Story() {
         onImageSelect={handleImageSelect}
         uploadImage={uploadImage}
         selectedImage={selectedImage}
+      />
+      <StoryModal
+        isOpen={isStoryModalOpen}
+        closeModal={closeStoryModal}
+        stories={stories}
+        selectedIndex={selectedIndex}
       />
     </>
   );
