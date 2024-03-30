@@ -2,6 +2,17 @@ import Image from 'next/image';
 import * as S from './ContentsFooter.styles';
 import { UserId } from '../header/ContentsHeader.styles';
 import { useInputResize } from '../../../../hooks/useInputResize';
+import {
+  BookFilled,
+  BookOutlined,
+  HeartOutlined,
+  HeartTwoTone,
+  MessageOutlined,
+  SendOutlined,
+} from '@ant-design/icons';
+import TurnedInNotOutlinedIcon from '@mui/icons-material/TurnedInNotOutlined';
+import TurnedInOutlinedIcon from '@mui/icons-material/TurnedInOutlined';
+import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
 
 export default function ContentsFooter(): JSX.Element {
   const { handleResizeHeight } = useInputResize();
@@ -10,17 +21,21 @@ export default function ContentsFooter(): JSX.Element {
       <S.IconWrapper>
         <S.IconBox>
           <S.CursorPointer>
-            <Image src={'/navicon/heart.svg'} width={24} height={24} />
+            <HeartOutlined style={{ fontSize: '26px' }} />
+            {/* 유저가 하트 클릭시 */}
+            {/* <HeartTwoTone twoToneColor="#eb2f96" style={{ fontSize: '24px' }} /> */}
+          </S.CursorPointer>
+          <S.CursorPointer style={{ marginLeft: '4%' }}>
+            <MessageOutlined style={{ fontSize: '24px' }} />
           </S.CursorPointer>
           <S.CursorPointer>
-            <Image src={'/navicon/message.svg'} width={24} height={24} />
-          </S.CursorPointer>
-          <S.CursorPointer>
-            <Image src={'/navicon/emailsend.svg'} width={24} height={24} />
+            <NearMeOutlinedIcon style={{ fontSize: '31px' }} />
           </S.CursorPointer>
         </S.IconBox>
         <S.CursorPointer>
-          <Image src={'/navicon/bookmark.svg'} width={27} height={27} />
+          <TurnedInNotOutlinedIcon style={{ fontSize: '31px' }} />
+          {/* 유저가 북마크 클릭시 */}
+          {/* <TurnedInOutlinedIcon style={{ fontSize: '31px' }} /> */}
         </S.CursorPointer>
       </S.IconWrapper>
       <S.Like>좋아요 520개</S.Like>

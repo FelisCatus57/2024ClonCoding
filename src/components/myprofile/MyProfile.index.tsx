@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import * as S from './MyProfile.styles';
 import MyStory from './story/MyStory.index';
 import Link from 'next/link';
+import { HeartOutlined } from '@ant-design/icons';
 
 export default function MyProfile(): JSX.Element {
   return (
@@ -9,9 +9,7 @@ export default function MyProfile(): JSX.Element {
       <S.Header>
         <S.UserId>__userid__</S.UserId>
         <Link href={'/notify'}>
-          <div style={{ cursor: 'pointer' }}>
-            <Image src={'/navicon/Heart.png'} width={25} height={25} />
-          </div>
+          <HeartOutlined style={{ fontSize: '24px' }} />
         </Link>
       </S.Header>
       <S.InfoWrapper>

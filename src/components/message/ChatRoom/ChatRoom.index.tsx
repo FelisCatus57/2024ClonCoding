@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as S from './ChatRoom.styles';
 import io, { Socket } from 'socket.io-client';
 import Image from 'next/image';
-import { ArrowLeftOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, SendOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import { useRouterBack } from '../../../hooks/useRouterBack';
 
@@ -70,7 +70,9 @@ export default function ChatRoom(): JSX.Element {
       </S.ChatContainer>
       <S.MessageForm onSubmit={sendMessage}>
         <S.Input value={inputMessage} onChange={(e) => setInputMessage(e.target.value)} />
-        <S.Button type="submit">보내기</S.Button>
+        <S.Button type="submit">
+          <SendOutlined style={{ fontSize: '17px' }} />
+        </S.Button>
       </S.MessageForm>
     </S.Wrapper>
   );

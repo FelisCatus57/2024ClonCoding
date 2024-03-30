@@ -5,6 +5,20 @@ import Image from 'next/image';
 import { useState } from 'react';
 import axios from 'axios';
 import PostBoardModal from '../../components/postboardmodal/PostBoardModal.index';
+import {
+  CompassFilled,
+  CompassOutlined,
+  HeartFilled,
+  HeartOutlined,
+  HomeFilled,
+  HomeOutlined,
+  InstagramOutlined,
+  PlusSquareOutlined,
+} from '@ant-design/icons';
+import { useRouter } from 'next/router';
+import LogoutIcon from '@mui/icons-material/Logout';
+import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
+import NearMeIcon from '@mui/icons-material/NearMe';
 
 export default function Sidebar(): JSX.Element {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,40 +56,59 @@ export default function Sidebar(): JSX.Element {
     }
   };
 
+  const router = useRouter();
+  const isHomePage = router.pathname === '/';
+  const isExplorePage = router.pathname === '/explore' || router.pathname === '/search';
+  const isMessagePage = router.pathname === '/message' || router.pathname.startsWith('/message/');
+  const isNotifyPage = router.pathname === '/notify';
+
   return (
     <>
       <S.Wrapper>
         <S.Title>Chosungram</S.Title>
         <S.LogoBox>
-          <Image src={'/navicon/logo.svg'} width={28} height={28} />
+          <InstagramOutlined style={{ fontSize: '24px' }} />
         </S.LogoBox>
         <S.NavBoxWrapper>
           <Link href={'/'}>
             <S.NavBox>
-              <Image src={'/navicon/home.svg'} width={22} height={22} />
+              {isHomePage ? <HomeFilled style={{ fontSize: '24px' }} /> : <HomeOutlined style={{ fontSize: '24px' }} />}
               <S.NavBoxText>홈</S.NavBoxText>
             </S.NavBox>
           </Link>
           <Link href={'/explore'}>
             <S.NavBox>
-              <Image src={'/navicon/Adventures.png'} width={22} height={22} />
+              {isExplorePage ? (
+                <CompassFilled style={{ fontSize: '24px' }} />
+              ) : (
+                <CompassOutlined style={{ fontSize: '24px' }} />
+              )}
               <S.NavBoxText>탐색</S.NavBoxText>
             </S.NavBox>
           </Link>
           <S.NavBox onClick={openModal}>
-            <Image src={'/navicon/add.png'} width={22} height={22} />
+            <PlusSquareOutlined style={{ fontSize: '24px' }} />
+
             <S.NavBoxText>만들기</S.NavBoxText>
           </S.NavBox>
 
           <Link href={'/message'}>
-            <S.NavBox>
-              <Image src={'/navicon/Email Send.png'} width={22} height={22} />
-              <S.NavBoxText>메시지</S.NavBoxText>
-            </S.NavBox>
+            <S.NavMessageBox>
+              {isMessagePage ? (
+                <NearMeIcon style={{ fontSize: '31px' }} />
+              ) : (
+                <NearMeOutlinedIcon style={{ fontSize: '31px' }} />
+              )}
+              <S.NavMessageBoxText>메시지</S.NavMessageBoxText>
+            </S.NavMessageBox>
           </Link>
           <Link href={'/notify'}>
             <S.ResponseImgBox>
-              <Image src={'/navicon/Heart.png'} width={22} height={22} />
+              {isNotifyPage ? (
+                <HeartFilled style={{ fontSize: '24px' }} />
+              ) : (
+                <HeartOutlined style={{ fontSize: '24px' }} />
+              )}
               <S.NavBoxText>알림</S.NavBoxText>
             </S.ResponseImgBox>
           </Link>
@@ -87,8 +120,8 @@ export default function Sidebar(): JSX.Element {
           </Link>
           <S.Spacer />
           <S.ResponseImgBox style={{ marginBottom: '0' }}>
-            <Image src={'/navicon/Vector.svg'} width={19} height={19} />
-            <S.NavBoxText>Menu</S.NavBoxText>
+            <LogoutIcon style={{ fontSize: '30px' }} />
+            <S.NavBoxText>로그아웃</S.NavBoxText>
           </S.ResponseImgBox>
         </S.NavBoxWrapper>
       </S.Wrapper>

@@ -83,6 +83,30 @@ export const NavBox = styled.div`
   }
 `;
 
+export const NavMessageBox = styled.div`
+  height: 48px;
+  margin-bottom: 7%;
+  display: flex;
+  align-items: center;
+  padding-left: 5.5%;
+  cursor: pointer;
+  @media only screen and (max-width: 1210px) {
+    padding-left: 0%;
+  }
+  @media only screen and (max-width: 738px) {
+    padding-left: 0%;
+    margin-bottom: 0%;
+  }
+`;
+
+export const NavMessageBoxText = styled.span`
+  margin-left: 7%;
+  font-size: 15px;
+  @media only screen and (max-width: 1210px) {
+    display: none;
+  }
+`;
+
 export const NavBoxText = styled.span`
   margin-left: 8%;
   font-size: 15px;

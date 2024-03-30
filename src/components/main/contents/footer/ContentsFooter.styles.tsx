@@ -28,6 +28,8 @@ export const IconBox = styled.div`
 
 export const CursorPointer = styled.div`
   cursor: pointer;
+  display: flex;
+  align-items: center;
 `;
 
 export const Like = styled.span`
