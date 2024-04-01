@@ -13,9 +13,15 @@ export default function Story() {
   const [isStoryModalOpen, setIsStoryModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
-  const openModal = () => setIsModalOpen(true);
+  const openModal = () => {
+    document.documentElement.style.overflowY = 'hidden';
+    document.body.style.overflowY = 'hidden';
+    setIsModalOpen(true);
+  };
 
   const openStoryModal = (index: SetStateAction<number>) => {
+    document.documentElement.style.overflowY = 'hidden';
+    document.body.style.overflowY = 'hidden';
     setSelectedIndex(index); // 여기에서 클릭된 스토리의 인덱스를 상태에 저장.
     setIsStoryModalOpen(true);
   };
@@ -27,9 +33,13 @@ export default function Story() {
     }))
   );
   const closeStoryModal = () => {
+    document.documentElement.style.overflowY = '';
+    document.body.style.overflowY = '';
     setIsStoryModalOpen(false);
   };
   const closeModal = () => {
+    document.documentElement.style.overflowY = '';
+    document.body.style.overflowY = '';
     setSelectedImage(null); // 모달을 닫을 때 이미지 선택 상태 초기화
     setIsModalOpen(false);
   };
