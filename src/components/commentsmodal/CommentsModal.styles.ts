@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const StyledInput = styled.input`
   display: none;
@@ -28,24 +28,29 @@ export const ModalBackdrop = styled.div`
   z-index: 1000;
 `;
 
-// export const ModalContainer = styled.div`
-//   width: 468px;
-//   height: 70vh;
-//   position: fixed;
-//   bottom: 0;
-//   background-color: white;
-//   border-top-left-radius: 10px;
-//   border-top-right-radius: 10px;
-//   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
-//   display: flex;
-//   flex-direction: column;
-//   @media only screen and (max-width: 475px) {
-//     width: 100vw;
-//     margin-left: 0;
-//   }
-// `;
+const slideUp = keyframes`
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+`;
 
-export const ModalContainer = styled.div`
+// 모달 사라짐 애니메이션 정의
+const slideDown = keyframes`
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+`;
+
+interface ModalContainerProps {
+  $isOpen: boolean;
+}
+export const ModalContainer = styled.div<ModalContainerProps>`
   width: 468px;
   height: 70vh;
   position: fixed;
@@ -56,14 +61,13 @@ export const ModalContainer = styled.div`
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease-in-out; // 애니메이션 지속 시간과 타입 설정
-  transform: translateY(0); // 기본 위치
+  overflow-y: auto;
+  animation: ${({ $isOpen }) => ($isOpen ? slideUp : slideDown)} 0.4s forwards;
   @media only screen and (max-width: 475px) {
     width: 100vw;
     margin-left: 0;
   }
 `;
-
 export const CloseButton = styled.span`
   position: fixed;
   top: 5px;

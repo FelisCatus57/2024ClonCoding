@@ -8,49 +8,36 @@ interface CommentsModalProps {
 }
 
 export default function CommentsModal(props: CommentsModalProps) {
-  //   if (!props.isOpen) return null;
-
-  //   const handleModalClick = (e: { stopPropagation: () => void }) => {
-  //     e.stopPropagation();
-  //   };
+  const handleModalClick = (e: { stopPropagation: () => void }) => {
+    e.stopPropagation();
+  };
 
   const comments = new Array(8).fill(null).map((_, index) => ({
     id: index,
     name: `user ${index + 1}`,
   }));
 
-  const [isOpen, setIsOpen] = useState(props.isOpen);
+  const [shouldRender, setShouldRender] = useState<boolean>(props.isOpen);
 
   useEffect(() => {
-    setIsOpen(props.isOpen);
+    if (props.isOpen) {
+      setShouldRender(true);
+    } else {
+      setTimeout(() => {
+        setShouldRender(false);
+        document.documentElement.style.overflowY = '';
+        document.body.style.overflowY = '';
+      }, 400);
+    }
   }, [props.isOpen]);
 
-  const handleModalClick = (e: { stopPropagation: () => void }) => {
-    e.stopPropagation();
-  };
-
-  const handleCloseModal = () => {
-    // 애니메이션 효과를 적용하고 모달 상태를 업데이트합니다.
-    setIsOpen(false);
-    setTimeout(() => {
-      props.closeModal();
-    }, 300); // transition 지속 시간과 일치시킵니다.
-  };
-
-  useEffect(() => {
-    setIsOpen(props.isOpen);
-  }, [props.isOpen]);
-
-  if (!isOpen) return null;
+  if (!shouldRender) return null;
   return (
-    <S.ModalBackdrop onClick={handleCloseModal}>
-      <S.ModalContainer
-        onClick={handleModalClick}
-        style={{ transform: props.isOpen ? 'translateY(0)' : 'translateY(100%)' }}
-      >
+    <S.ModalBackdrop onClick={props.closeModal}>
+      <S.ModalContainer $isOpen={props.isOpen} onClick={handleModalClick}>
         <S.Header>댓글</S.Header>
         {comments.map((comments, index) => (
-          <S.CommentWrapper>
+          <S.CommentWrapper key={index}>
             <S.UserImg></S.UserImg>
             <S.UserInfo>
               <S.UserId>{comments.name}</S.UserId>

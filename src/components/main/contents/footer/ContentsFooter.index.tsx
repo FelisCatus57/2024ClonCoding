@@ -19,8 +19,15 @@ import CommentsModal from '../../../commentsmodal/CommentsModal.index';
 export default function ContentsFooter(): JSX.Element {
   const { handleResizeHeight } = useInputResize();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+
+  const openModal = () => {
+    document.documentElement.style.overflowY = 'hidden';
+    document.body.style.overflowY = 'hidden';
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>

@@ -23,8 +23,15 @@ import NearMeIcon from '@mui/icons-material/NearMe';
 export default function Sidebar(): JSX.Element {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const openModal = () => setIsModalOpen(true);
+
+  const openModal = () => {
+    document.documentElement.style.overflowY = 'hidden';
+    document.body.style.overflowY = 'hidden';
+    setIsModalOpen(true);
+  };
   const closeModal = () => {
+    document.documentElement.style.overflowY = '';
+    document.body.style.overflowY = '';
     setSelectedImage(null); // 모달을 닫을 때 이미지 선택 상태 초기화
     setIsModalOpen(false);
   };
