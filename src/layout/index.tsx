@@ -7,8 +7,6 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { isLoggedIn, useSsrComplectedState } from '../commons/globalstate/globalstate';
 import useLogin from '../services/useLogin';
 import { Refresh } from '@mui/icons-material';
-import { getCookie, setCookie } from '../lib/react-cookie';
-import axios from 'axios';
 
 interface ILayoutProps {
   children: JSX.Element;

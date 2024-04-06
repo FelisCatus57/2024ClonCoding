@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
 import { isLoggedIn } from '../commons/globalstate/globalstate';
-import { setCookie } from '../lib/react-cookie';
+import { setCookie } from './useReactCookie';
 
 interface userInfo {
   username: string;
@@ -24,7 +24,6 @@ export default function useLogin(userInfo: userInfo) {
           console.log('accessToken', accessToken);
           console.log('refreshToken', refreshToken);
           setLoggedin(true);
-          alert('로그인 성공');
           router.push('/');
         }
       })
