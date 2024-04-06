@@ -2,8 +2,10 @@ import type { AppProps } from 'next/app';
 import { GlobalStyles } from '../src/commons/globalstyles/GlobalStyles';
 import Head from 'next/head';
 import Layout from '../src/layout/index';
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Socket, io } from 'socket.io-client';
+import { RecoilRoot, useRecoilValue } from 'recoil';
+import { CookiesProvider } from 'react-cookie';
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   // useEffect(() => {
@@ -39,10 +41,14 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
         />
         <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet"></link>
       </Head>
-      <GlobalStyles />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <CookiesProvider>
+        <RecoilRoot>
+          <GlobalStyles />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </RecoilRoot>
+      </CookiesProvider>
     </>
   );
 }

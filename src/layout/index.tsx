@@ -3,6 +3,12 @@ import Sidebar from './sidebar/SideBar.index';
 import Headerbar from './headerbar/HeaderBar.index';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { isLoggedIn, useSsrComplectedState } from '../commons/globalstate/globalstate';
+import useLogin from '../services/useLogin';
+import { Refresh } from '@mui/icons-material';
+import { getCookie, setCookie } from '../lib/react-cookie';
+import axios from 'axios';
 
 interface ILayoutProps {
   children: JSX.Element;
@@ -26,7 +32,6 @@ export default function Layout(props: ILayoutProps): JSX.Element {
   const isLoginPage = router.pathname === '/login';
   const isSignupPage = router.pathname === '/signup';
   const isHomePage = router.pathname === '/';
-
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
   useEffect(() => {
@@ -35,14 +40,10 @@ export default function Layout(props: ILayoutProps): JSX.Element {
         setIsSidebarVisible(false);
       } else {
         setIsSidebarVisible(true);
-        console.log(isSidebarVisible);
       }
     };
-
     window.addEventListener('resize', handleResize);
-
     handleResize();
-
     return () => window.removeEventListener('resize', handleResize);
   }, [router.pathname]);
 

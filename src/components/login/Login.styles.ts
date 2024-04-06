@@ -20,7 +20,7 @@ export const LoginBox = styled.div`
 
 export const SignupBox = styled.div`
   width: 350px;
-  height: 500px;
+  height: 600px;
   border: 1px solid #d8d8d8;
   display: flex;
   flex-direction: column;
@@ -41,6 +41,7 @@ export const Input = styled.input`
   border: 1px solid #d8d8d8;
   height: 38px;
   padding-left: 3%;
+  margin-bottom: 2%;
   &:focus {
     border-color: #bdbdbd;
     outline: none;
