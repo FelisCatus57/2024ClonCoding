@@ -16,20 +16,32 @@ export const persistAtomEffect = <T>(param: Parameters<AtomEffect<T>>[0]) => {
   param.getPromise(ssrCompletedState).then(() => persistAtom(param));
 };
 
-export const isLoggedIn = atom<boolean | null>({
-  key: 'isLoggedIn',
+// export const isLoggedIn = atom<boolean | null>({
+//   key: 'isLoggedIn',
+//   default: null,
+//   effects_UNSTABLE: [persistAtomEffect],
+// });
+
+export const username = atom<string | null | undefined>({
+  key: 'username',
   default: null,
   effects_UNSTABLE: [persistAtomEffect],
 });
 
-// export const layoutEmail = atom<string | null | undefined>({
-//   key: 'layoutEmail',
-//   default: null,
-//   effects_UNSTABLE: [persistAtomEffect],
-// });
+export const nickname = atom<string | null | undefined>({
+  key: 'nickname',
+  default: null,
+  effects_UNSTABLE: [persistAtomEffect],
+});
 
-// export const userEmail = atom<string | null | undefined>({
-//   key: 'userEmail',
-//   default: null,
-//   effects_UNSTABLE: [persistAtomEffect],
-// });
+export const name = atom<string | null | undefined>({
+  key: 'name',
+  default: null,
+  effects_UNSTABLE: [persistAtomEffect],
+});
+
+export const profileImageUrl = atom<string | null | undefined>({
+  key: 'profileImageUrl',
+  default: null,
+  effects_UNSTABLE: [persistAtomEffect],
+});

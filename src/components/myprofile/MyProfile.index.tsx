@@ -2,12 +2,15 @@ import * as S from './MyProfile.styles';
 import MyStory from './story/MyStory.index';
 import Link from 'next/link';
 import { HeartOutlined } from '@ant-design/icons';
+import { useRecoilValue } from 'recoil';
+import { nickname } from '../../commons/globalstate/globalstate';
 
 export default function MyProfile(): JSX.Element {
+  const myNickname = useRecoilValue(nickname);
   return (
     <S.Wrapper>
       <S.Header>
-        <S.UserId>__userid__</S.UserId>
+        <S.UserId>{myNickname}</S.UserId>
         <Link href={'/notify'}>
           <HeartOutlined style={{ fontSize: '24px' }} />
         </Link>

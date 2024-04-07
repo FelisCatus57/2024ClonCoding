@@ -19,11 +19,16 @@ import { useRouter } from 'next/router';
 import LogoutIcon from '@mui/icons-material/Logout';
 import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
 import NearMeIcon from '@mui/icons-material/NearMe';
+import useLogout from '../../services/useLogout';
+import useRefreshToken from '../../services/useRefreshToken';
+import { useRecoilValue } from 'recoil';
+import { nickname, profileImageUrl } from '../../commons/globalstate/globalstate';
 
 export default function Sidebar(): JSX.Element {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-
+  const profileImage = useRecoilValue(profileImageUrl);
+  const myNickname = useRecoilValue(nickname);
   const openModal = () => {
     document.documentElement.style.overflowY = 'hidden';
     document.body.style.overflowY = 'hidden';
@@ -69,6 +74,8 @@ export default function Sidebar(): JSX.Element {
   const isMessagePage = router.pathname === '/message' || router.pathname.startsWith('/message/');
   const isNotifyPage = router.pathname === '/notify';
 
+  useRefreshToken();
+  const logout = useLogout();
   return (
     <>
       <S.Wrapper>
@@ -119,14 +126,14 @@ export default function Sidebar(): JSX.Element {
               <S.NavBoxText>알림</S.NavBoxText>
             </S.ResponseImgBox>
           </Link>
-          <Link href={'/mypage'}>
+          <Link href={`/user/${myNickname}`}>
             <S.NavBox>
-              <Image src={'/navicon/user.png'} width={22} height={22} />
-              <S.NavBoxText>__userid_</S.NavBoxText>
+              <Image src={profileImage || '/user.png'} alt="profile" width="24" height="24" />
+              <S.NavBoxText>{myNickname}</S.NavBoxText>
             </S.NavBox>
           </Link>
           <S.Spacer />
-          <S.ResponseImgBox style={{ marginBottom: '0' }}>
+          <S.ResponseImgBox style={{ marginBottom: '0' }} onClick={() => logout()}>
             <LogoutIcon style={{ fontSize: '30px' }} />
             <S.NavBoxText>로그아웃</S.NavBoxText>
           </S.ResponseImgBox>

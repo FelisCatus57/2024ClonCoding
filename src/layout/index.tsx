@@ -3,10 +3,6 @@ import Sidebar from './sidebar/SideBar.index';
 import Headerbar from './headerbar/HeaderBar.index';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { isLoggedIn, useSsrComplectedState } from '../commons/globalstate/globalstate';
-import useLogin from '../services/useLogin';
-import { Refresh } from '@mui/icons-material';
 
 interface ILayoutProps {
   children: JSX.Element;
