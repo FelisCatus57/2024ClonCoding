@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import Contents from './contents/Contents.index';
 import Story from './story/Story.index';
+import useRefreshToken from '../../services/useRefreshToken';
+import { useEffect } from 'react';
 
 export default function Main(): JSX.Element {
   const Wrapper = styled.div`
@@ -17,9 +19,7 @@ export default function Main(): JSX.Element {
       <Wrapper>
         <Story />
         <Contents />
-        {/* 스크롤 테스트..*/}
         <Contents />
-        {/* 스크롤 테스트..*/}
         <Contents />
       </Wrapper>
     </>

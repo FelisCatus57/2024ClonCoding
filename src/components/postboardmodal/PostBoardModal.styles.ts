@@ -6,7 +6,7 @@ export const StyledInput = styled.input`
 
 export const Header = styled.div`
   width: 100%;
-  height: 50px;
+  min-height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -74,7 +74,8 @@ export const ModalBackdrop = styled.div`
 
 export const ModalContainer = styled.div`
   width: 500px;
-  height: 570px;
+  min-height: 570px;
+  height: auto;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
@@ -90,12 +91,13 @@ export const ModalContainer = styled.div`
 export const InputText = styled.textarea`
   width: 100%;
   padding: 0 8px;
+  border-radius: 10px;
   border: none;
   outline: none;
   resize: none;
-  overflow-y: auto;
+  overflow-y: hidden;
   font-size: 14px;
-  border-radius: 10px;
+  /* background-color: red; */
 `;
 
 export const CloseButton = styled.span`

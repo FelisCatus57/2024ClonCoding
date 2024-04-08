@@ -21,13 +21,34 @@ export const ModalBackdrop = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 1010;
 `;
 
+interface ModalContainerProps {
+  $isOpen: boolean;
+}
+
+// 모달 내부 댓글ver
+
+// export const ModalContainer = styled.div<ModalContainerProps>`
+//   width: 500px;
+//   height: 600px;
+//   margin-top: 13.1vh;
+//   border-radius: 10px;
+//   background-color: white;
+//   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.8);
+//   display: flex;
+//   flex-direction: column;
+//   overflow-y: auto;
+//   @media only screen and (max-width: 650px) {
+//     width: 75vw;
+//     max-height: 80vh;
+//     margin-top: 0vh;
+//   }
+// `;
 const slideUp = keyframes`
   from {
     transform: translateY(100%);
@@ -47,11 +68,8 @@ const slideDown = keyframes`
   }
 `;
 
-interface ModalContainerProps {
-  $isOpen: boolean;
-}
 export const ModalContainer = styled.div<ModalContainerProps>`
-  width: 468px;
+  width: 500px;
   height: 70vh;
   position: fixed;
   bottom: 0;
@@ -90,8 +108,8 @@ export const UserImg = styled.div`
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 1px solid gray;
   margin-right: 1.5%;
+  position: relative;
 `;
 export const UserInfo = styled.div`
   display: flex;

@@ -10,6 +10,10 @@ const nextConfig = {
 
     return config;
   },
+
+  images: {
+    domains: ['uncertain.shop'],
+  },
 };
 
 // export default nextConfig;

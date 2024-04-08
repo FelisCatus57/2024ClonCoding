@@ -2,8 +2,15 @@ import type { AppProps } from 'next/app';
 import { GlobalStyles } from '../src/commons/globalstyles/GlobalStyles';
 import Head from 'next/head';
 import Layout from '../src/layout/index';
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { Socket, io } from 'socket.io-client';
+import { RecoilRoot } from 'recoil';
+import { CookiesProvider } from 'react-cookie';
+import { Spin } from 'antd';
+import { useRouter } from 'next/router';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   // useEffect(() => {
@@ -39,10 +46,16 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
         />
         <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet"></link>
       </Head>
-      <GlobalStyles />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <CookiesProvider>
+        <RecoilRoot>
+          <GlobalStyles />
+          <Layout>
+            <QueryClientProvider client={queryClient}>
+              <Component {...pageProps} />
+            </QueryClientProvider>
+          </Layout>
+        </RecoilRoot>
+      </CookiesProvider>
     </>
   );
 }

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import * as S from './Sidebar.styles';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import axios from 'axios';
 import PostBoardModal from '../../components/postboardmodal/PostBoardModal.index';
 import {
@@ -19,10 +19,18 @@ import { useRouter } from 'next/router';
 import LogoutIcon from '@mui/icons-material/Logout';
 import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
 import NearMeIcon from '@mui/icons-material/NearMe';
+import useLogout from '../../services/useLogout';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { accesstoken, nickname, profileImageUrl } from '../../commons/globalstate/globalstate';
+import { getCookie, setCookie } from '../../services/useReactCookie';
+import useRefreshToken from '../../services/useRefreshToken';
 
 export default function Sidebar(): JSX.Element {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const profileImage = useRecoilValue(profileImageUrl);
+  const myNickname = useRecoilValue(nickname);
+  const logout = useLogout();
 
   const openModal = () => {
     document.documentElement.style.overflowY = 'hidden';
@@ -68,6 +76,8 @@ export default function Sidebar(): JSX.Element {
   const isExplorePage = router.pathname === '/explore' || router.pathname === '/search';
   const isMessagePage = router.pathname === '/message' || router.pathname.startsWith('/message/');
   const isNotifyPage = router.pathname === '/notify';
+
+  useRefreshToken();
 
   return (
     <>
@@ -119,14 +129,14 @@ export default function Sidebar(): JSX.Element {
               <S.NavBoxText>알림</S.NavBoxText>
             </S.ResponseImgBox>
           </Link>
-          <Link href={'/mypage'}>
+          <Link href={`/user/${myNickname}`}>
             <S.NavBox>
-              <Image src={'/navicon/user.png'} width={22} height={22} />
-              <S.NavBoxText>__userid_</S.NavBoxText>
+              <Image src={profileImage || '/user.png'} alt="profile" width="24" height="24" />
+              <S.NavBoxText>{myNickname}</S.NavBoxText>
             </S.NavBox>
           </Link>
           <S.Spacer />
-          <S.ResponseImgBox style={{ marginBottom: '0' }}>
+          <S.ResponseImgBox style={{ marginBottom: '0' }} onClick={() => logout()}>
             <LogoutIcon style={{ fontSize: '30px' }} />
             <S.NavBoxText>로그아웃</S.NavBoxText>
           </S.ResponseImgBox>

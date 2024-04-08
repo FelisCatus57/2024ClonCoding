@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 
 export const LoginBox = styled.div`
   width: 350px;
-  height: 430px;
+  height: 470px;
   border: 1px solid #d8d8d8;
   display: flex;
   flex-direction: column;
@@ -20,7 +20,8 @@ export const LoginBox = styled.div`
 
 export const SignupBox = styled.div`
   width: 350px;
-  height: 500px;
+  min-height: 600px;
+  height: auto;
   border: 1px solid #d8d8d8;
   display: flex;
   flex-direction: column;
@@ -41,6 +42,7 @@ export const Input = styled.input`
   border: 1px solid #d8d8d8;
   height: 38px;
   padding-left: 3%;
+  margin-bottom: 4%;
   &:focus {
     border-color: #bdbdbd;
     outline: none;
@@ -69,9 +71,23 @@ export const LoginButton = styled.button`
 
 export const SignupDiv = styled.div`
   margin-top: 10%;
+  margin-bottom: 5%;
 `;
 
 export const SignupText = styled.span`
   font-size: 14px;
   cursor: pointer;
+`;
+
+export const Form = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const Error = styled.span`
+  font-size: 13px;
+  color: gray;
+  margin-bottom: 3%;
 `;

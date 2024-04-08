@@ -35,14 +35,10 @@ export default function Layout(props: ILayoutProps): JSX.Element {
         setIsSidebarVisible(false);
       } else {
         setIsSidebarVisible(true);
-        console.log(isSidebarVisible);
       }
     };
-
     window.addEventListener('resize', handleResize);
-
     handleResize();
-
     return () => window.removeEventListener('resize', handleResize);
   }, [router.pathname]);
 

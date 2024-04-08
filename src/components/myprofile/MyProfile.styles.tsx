@@ -43,8 +43,11 @@ export const UserImg = styled.div`
   width: 65px;
   height: 65px;
   border-radius: 50%;
-  border: 1px solid gray;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 `;
 
 export const NumBox = styled.div`
@@ -71,7 +74,7 @@ export const Logout = styled.div`
   width: 100%;
   height: 40px;
   border-radius: 10px;
-  border: 1px solid #f2f2f2;
+  border: none;
   background-color: #f2f2f2;
   display: flex;
   align-items: center;
@@ -106,8 +109,12 @@ export const Img = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
   border: 1px solid #ffffff;
+  :hover {
+    filter: brightness(0.9);
+  }
+  cursor: pointer;
 `;
 
 export const GuideTextWrapper = styled.div`

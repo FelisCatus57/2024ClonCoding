@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import * as S from '../postboardmodal/PostBoardModal.styles';
+import { useInputResize } from '../../hooks/useInputResize';
 
 interface PostBoardModalProps {
   isOpen: boolean;
@@ -12,7 +13,7 @@ interface PostBoardModalProps {
 
 export default function PostBoardModal(props: PostBoardModalProps) {
   if (!props.isOpen) return null;
-
+  const { handleResizeHeight } = useInputResize();
   const preview = props.selectedImage ? URL.createObjectURL(props.selectedImage) : '';
 
   const handleModalClick = (e: { stopPropagation: () => void }) => {
@@ -44,8 +45,8 @@ export default function PostBoardModal(props: PostBoardModalProps) {
           accept="image/*"
           onChange={(e) => props.onImageSelect(e.target.files ? e.target.files[0] : null)}
         />
-        <S.InputText style={{ marginTop: '20px' }} placeholder="내용을 작성해주세요" />
-        <S.InputText placeholder="사진 속 장소를 작성해주세요" />
+        <S.InputText onInput={handleResizeHeight} style={{ marginTop: '20px' }} placeholder="내용을 작성해주세요" />
+        {/* <S.InputText placeholder="사진 속 장소를 작성해주세요" /> */}
       </S.ModalContainer>
       <S.CloseButton>x</S.CloseButton>
     </S.ModalBackdrop>
