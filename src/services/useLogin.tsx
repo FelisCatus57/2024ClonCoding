@@ -43,19 +43,21 @@ export default function useLogin() {
         .then((res) => {
           if (res.status === 200) {
             // 응답에서 새로운 토큰을 받아 로컬 스토리지와 쿠키에 저장합니다.
-            const accessToken = res.headers['authorization'];
-            const refreshToken = res.headers['authorization-refresh'];
-            // localStorage.setItem('accessToken', accessToken);
-            alert('토큰재발급login');
-            // setAccessToken(accessToken);
-            setCookie('accessToken', accessToken);
-            setCookie('refreshToken', refreshToken);
-            // 재발급 성공 시 59분 후에 다시 토큰을 재발급하도록 setTimeout 설정
-            // setTimeout(refreshTokens, 59 * 60 * 1000);
-            setTimeout(() => refreshTokens(accessToken, refreshToken), 59 * 60 * 1000);
+            //헤더 이름이 소문자로 반환되는 경우 고려하여 toLowerCase사용.
+            const accessToken = res.headers['authorization'].toLowerCase();
+            const refreshToken = res.headers['authorization-refresh'].toLowerCase();
+            
+
+           alert('토큰 재발급 성공');
+           setCookie('accessToken', accessToken, {path: '/' });
+           setCookie('refreshToken', refreshToken, {path: '/' });
+
+           const refreshTokenTimeout = 59 * 60 * 1000;
+           setTimeout(() => refreshTokens(accessToken, refreshToken), refreshTokenTimeout);
           }
         })
         .catch((error) => {
+          console.error('토큰 재발급 실패: ', error);
           alert('다시 로그인 해주세요.');
           localStorage.clear();
           setCookie('refreshToken', '', { path: '/', maxAge: -1 }); // 쿠키 삭제
