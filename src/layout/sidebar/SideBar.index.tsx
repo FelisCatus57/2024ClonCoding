@@ -2,7 +2,7 @@ import Link from 'next/link';
 import * as S from './Sidebar.styles';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import axios from 'axios';
 import PostBoardModal from '../../components/postboardmodal/PostBoardModal.index';
 import {
@@ -20,15 +20,18 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
 import NearMeIcon from '@mui/icons-material/NearMe';
 import useLogout from '../../services/useLogout';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { accesstoken, nickname, profileImageUrl } from '../../commons/globalstate/globalstate';
+import { getCookie, setCookie } from '../../services/useReactCookie';
 import useRefreshToken from '../../services/useRefreshToken';
-import { useRecoilValue } from 'recoil';
-import { nickname, profileImageUrl } from '../../commons/globalstate/globalstate';
 
 export default function Sidebar(): JSX.Element {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const profileImage = useRecoilValue(profileImageUrl);
   const myNickname = useRecoilValue(nickname);
+  const logout = useLogout();
+
   const openModal = () => {
     document.documentElement.style.overflowY = 'hidden';
     document.body.style.overflowY = 'hidden';
@@ -75,7 +78,7 @@ export default function Sidebar(): JSX.Element {
   const isNotifyPage = router.pathname === '/notify';
 
   useRefreshToken();
-  const logout = useLogout();
+
   return (
     <>
       <S.Wrapper>

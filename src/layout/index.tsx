@@ -26,6 +26,7 @@ export default function Layout(props: ILayoutProps): JSX.Element {
   const isLoginPage = router.pathname === '/login';
   const isSignupPage = router.pathname === '/signup';
   const isHomePage = router.pathname === '/';
+
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
   useEffect(() => {

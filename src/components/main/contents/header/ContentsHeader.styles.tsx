@@ -19,6 +19,7 @@ export const UserImg = styled.div`
 export const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `;
 export const UserId = styled.span`
   font-size: 14px;

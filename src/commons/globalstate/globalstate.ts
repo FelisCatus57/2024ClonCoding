@@ -22,15 +22,21 @@ export const persistAtomEffect = <T>(param: Parameters<AtomEffect<T>>[0]) => {
 //   effects_UNSTABLE: [persistAtomEffect],
 // });
 
+export const accesstoken = atom<string | null | undefined>({
+  key: 'accesstoken',
+  default: null,
+  effects_UNSTABLE: [persistAtomEffect],
+});
+
 export const username = atom<string | null | undefined>({
   key: 'username',
   default: null,
   effects_UNSTABLE: [persistAtomEffect],
 });
 
-export const nickname = atom<string | null | undefined>({
+export const nickname = atom<string>({
   key: 'nickname',
-  default: null,
+  default: '',
   effects_UNSTABLE: [persistAtomEffect],
 });
 
