@@ -44,10 +44,9 @@ export default function useLogin() {
           if (res.status === 200) {
             // 응답에서 새로운 토큰을 받아 로컬 스토리지와 쿠키에 저장합니다.
             //헤더 이름이 소문자로 반환되는 경우 고려하여 toLowerCase사용.
-            const accessToken = res.headers['authorization'].toLowerCase();
-            const refreshToken = res.headers['authorization-refresh'].toLowerCase();
-            
-
+            const accessToken = res.headers['authorization'] || res.headers['Authorization'];
+            const refreshToken = res.headers['authorization-refresh'] || res.headers['Authorization-refresh'];
+          
            alert('토큰 재발급 성공');
            setCookie('accessToken', accessToken, {path: '/' });
            setCookie('refreshToken', refreshToken, {path: '/' });
