@@ -6,7 +6,7 @@ import { get } from 'http';
 import { getCookie } from './useReactCookie';
 
 const getProfile = async (nickname: string, accessToken: string | null | undefined) => {
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}api/${nickname}`, {
+  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/api/${nickname}`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },

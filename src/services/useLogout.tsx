@@ -10,7 +10,7 @@ export default function useLogout() {
   const logout = () => {
     if (accessToken) {
       axios
-        .post(`${process.env.NEXT_PUBLIC_API}logout`, {
+        .post(`${process.env.NEXT_PUBLIC_API}/logout`, {
           headers: {
             Authorization: accessToken,
           },

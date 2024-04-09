@@ -27,6 +27,7 @@ interface Post {
 
 export default function MyProfile(): JSX.Element {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPostId, setSelectedPostId] = useState('');
   const myNickname = useRecoilValue(nickname);
   const myProfileImage = useRecoilValue(profileImageUrl);
   const { data } = useGetProfile(myNickname);
@@ -34,9 +35,10 @@ export default function MyProfile(): JSX.Element {
   const userPosts = data?.data?.userPost;
   const logout = useLogout();
 
-  const openModal = () => {
+  const openModal = (postId: string) => {
     document.documentElement.style.overflowY = 'hidden';
     document.body.style.overflowY = 'hidden';
+    setSelectedPostId(postId);
     setIsModalOpen(true);
   };
   const closeModal = () => {
@@ -44,7 +46,6 @@ export default function MyProfile(): JSX.Element {
     document.body.style.overflowY = '';
     setIsModalOpen(false);
   };
-
   return (
     <>
       <S.Wrapper>
@@ -63,11 +64,11 @@ export default function MyProfile(): JSX.Element {
             <S.NumText>게시물</S.NumText>
           </S.NumBox>
           <S.NumBox>
-            <S.Num>204</S.Num>
+            <S.Num>{data?.data?.userFollowerCount}</S.Num>
             <S.NumText>팔로워</S.NumText>
           </S.NumBox>
           <S.NumBox>
-            <S.Num>209</S.Num>
+            <S.Num>{data?.data?.userFollowCount}</S.Num>
             <S.NumText>팔로잉</S.NumText>
           </S.NumBox>
         </S.InfoWrapper>
@@ -78,7 +79,7 @@ export default function MyProfile(): JSX.Element {
           <S.PostWrapper>
             {userPosts.map((post: Post, index: number) => (
               <>
-                <S.Post key={index} onClick={openModal}>
+                <S.Post key={post.postId} onClick={() => openModal(post.postId)}>
                   <S.Img>
                     {/* 배열 안의 첫 번째 이미지 객체에서 imageUrl을 가져와서 Image 컴포넌트의 src에 사용 */}
                     {post.postImageResponse.length > 0 && (
@@ -86,14 +87,14 @@ export default function MyProfile(): JSX.Element {
                     )}
                   </S.Img>
                 </S.Post>
-                <PostDetailModal
+                {/* <PostDetailModal
                   isOpen={isModalOpen}
                   closeModal={closeModal}
-                  postId={post.postId}
+                  postId={selectedPostId}
                   commentCount={post.commentCount}
                   content={post.content}
-                  postImage={post.postImageResponse[0].image.imageUrl}
-                />
+                  postImage={post.postImageResponse[0]?.image.imageUrl}
+                /> */}
               </>
             ))}
           </S.PostWrapper>
@@ -104,6 +105,19 @@ export default function MyProfile(): JSX.Element {
           </S.GuideTextWrapper>
         )}
       </S.Wrapper>
+      {isModalOpen && (
+        <PostDetailModal
+          isOpen={isModalOpen}
+          closeModal={closeModal}
+          postId={selectedPostId}
+          commentCount={userPosts.find((post: { postId: string }) => post.postId === selectedPostId)?.commentCount || 0}
+          content={userPosts.find((post: { postId: string }) => post.postId === selectedPostId)?.content || ''}
+          postImage={
+            userPosts.find((post: { postId: string }) => post.postId === selectedPostId)?.postImageResponse[0]?.image
+              .imageUrl || ''
+          }
+        />
+      )}
     </>
   );
 }

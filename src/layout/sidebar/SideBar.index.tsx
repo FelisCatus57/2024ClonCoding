@@ -31,7 +31,7 @@ export default function Sidebar(): JSX.Element {
   const profileImage = useRecoilValue(profileImageUrl);
   const myNickname = useRecoilValue(nickname);
   const logout = useLogout();
-
+  useRefreshToken();
   const openModal = () => {
     document.documentElement.style.overflowY = 'hidden';
     document.body.style.overflowY = 'hidden';
@@ -48,36 +48,11 @@ export default function Sidebar(): JSX.Element {
     setSelectedImage(image);
   };
 
-  const uploadImage = async () => {
-    if (!selectedImage) {
-      console.error('파일이 선택되지 않았습니다.');
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('image', selectedImage);
-
-    try {
-      const response = await axios.post('url', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      console.log('서버 응답:', response.data);
-      // 업로드 성공 후 처리
-      closeModal(); // 업로드 성공 후 모달 닫기
-    } catch (error) {
-      console.error('업로드 에러:', error);
-    }
-  };
-
   const router = useRouter();
   const isHomePage = router.pathname === '/';
   const isExplorePage = router.pathname === '/explore' || router.pathname === '/search';
   const isMessagePage = router.pathname === '/message' || router.pathname.startsWith('/message/');
   const isNotifyPage = router.pathname === '/notify';
-
-  useRefreshToken();
 
   return (
     <>
@@ -146,7 +121,6 @@ export default function Sidebar(): JSX.Element {
         isOpen={isModalOpen}
         closeModal={closeModal}
         onImageSelect={handleImageSelect}
-        uploadImage={uploadImage}
         selectedImage={selectedImage}
       />
     </>

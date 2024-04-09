@@ -34,7 +34,7 @@ export const PreviewContainer = styled.div`
   height: 400px;
   position: relative;
   @media only screen and (max-width: 650px) {
-    height: 350px;
+    min-height: 350px;
   }
 `;
 
@@ -55,7 +55,7 @@ export const FileInputLabel = styled.label`
     color: white;
   }
   @media only screen and (max-width: 650px) {
-    height: 350px;
+    min-height: 350px;
   }
 `;
 

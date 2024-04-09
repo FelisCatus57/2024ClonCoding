@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import * as S from '../postboardmodal/PostBoardModal.styles';
 import { useInputResize } from '../../hooks/useInputResize';
+import { getCookie } from '../../services/useReactCookie';
+import axios from 'axios';
 
 interface PostBoardModalProps {
   isOpen: boolean;
   closeModal: () => void;
   onImageSelect: (image: File | null) => void;
-  uploadImage: () => Promise<void>;
   selectedImage: File | null;
 }
 
@@ -19,13 +20,39 @@ export default function PostBoardModal(props: PostBoardModalProps) {
   const handleModalClick = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
   };
+  const [isLoading, setIsLoading] = useState(false);
+  const [content, setContent] = useState('' as string);
+  const accessToken = getCookie('accessToken');
+  const postBoard = async (content: string, Image: File | null) => {
+    if (!Image) {
+      alert('이미지를 첨부해주세요');
+      return;
+    }
+    setIsLoading(true);
+    const formData = new FormData();
+    formData.append('files', Image);
+    formData.append('content', content);
+    try {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/api/post`, formData, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      setIsLoading(false);
 
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
+    }
+  };
   return (
     <S.ModalBackdrop onClick={props.closeModal}>
       <S.ModalContainer onClick={handleModalClick}>
         <S.Header>
           새 게시물 만들기
-          <S.UploadButton onClick={props.uploadImage} disabled={!props.selectedImage}>
+          <S.UploadButton onClick={() => postBoard(content, props.selectedImage)} disabled={isLoading}>
             게시
           </S.UploadButton>
         </S.Header>
@@ -45,7 +72,12 @@ export default function PostBoardModal(props: PostBoardModalProps) {
           accept="image/*"
           onChange={(e) => props.onImageSelect(e.target.files ? e.target.files[0] : null)}
         />
-        <S.InputText onInput={handleResizeHeight} style={{ marginTop: '20px' }} placeholder="내용을 작성해주세요" />
+        <S.InputText
+          onInput={handleResizeHeight}
+          onChange={(e) => setContent(e.target.value)}
+          style={{ marginTop: '20px' }}
+          placeholder="내용을 작성해주세요"
+        />
         {/* <S.InputText placeholder="사진 속 장소를 작성해주세요" /> */}
       </S.ModalContainer>
       <S.CloseButton>x</S.CloseButton>

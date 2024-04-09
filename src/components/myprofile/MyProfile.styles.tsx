@@ -19,7 +19,7 @@ export const Wrapper = styled.div`
 
 export const Header = styled.div`
   width: 100%;
-  height: 60px;
+  min-height: 60px;
 
   display: flex;
   justify-content: space-between;
@@ -32,7 +32,7 @@ export const UserId = styled.span`
 `;
 
 export const InfoWrapper = styled.div`
-  height: 100px;
+  min-height: 100px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -41,7 +41,7 @@ export const InfoWrapper = styled.div`
 `;
 export const UserImg = styled.div`
   width: 65px;
-  height: 65px;
+  min-height: 65px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -72,7 +72,7 @@ export const NumText = styled.span`
 
 export const Logout = styled.div`
   width: 100%;
-  height: 40px;
+  min-height: 40px;
   border-radius: 10px;
   border: none;
   background-color: #f2f2f2;
@@ -87,7 +87,7 @@ export const Logout = styled.div`
 export const DivineLine = styled.div`
   margin-top: 3%;
   width: 100%;
-  height: 1px;
+  min-height: 1px;
   background-color: #e6e6e6;
 `;
 

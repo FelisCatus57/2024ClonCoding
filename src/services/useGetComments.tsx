@@ -5,7 +5,7 @@ import { accesstoken } from '../commons/globalstate/globalstate';
 import { getCookie } from './useReactCookie';
 
 const getComments = async (postId: string, accessToken: string | null | undefined) => {
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}api/${postId}/comment`, {
+  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/api/${postId}/comment`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },

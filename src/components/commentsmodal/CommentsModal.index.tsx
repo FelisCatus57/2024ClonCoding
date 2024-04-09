@@ -12,7 +12,7 @@ export default function CommentsModal(props: CommentsModalProps) {
     e.stopPropagation();
   };
 
-  const comments = new Array(8).fill(null).map((_, index) => ({
+  const comments = new Array(13).fill(null).map((_, index) => ({
     id: index,
     name: `user ${index + 1}`,
   }));
@@ -34,18 +34,20 @@ export default function CommentsModal(props: CommentsModalProps) {
   if (!shouldRender) return null;
   return (
     <S.ModalBackdrop onClick={props.closeModal}>
-      <S.ModalContainer $isOpen={props.isOpen} onClick={handleModalClick}>
+      <S.ModalContainerWrapper $isOpen={props.isOpen} onClick={handleModalClick}>
         <S.Header>댓글</S.Header>
-        {comments.map((comments, index) => (
-          <S.CommentWrapper key={index}>
-            <S.UserImg></S.UserImg>
-            <S.UserInfo>
-              <S.UserId>{comments.name}</S.UserId>
-              <S.UserComment>댓글이에요{index + 1}</S.UserComment>
-            </S.UserInfo>
-          </S.CommentWrapper>
-        ))}
-      </S.ModalContainer>
+        <S.ModalContainer>
+          {comments.map((comments, index) => (
+            <S.CommentWrapper key={index}>
+              <S.UserImg></S.UserImg>
+              <S.UserInfo>
+                <S.UserId>{comments.name}</S.UserId>
+                <S.UserComment>댓글이에요{index + 1}</S.UserComment>
+              </S.UserInfo>
+            </S.CommentWrapper>
+          ))}
+        </S.ModalContainer>
+      </S.ModalContainerWrapper>
 
       <S.CloseButton>x</S.CloseButton>
     </S.ModalBackdrop>

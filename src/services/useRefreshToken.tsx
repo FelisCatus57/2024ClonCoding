@@ -14,7 +14,7 @@ export default function useRefreshToken() {
       const formData = new URLSearchParams();
       formData.append('refreshToken', refreshToken);
       axios
-        .post(`${process.env.NEXT_PUBLIC_API}api/reissue`, formData.toString(), {
+        .post(`${process.env.NEXT_PUBLIC_API}/api/reissue`, formData.toString(), {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             Authorization: `Bearer ${accessToken}`,

@@ -34,7 +34,7 @@ export default function useLogin() {
       const formData = new URLSearchParams();
       formData.append('refreshToken', refreshToken);
       axios
-        .post(`${process.env.NEXT_PUBLIC_API}api/reissue`, formData.toString(), {
+        .post(`${process.env.NEXT_PUBLIC_API}/api/reissue`, formData.toString(), {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             Authorization: `Bearer ${accessToken}`,
@@ -46,7 +46,6 @@ export default function useLogin() {
             const accessToken = res.headers['authorization'];
             const refreshToken = res.headers['authorization-refresh'];
             // localStorage.setItem('accessToken', accessToken);
-            alert('토큰재발급login');
             // setAccessToken(accessToken);
             setCookie('accessToken', accessToken);
             setCookie('refreshToken', refreshToken);
@@ -72,7 +71,7 @@ export default function useLogin() {
   const login = (data: { username: string; password: string }) => {
     const { username, password } = data;
     axios
-      .post(`${process.env.NEXT_PUBLIC_API}login`, { username, password })
+      .post(`${process.env.NEXT_PUBLIC_API}/login`, { username, password })
       .then((res) => {
         if (res.status === 200) {
           const accessToken = res.headers['authorization'];
@@ -94,7 +93,7 @@ export default function useLogin() {
   // 프로필 정보를 요청하는 함수
   const getProfile = async (accessToken: string) => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_API}api/profile`, {
+      .get(`${process.env.NEXT_PUBLIC_API}/api/profile`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

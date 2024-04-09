@@ -31,20 +31,22 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
   if (!shouldRender) return null;
   return (
     <S.ModalBackdrop onClick={props.closeModal}>
-      <S.ModalContainer $isOpen={props.isOpen} onClick={handleModalClick}>
+      <S.ModalContainerWrapper $isOpen={props.isOpen} onClick={handleModalClick}>
         <S.Header>댓글</S.Header>
-        {data?.data.map((comment: any, index: any) => (
-          <S.CommentWrapper key={comment.commentId}>
-            <S.UserImg>
-              <Image src={comment.userFeedResponse.userProfileUrl} layout="fill" />
-            </S.UserImg>
-            <S.UserInfo>
-              <S.UserId>{comment.userFeedResponse.nickname}</S.UserId>
-              <S.UserComment>{comment.content}</S.UserComment>
-            </S.UserInfo>
-          </S.CommentWrapper>
-        ))}
-      </S.ModalContainer>
+        <S.ModalContainer>
+          {data?.data.map((comment: any, index: any) => (
+            <S.CommentWrapper key={comment.commentId}>
+              <S.UserImg>
+                <Image src={comment.userFeedResponse.userProfileUrl} layout="fill" />
+              </S.UserImg>
+              <S.UserInfo>
+                <S.UserId>{comment.userFeedResponse.nickname}</S.UserId>
+                <S.UserComment>{comment.content}</S.UserComment>
+              </S.UserInfo>
+            </S.CommentWrapper>
+          ))}
+        </S.ModalContainer>
+      </S.ModalContainerWrapper>
 
       <S.CloseButton>x</S.CloseButton>
     </S.ModalBackdrop>

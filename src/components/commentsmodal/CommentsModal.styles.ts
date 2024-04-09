@@ -50,7 +50,7 @@ const slideDown = keyframes`
 interface ModalContainerProps {
   $isOpen: boolean;
 }
-export const ModalContainer = styled.div<ModalContainerProps>`
+export const ModalContainerWrapper = styled.div<ModalContainerProps>`
   width: 468px;
   height: 70vh;
   position: fixed;
@@ -61,11 +61,35 @@ export const ModalContainer = styled.div<ModalContainerProps>`
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  //overflow-y: auto;
   animation: ${({ $isOpen }) => ($isOpen ? slideUp : slideDown)} 0.4s forwards;
   @media only screen and (max-width: 475px) {
     width: 100vw;
     margin-left: 0;
+  }
+`;
+
+export const ModalContainer = styled.div`
+  width: 468px;
+  height: 64.6vh;
+
+  margin-top: 50px;
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  /* border-top-left-radius: 10px;
+  border-top-right-radius: 10px; */
+  /* box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5); */
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  @media only screen and (max-width: 475px) {
+    width: 100vw;
+    margin-left: 0;
+    height: 64vh;
+  }
+  @media only screen and (max-width: 400px) {
+    height: 62.5vh;
   }
 `;
 export const CloseButton = styled.span`

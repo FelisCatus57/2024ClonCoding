@@ -29,7 +29,7 @@ export default function useSignup() {
   const signup = (data: { username: string; password: string; name: string; nickname: string; email: string }) => {
     const { username, password, name, nickname, email } = data;
     axios
-      .post(`${process.env.NEXT_PUBLIC_API}signup`, { username, password, name, nickname, email })
+      .post(`${process.env.NEXT_PUBLIC_API}/signup`, { username, password, name, nickname, email })
       .then((res) => {
         if (res.status === 200) {
           console.log(res);

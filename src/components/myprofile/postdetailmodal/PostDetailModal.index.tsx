@@ -18,12 +18,7 @@ import { useInputResize } from '../../../hooks/useInputResize';
 import { UserId } from '../../main/contents/header/ContentsHeader.styles';
 import PostDetailCommentsModal from './postdetailcommentsmodal/PostDetailCommentsModal.index';
 import { usePostComment } from '../../../services/usePostComment';
-interface PostImageResponse {
-  image: {
-    imageUrl: string;
-    imageUUID: string;
-  };
-}
+
 interface PostBoardModalProps {
   isOpen: boolean;
   closeModal: () => void;
@@ -66,13 +61,12 @@ export default function PostDetailModal(props: PostBoardModalProps) {
       console.error('Error posting comment:', err);
     }
   };
-
   return (
     <S.ModalBackdrop onClick={props.closeModal}>
       <S.ModalContainer onClick={handleModalClick}>
         <S.Header>
           <S.UserImg>
-            <Image src={myProfileImage || '/user.png'} layout="fill" />
+            <Image src={myProfileImage || '/navicon/user.png'} layout="fill" />
           </S.UserImg>
           <S.UserInfo>
             <S.UserId>{myNickname}</S.UserId>
@@ -81,7 +75,7 @@ export default function PostDetailModal(props: PostBoardModalProps) {
         </S.Header>
         <S.ImageWrapper>
           {/* 테스트 이미지입니다. */}
-          <Image src={props.postImage} layout="fill" />
+          <Image src={props.postImage || '/navicon/user.png'} layout="fill" />
         </S.ImageWrapper>
         <S.FooterWrapper>
           <S.IconWrapper>
@@ -92,7 +86,7 @@ export default function PostDetailModal(props: PostBoardModalProps) {
                 {/* <HeartTwoTone twoToneColor="#eb2f96" style={{ fontSize: '24px' }} /> */}
               </S.CursorPointer>
               <S.CursorPointer style={{ marginLeft: '4%' }}>
-                <MessageOutlined style={{ fontSize: '24px' }} />
+                <MessageOutlined onClick={openModal} style={{ fontSize: '24px' }} />
               </S.CursorPointer>
               <S.CursorPointer>
                 <NearMeOutlinedIcon style={{ fontSize: '31px' }} />

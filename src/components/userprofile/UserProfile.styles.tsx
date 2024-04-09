@@ -43,8 +43,8 @@ export const UserImg = styled.div`
   width: 65px;
   height: 65px;
   border-radius: 50%;
-  border: 1px solid gray;
   cursor: pointer;
+  position: relative;
 `;
 
 export const NumBox = styled.div`

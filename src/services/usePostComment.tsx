@@ -11,6 +11,7 @@ export const usePostComment = () => {
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API}/api/${postId}/comment`,
+        // `/api/${postId}/comment`,
         {
           content: comment,
         },
@@ -20,6 +21,7 @@ export const usePostComment = () => {
           },
         }
       );
+      alert('댓글이 등록되었습니다.');
       setIsLoading(false);
       return response.data;
     } catch (err) {
