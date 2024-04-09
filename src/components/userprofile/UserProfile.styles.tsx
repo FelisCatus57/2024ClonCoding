@@ -72,7 +72,7 @@ export const ButtonWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
 `;
-export const Button = styled.div`
+export const Button = styled.button`
   width: 49%;
   height: 40px;
   border-radius: 10px;

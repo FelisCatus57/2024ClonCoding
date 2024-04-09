@@ -77,25 +77,15 @@ export default function MyProfile(): JSX.Element {
         <S.DivineLine />
         {postCount !== 0 && Array.isArray(userPosts) ? (
           <S.PostWrapper>
-            {userPosts.map((post: Post, index: number) => (
-              <>
-                <S.Post key={post.postId} onClick={() => openModal(post.postId)}>
-                  <S.Img>
-                    {/* 배열 안의 첫 번째 이미지 객체에서 imageUrl을 가져와서 Image 컴포넌트의 src에 사용 */}
-                    {post.postImageResponse.length > 0 && (
-                      <Image src={post.postImageResponse[0].image.imageUrl} layout="fill" />
-                    )}
-                  </S.Img>
-                </S.Post>
-                {/* <PostDetailModal
-                  isOpen={isModalOpen}
-                  closeModal={closeModal}
-                  postId={selectedPostId}
-                  commentCount={post.commentCount}
-                  content={post.content}
-                  postImage={post.postImageResponse[0]?.image.imageUrl}
-                /> */}
-              </>
+            {userPosts.map((post: Post) => (
+              <S.Post key={post.postId} onClick={() => openModal(post.postId)}>
+                <S.Img>
+                  {/* 배열 안의 첫 번째 이미지 객체에서 imageUrl을 가져와서 Image 컴포넌트의 src에 사용 */}
+                  {post.postImageResponse.length > 0 && (
+                    <Image src={post.postImageResponse[0].image.imageUrl} layout="fill" />
+                  )}
+                </S.Img>
+              </S.Post>
             ))}
           </S.PostWrapper>
         ) : (

@@ -40,7 +40,8 @@ export default function PostBoardModal(props: PostBoardModalProps) {
         },
       });
       setIsLoading(false);
-
+      props.closeModal();
+      alert('게시물이 등록되었습니다.');
       return response.data;
     } catch (err) {
       console.log(err);
