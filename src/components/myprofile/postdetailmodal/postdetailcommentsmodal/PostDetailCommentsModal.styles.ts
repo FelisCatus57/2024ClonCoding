@@ -136,18 +136,59 @@ export const UserComment = styled.span`
     max-width: 65vw;
   }
 `;
+
 export const DeleteComment = styled(DeleteOutlined)`
   position: absolute;
-  top: 5%;
+  margin-top: 3px;
   right: 5%;
   cursor: pointer;
 `;
 
 //대댓글
+export const Reply = styled.span`
+  font-size: 13px;
+  font-weight: 500;
+  color: gray;
+  cursor: pointer;
+`;
+
+export const InputReply = styled.textarea`
+  width: 380px;
+  height: 50px;
+  border: none;
+  outline: none;
+  resize: none;
+  overflow-y: auto;
+  font-size: 13px;
+  position: relative;
+  @media only screen and (max-width: 475px) {
+    max-width: 73vw;
+  }
+  @media only screen and (max-width: 440px) {
+    max-width: 70vw;
+  }
+  @media only screen and (max-width: 390px) {
+    max-width: 67vw;
+  }
+`;
+
+export const ReplySubmit = styled.button`
+  width: 40px;
+  height: 30px;
+  position: absolute;
+  bottom: 23px;
+  right: 20px;
+  border: none;
+  color: #3498db;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: white;
+`;
 export const ReplyCommentWrapper = styled.div`
   height: 38px;
   display: flex;
   padding: 0 3%;
   margin-top: 20px;
-  margin-left: 30px;
+  margin-left: 20px;
+  position: relative;
 `;

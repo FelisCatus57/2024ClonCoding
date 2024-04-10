@@ -4,16 +4,14 @@ import UserStory from './userstory/UserStory.index';
 import { HeartOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-
 import Image from 'next/image';
 import PostDetailModal from './postdetailmodal/PostDetailModal.index';
-
 import { useRecoilValue } from 'recoil';
 import { nickname } from '../../commons/globalstate/globalstate';
 import { useFollow } from '../../services/follow/useFollow';
 import { useUnFollow } from '../../services/follow/useUnFollow';
-import { useGetProfile } from '../../services/profile/useGetProfile';
 import { useGetFollowers } from '../../services/follow/useGetFollowers';
+import { useGetProfile } from '../../services/profile/useGetProfile';
 
 interface PostImageResponse {
   image: {

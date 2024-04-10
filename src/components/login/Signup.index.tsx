@@ -1,15 +1,8 @@
-import { useState } from 'react';
 import * as S from '../login/Login.styles';
 import Link from 'next/link';
-import useSignup from '../../services/useSignup';
+import useSignup from '../../services/login/useSignup';
 
 export default function Signup() {
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [name, setName] = useState('');
-  // const [nickname, setNickname] = useState('');
-  // const [email, setEmail] = useState('');
-  // const signup = useSignup({ username, password, name, nickname, email });
   const { register, handleSubmit, errors } = useSignup();
   return (
     <S.Wrapper>

@@ -174,7 +174,6 @@ export const InputComment = styled.textarea`
 
 export const Button = styled.button`
   width: 50px;
-  /* height: 20px; */
   margin-bottom: 20px;
   border: none;
   color: #3498db;

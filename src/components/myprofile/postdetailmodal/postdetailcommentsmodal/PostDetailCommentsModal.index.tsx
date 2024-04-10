@@ -4,6 +4,9 @@ import * as S from '../postdetailcommentsmodal/PostDetailCommentsModal.styles';
 import Image from 'next/image';
 import { useGetComments } from '../../../../services/comment/useGetComments';
 import { useDeleteComment } from '../../../../services/comment/useDeleteComment';
+import { useRecoilValue } from 'recoil';
+import { nickname } from '../../../../commons/globalstate/globalstate';
+import { usePostReply } from '../../../../services/comment/usePostReply';
 interface CommentsModalProps {
   isOpen: boolean;
   closeModal: () => void;
@@ -11,6 +14,7 @@ interface CommentsModalProps {
 }
 
 interface Comment {
+  commentChildrenResponses: Comment[];
   commentId: string;
   userFeedResponse: {
     userProfileUrl: string;
@@ -26,7 +30,7 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
   };
 
   const [shouldRender, setShouldRender] = useState<boolean>(props.isOpen);
-
+  const myNickname = useRecoilValue(nickname);
   useEffect(() => {
     if (props.isOpen) {
       setShouldRender(true);
@@ -51,6 +55,32 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
     }
   };
 
+  console.log(data);
+  //대댓글
+  const [openReplyInputId, setOpenReplyInputId] = useState<string | null>(null);
+  const toggleReplyInput = (commentId: string) => {
+    if (openReplyInputId === commentId) {
+      // 이미 열린 입력창을 닫습니다.
+      setOpenReplyInputId(null);
+    } else {
+      // 새 입력창을 엽니다.
+      setOpenReplyInputId(commentId);
+    }
+  };
+  //대댓글 post
+  const [replyComment, setReplyComment] = useState('');
+  const { postReply } = usePostReply();
+  const handleReplySubmit = async (e: { preventDefault: () => void }, commentId: string) => {
+    e.preventDefault();
+
+    try {
+      await postReply(props.postId, commentId, replyComment);
+      setReplyComment('');
+      setOpenReplyInputId(null);
+    } catch (err) {
+      console.error('Error posting comment:', err);
+    }
+  };
   if (!shouldRender) return null;
   return (
     <S.ModalBackdrop onClick={props.closeModal}>
@@ -58,16 +88,45 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
         <S.Header>댓글</S.Header>
         <S.ModalContainer>
           {data?.data.map((comment: Comment) => (
-            <S.CommentWrapper key={comment.commentId}>
-              <S.UserImg>
-                <Image src={comment.userFeedResponse.userProfileUrl} layout="fill" />
-              </S.UserImg>
-              <S.UserInfo>
-                <S.UserId>{comment.userFeedResponse.nickname}</S.UserId>
-                <S.UserComment>{comment.content}</S.UserComment>
-              </S.UserInfo>
-              <S.DeleteComment onClick={() => handleDeteteComment(props.postId, comment.commentId)} />
-            </S.CommentWrapper>
+            <>
+              <S.CommentWrapper key={comment.commentId}>
+                <S.UserImg>
+                  <Image src={comment.userFeedResponse.userProfileUrl} layout="fill" />
+                </S.UserImg>
+                <S.UserInfo>
+                  <S.UserId>{comment.userFeedResponse.nickname}</S.UserId>
+                  <S.UserComment>{comment.content}</S.UserComment>
+                  <S.Reply onClick={() => toggleReplyInput(comment.commentId)}>답글 달기</S.Reply>
+                  {openReplyInputId === comment.commentId && (
+                    <>
+                      <S.InputReply
+                        placeholder="답글 달기..."
+                        value={replyComment}
+                        onChange={(e) => setReplyComment(e.target.value)}
+                      />
+                      <S.ReplySubmit onClick={(e) => handleReplySubmit(e, comment.commentId)}>게시</S.ReplySubmit>
+                    </>
+                  )}
+                </S.UserInfo>
+                {myNickname === comment.userFeedResponse.nickname && (
+                  <S.DeleteComment onClick={() => handleDeteteComment(props.postId, comment.commentId)} />
+                )}
+              </S.CommentWrapper>
+              {comment.commentChildrenResponses?.map((reply) => (
+                <S.ReplyCommentWrapper key={reply.commentId}>
+                  <S.UserImg>
+                    <Image src={reply.userFeedResponse.userProfileUrl} layout="fill" />
+                  </S.UserImg>
+                  <S.UserInfo>
+                    <S.UserId>{reply.userFeedResponse.nickname}</S.UserId>
+                    <S.UserComment>{reply.content}</S.UserComment>
+                  </S.UserInfo>
+                  {/* {reply.userFeedResponse.nickname === myNickname && (
+                    <S.DeleteComment onClick={() => handleDeteteComment(props.postId, reply.commentId)} />
+                  )} */}
+                </S.ReplyCommentWrapper>
+              ))}
+            </>
           ))}
         </S.ModalContainer>
       </S.ModalContainerWrapper>
