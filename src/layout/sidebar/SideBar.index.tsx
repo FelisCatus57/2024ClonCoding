@@ -19,11 +19,10 @@ import { useRouter } from 'next/router';
 import LogoutIcon from '@mui/icons-material/Logout';
 import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
 import NearMeIcon from '@mui/icons-material/NearMe';
-import useLogout from '../../services/useLogout';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { accesstoken, nickname, profileImageUrl } from '../../commons/globalstate/globalstate';
-import { getCookie, setCookie } from '../../services/useReactCookie';
-import useRefreshToken from '../../services/useRefreshToken';
+import { useRecoilValue } from 'recoil';
+import { nickname, profileImageUrl } from '../../commons/globalstate/globalstate';
+import useLogout from '../../services/login/useLogout';
+import useRefreshToken from '../../services/login/useRefreshToken';
 
 export default function Sidebar(): JSX.Element {
   const [isModalOpen, setIsModalOpen] = useState(false);

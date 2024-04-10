@@ -4,7 +4,7 @@ import { setCookie } from './useReactCookie';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { set, useForm } from 'react-hook-form';
-import { accesstoken, name, nickname, profileImageUrl, username } from '../commons/globalstate/globalstate';
+import { accesstoken, name, nickname, profileImageUrl, username } from '../../commons/globalstate/globalstate';
 import { useRecoilState } from 'recoil';
 
 // 유효성 검사 스키마
@@ -17,7 +17,6 @@ const schema = yup
 
 export default function useLogin() {
   const router = useRouter();
-  // const [, setAccessToken] = useRecoilState<string | null | undefined>(accesstoken);
   const [, setUsername] = useRecoilState<string | null | undefined>(username);
   const [, setNickname] = useRecoilState<string>(nickname);
   const [, setName] = useRecoilState<string | null | undefined>(name);
@@ -81,7 +80,7 @@ export default function useLogin() {
           setCookie('refreshToken', refreshToken);
           setUsername(username);
           // 로그인 성공 후 프로필 정보 요청
-          getProfile(accessToken);
+          getInfo(accessToken);
           // router.push('/');
           // 로그인 성공 후 59분 후에 토큰 재발급 함수를 실행합니다.
           setTimeout(() => refreshTokens(accessToken, refreshToken), 59 * 60 * 1000);
@@ -91,7 +90,7 @@ export default function useLogin() {
   };
 
   // 프로필 정보를 요청하는 함수
-  const getProfile = async (accessToken: string) => {
+  const getInfo = async (accessToken: string) => {
     axios
       .get(`${process.env.NEXT_PUBLIC_API}/api/profile`, {
         headers: {

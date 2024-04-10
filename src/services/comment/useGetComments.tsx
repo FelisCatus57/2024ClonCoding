@@ -1,8 +1,6 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
-import { useRecoilValue } from 'recoil';
-import { accesstoken } from '../commons/globalstate/globalstate';
-import { getCookie } from './useReactCookie';
+import { getCookie } from '../login/useReactCookie';
 
 const getComments = async (postId: string, accessToken: string | null | undefined) => {
   const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/api/${postId}/comment`, {

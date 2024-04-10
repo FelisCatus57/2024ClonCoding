@@ -19,10 +19,11 @@ import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
 import { useInputResize } from '../../../hooks/useInputResize';
 import { UserId } from '../../main/contents/header/ContentsHeader.styles';
 import PostDetailCommentsModal from './postdetailcommentsmodal/PostDetailCommentsModal.index';
-import { usePostComment } from '../../../services/usePostComment';
-import { useDeletePost } from '../../../services/useDeletePost';
+
 import { InputText } from '../../postboardmodal/PostBoardModal.styles';
-import { useEditPost } from '../../../services/useEditPost';
+import { useDeleteBoard } from '../../../services/board/useDeleteBoard';
+import { useEditBoard } from '../../../services/board/useEditBoard';
+import { usePostComment } from '../../../services/comment/usePostComment';
 
 interface PostBoardModalProps {
   isOpen: boolean;
@@ -70,10 +71,10 @@ export default function PostDetailModal(props: PostBoardModalProps) {
   };
 
   //게시글 삭제
-  const { deletePost, isLoading: deleteLoading } = useDeletePost();
-  const handleDetetePost = async (postId: string) => {
+  const { deleteBoard, isLoading: deleteLoading } = useDeleteBoard();
+  const handleDeteteBoard = async (postId: string) => {
     try {
-      await deletePost(postId);
+      await deleteBoard(postId);
       props.closeModal();
     } catch (err) {
       props.closeModal();
@@ -87,11 +88,11 @@ export default function PostDetailModal(props: PostBoardModalProps) {
   const toggleEdit = () => {
     setEditMode(!editMode);
   };
-  const { editPost, isLoading: editLoading } = useEditPost();
+  const { editBoard, isLoading: editLoading } = useEditBoard();
 
-  const handleEditPost = async (postId: string, content: string) => {
+  const handleEditBoard = async (postId: string, content: string) => {
     try {
-      await editPost(postId, content);
+      await editBoard(postId, content);
       props.closeModal();
     } catch (err) {
       props.closeModal();
@@ -106,7 +107,7 @@ export default function PostDetailModal(props: PostBoardModalProps) {
           <S.EditHeader>
             <ArrowLeftOutlined onClick={() => setEditMode(false)} style={{ cursor: 'pointer' }} />
             게시글 수정
-            <S.SubmitButton onClick={() => handleEditPost(props.postId, editableContent)}>게시</S.SubmitButton>
+            <S.SubmitButton onClick={() => handleEditBoard(props.postId, editableContent)}>게시</S.SubmitButton>
           </S.EditHeader>
         ) : (
           <S.Header>
@@ -117,7 +118,7 @@ export default function PostDetailModal(props: PostBoardModalProps) {
               <S.UserId>{myNickname}</S.UserId>
               {/* <S.UserLoc></S.UserLoc> */}
               <S.Edit onClick={toggleEdit} />
-              <S.Delete onClick={() => handleDetetePost(props.postId)} disabled={deleteLoading} />
+              <S.Delete onClick={() => handleDeteteBoard(props.postId)} disabled={deleteLoading} />
             </S.UserInfo>
           </S.Header>
         )}

@@ -22,8 +22,8 @@ export const UserImg = styled.div`
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 1px solid grey;
   margin-right: 1.5%;
+  position: relative;
 `;
 
 export const UserInfo = styled.div`

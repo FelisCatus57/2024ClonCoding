@@ -17,7 +17,7 @@ import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
 import { useInputResize } from '../../../hooks/useInputResize';
 import { UserId } from '../../main/contents/header/ContentsHeader.styles';
 import PostDetailCommentsModal from './postdetailcommentsmodal/PostDetailCommentsModal.index';
-import { usePostComment } from '../../../services/usePostComment';
+import { usePostComment } from '../../../services/comment/usePostComment';
 
 interface PostBoardModalProps {
   isOpen: boolean;

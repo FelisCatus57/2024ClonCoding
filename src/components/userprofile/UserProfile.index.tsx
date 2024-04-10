@@ -4,15 +4,16 @@ import UserStory from './userstory/UserStory.index';
 import { HeartOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useGetProfile } from '../../services/useGetProfile';
-import useLogout from '../../services/useLogout';
+
 import Image from 'next/image';
 import PostDetailModal from './postdetailmodal/PostDetailModal.index';
-import { useFollow } from '../../services/useFollow';
-import { useGetFollowers } from '../../services/useGetFollowers';
+
 import { useRecoilValue } from 'recoil';
 import { nickname } from '../../commons/globalstate/globalstate';
-import { useUnFollow } from '../../services/useUnFollow';
+import { useFollow } from '../../services/follow/useFollow';
+import { useUnFollow } from '../../services/follow/useUnFollow';
+import { useGetProfile } from '../../services/profile/useGetProfile';
+import { useGetFollowers } from '../../services/follow/useGetFollowers';
 
 interface PostImageResponse {
   image: {
@@ -53,7 +54,7 @@ export default function UserProfile(): JSX.Element {
 
   useEffect(() => {
     // followers 배열을 순회하여 myNickname이 존재하는지 확인
-    const checkFollowing = followers?.data.some(
+    const checkFollowing = followers?.data?.some(
       (follower: { response: { nickname: string } }) => follower.response.nickname === myNickname
     );
     setIsFollowing(checkFollowing);
@@ -97,6 +98,7 @@ export default function UserProfile(): JSX.Element {
       setIsFollowing(originalIsFollowing); // 요청 실패 시, 원래 상태로 롤백
     }
   };
+
   return (
     <>
       <S.Wrapper>

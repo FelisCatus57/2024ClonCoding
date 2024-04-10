@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import * as S from '../postboardmodal/PostBoardModal.styles';
 import { useInputResize } from '../../hooks/useInputResize';
-import { getCookie } from '../../services/useReactCookie';
 import axios from 'axios';
+import { getCookie } from '../../services/login/useReactCookie';
 
 interface PostBoardModalProps {
   isOpen: boolean;

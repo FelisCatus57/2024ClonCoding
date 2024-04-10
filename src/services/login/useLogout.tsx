@@ -1,8 +1,5 @@
 import axios from 'axios';
-
 import { getCookie, setCookie } from './useReactCookie';
-import { useRecoilValue } from 'recoil';
-import { accesstoken } from '../commons/globalstate/globalstate';
 
 export default function useLogout() {
   // const accessToken = useRecoilValue(accesstoken);

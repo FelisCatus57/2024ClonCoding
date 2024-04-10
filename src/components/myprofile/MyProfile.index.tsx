@@ -4,11 +4,12 @@ import Link from 'next/link';
 import { HeartOutlined } from '@ant-design/icons';
 import { useRecoilValue } from 'recoil';
 import { nickname, profileImageUrl } from '../../commons/globalstate/globalstate';
-import { useGetProfile } from '../../services/useGetProfile';
 import Image from 'next/image';
-import useLogout from '../../services/useLogout';
+
 import { useState } from 'react';
 import PostDetailModal from './postdetailmodal/PostDetailModal.index';
+import useLogout from '../../services/login/useLogout';
+import { useGetProfile } from '../../services/profile/useGetProfile';
 
 interface PostImageResponse {
   image: {

@@ -1,19 +1,19 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { getCookie } from './useReactCookie';
+import { getCookie } from '../login/useReactCookie';
 
-export const useEditPost = () => {
+export const usePostComment = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const accessToken = getCookie('accessToken');
-  const editPost = async (postId: string, content: string) => {
+  const postComment = async (postId: string, comment: string) => {
     setIsLoading(true);
     try {
-      const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_API}/api/post/${postId}`,
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API}/api/${postId}/comment`,
         // `/api/${postId}/comment`,
         {
-          content: content,
+          content: comment,
         },
         {
           headers: {
@@ -21,7 +21,7 @@ export const useEditPost = () => {
           },
         }
       );
-      alert('수정이 완료되었습니다.');
+      alert('댓글이 등록되었습니다.');
       setIsLoading(false);
       return response.data;
     } catch (err) {
@@ -30,5 +30,5 @@ export const useEditPost = () => {
     }
   };
 
-  return { editPost, isLoading };
+  return { postComment, isLoading };
 };

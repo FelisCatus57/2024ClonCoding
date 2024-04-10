@@ -1,17 +1,16 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { getCookie } from './useReactCookie';
-import { Modal } from 'antd';
+import { getCookie } from '../login/useReactCookie';
 
-export const useFollow = () => {
+export const useUnFollow = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const accessToken = getCookie('accessToken');
-  const postFollow = async (nickname: string) => {
+  const postUnFollow = async (nickname: string) => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/api/${nickname}/follow`,
+        `${process.env.NEXT_PUBLIC_API}/api/${nickname}/unfollow`,
         {},
         {
           headers: {
@@ -19,7 +18,7 @@ export const useFollow = () => {
           },
         }
       );
-      console.log('팔로우 완료');
+      console.log('언팔로우 완료');
       setIsLoading(false);
       return response.data;
     } catch (err) {
@@ -28,5 +27,5 @@ export const useFollow = () => {
     }
   };
 
-  return { postFollow, isLoading };
+  return { postUnFollow, isLoading };
 };

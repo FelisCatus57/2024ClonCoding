@@ -42,7 +42,10 @@ export default function CommentsModal(props: CommentsModalProps) {
               <S.UserImg></S.UserImg>
               <S.UserInfo>
                 <S.UserId>{comments.name}</S.UserId>
-                <S.UserComment>댓글이에요{index + 1}</S.UserComment>
+                <S.UserComment>
+                  댓글이에요
+                  {index + 1}
+                </S.UserComment>
               </S.UserInfo>
             </S.CommentWrapper>
           ))}

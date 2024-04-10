@@ -1,3 +1,4 @@
+import { DeleteOutlined } from '@ant-design/icons';
 import styled, { keyframes } from 'styled-components';
 
 export const StyledInput = styled.input`
@@ -31,24 +32,6 @@ interface ModalContainerProps {
   $isOpen: boolean;
 }
 
-// 모달 내부 댓글ver
-
-// export const ModalContainer = styled.div<ModalContainerProps>`
-//   width: 500px;
-//   height: 600px;
-//   margin-top: 13.1vh;
-//   border-radius: 10px;
-//   background-color: white;
-//   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.8);
-//   display: flex;
-//   flex-direction: column;
-//   overflow-y: auto;
-//   @media only screen and (max-width: 650px) {
-//     width: 75vw;
-//     max-height: 80vh;
-//     margin-top: 0vh;
-//   }
-// `;
 const slideUp = keyframes`
   from {
     transform: translateY(100%);
@@ -79,7 +62,6 @@ export const ModalContainerWrapper = styled.div<ModalContainerProps>`
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  /* overflow-y: auto; */
   animation: ${({ $isOpen }) => ($isOpen ? slideUp : slideDown)} 0.4s forwards;
   @media only screen and (max-width: 475px) {
     width: 100vw;
@@ -89,15 +71,12 @@ export const ModalContainerWrapper = styled.div<ModalContainerProps>`
 
 export const ModalContainer = styled.div`
   width: 500px;
+  max-width: 500px;
   height: 64.6vh;
-
   margin-top: 50px;
   position: fixed;
   bottom: 0;
   background-color: white;
-  /* border-top-left-radius: 10px;
-  border-top-right-radius: 10px; */
-  /* box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5); */
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -122,10 +101,11 @@ export const CloseButton = styled.span`
 `;
 
 export const CommentWrapper = styled.div`
-  height: 38px;
   display: flex;
   padding: 0 3%;
   margin-top: 20px;
+  height: auto;
+  position: relative;
 `;
 
 export const UserImg = styled.div`
@@ -146,4 +126,28 @@ export const UserId = styled.span`
 export const UserComment = styled.span`
   font-size: 13px;
   font-weight: 700;
+  max-width: 400px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  @media only screen and (max-width: 475px) {
+    max-width: 75vw;
+  }
+  @media only screen and (max-width: 330px) {
+    max-width: 65vw;
+  }
+`;
+export const DeleteComment = styled(DeleteOutlined)`
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  cursor: pointer;
+`;
+
+//대댓글
+export const ReplyCommentWrapper = styled.div`
+  height: 38px;
+  display: flex;
+  padding: 0 3%;
+  margin-top: 20px;
+  margin-left: 30px;
 `;
