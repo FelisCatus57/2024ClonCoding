@@ -1,3 +1,4 @@
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
 export const StyledInput = styled.input`
@@ -12,9 +13,23 @@ export const Header = styled.div`
   font-size: 15px;
   font-weight: 700;
   padding: 0 3%;
+  position: relative;
   /* border-bottom: 1px solid #d8d8d8; */
 `;
 
+export const Edit = styled(EditOutlined)`
+  position: absolute;
+  right: 7.5%;
+  font-size: 20px;
+  cursor: pointer;
+`;
+
+export const Delete = styled(DeleteOutlined)`
+  position: absolute;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+`;
 export const UserImg = styled.div`
   width: 38px;
   height: 38px;
@@ -95,8 +110,6 @@ export const FooterWrapper = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
-  @media only screen and (max-width: 475px) {
-  }
 `;
 export const IconWrapper = styled.div`
   padding-top: 5px;
@@ -168,4 +181,42 @@ export const Button = styled.button`
   cursor: pointer;
   font-size: 14px;
   background-color: white;
+`;
+
+//게시글 수정
+
+export const EditHeader = styled.div`
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 0 3%;
+  position: relative;
+`;
+export const SubmitButton = styled.button`
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  color: #3498db;
+  background-color: white;
+  cursor: pointer;
+  &:disabled {
+    color: #a5d8ff;
+    cursor: not-allowed;
+  }
+`;
+
+export const EditInputText = styled.textarea`
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  resize: none;
+  overflow-y: hidden;
+  padding-top: 20px;
+  font-size: 14px;
+  min-height: 166px;
 `;
