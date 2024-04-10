@@ -145,6 +145,10 @@ export const DeleteComment = styled(DeleteOutlined)`
 `;
 
 //대댓글
+
+export const ReplyWrapeer = styled.div`
+  display: flex;
+`;
 export const Reply = styled.span`
   font-size: 13px;
   font-weight: 500;
@@ -153,6 +157,7 @@ export const Reply = styled.span`
 `;
 
 export const InputReply = styled.textarea`
+  margin-top: 5px;
   width: 380px;
   height: 50px;
   border: none;

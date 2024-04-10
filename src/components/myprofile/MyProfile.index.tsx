@@ -47,6 +47,7 @@ export default function MyProfile(): JSX.Element {
     document.body.style.overflowY = '';
     setIsModalOpen(false);
   };
+
   return (
     <>
       <S.Wrapper>

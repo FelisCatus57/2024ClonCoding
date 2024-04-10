@@ -45,18 +45,19 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
 
   const { data } = useGetComments(props.postId);
   const { deleteComment } = useDeleteComment();
+  //댓글 삭제
   const handleDeteteComment = async (postId: string, commentId: string) => {
     try {
       await deleteComment(postId, commentId);
-      props.closeModal();
+      // props.closeModal();
     } catch (err) {
-      props.closeModal();
+      // props.closeModal();
       console.error(err);
     }
   };
 
   console.log(data);
-  //대댓글
+  //대댓글 input
   const [openReplyInputId, setOpenReplyInputId] = useState<string | null>(null);
   const toggleReplyInput = (commentId: string) => {
     if (openReplyInputId === commentId) {
@@ -67,6 +68,20 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
       setOpenReplyInputId(commentId);
     }
   };
+  //대댓글 보기
+
+  const [visibleRepliesId, setVisibleRepliesId] = useState<string | null>(null);
+
+  const toggleVisibleReplies = (commentId: string) => {
+    if (visibleRepliesId === commentId) {
+      // 이미 보여지고 있는 대댓글을 숨깁니다.
+      setVisibleRepliesId(null);
+    } else {
+      // 선택한 댓글의 대댓글을 보여줍니다.
+      setVisibleRepliesId(commentId);
+    }
+  };
+
   //대댓글 post
   const [replyComment, setReplyComment] = useState('');
   const { postReply } = usePostReply();
@@ -96,7 +111,12 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
                 <S.UserInfo>
                   <S.UserId>{comment.userFeedResponse.nickname}</S.UserId>
                   <S.UserComment>{comment.content}</S.UserComment>
-                  <S.Reply onClick={() => toggleReplyInput(comment.commentId)}>답글 달기</S.Reply>
+                  <S.ReplyWrapeer>
+                    <S.Reply style={{ marginRight: '10px' }} onClick={() => toggleVisibleReplies(comment.commentId)}>
+                      답글 보기 {comment.commentChildrenResponses?.length || 0}개
+                    </S.Reply>
+                    <S.Reply onClick={() => toggleReplyInput(comment.commentId)}>답글 달기</S.Reply>
+                  </S.ReplyWrapeer>
                   {openReplyInputId === comment.commentId && (
                     <>
                       <S.InputReply
@@ -112,20 +132,21 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
                   <S.DeleteComment onClick={() => handleDeteteComment(props.postId, comment.commentId)} />
                 )}
               </S.CommentWrapper>
-              {comment.commentChildrenResponses?.map((reply) => (
-                <S.ReplyCommentWrapper key={reply.commentId}>
-                  <S.UserImg>
-                    <Image src={reply.userFeedResponse.userProfileUrl} layout="fill" />
-                  </S.UserImg>
-                  <S.UserInfo>
-                    <S.UserId>{reply.userFeedResponse.nickname}</S.UserId>
-                    <S.UserComment>{reply.content}</S.UserComment>
-                  </S.UserInfo>
-                  {/* {reply.userFeedResponse.nickname === myNickname && (
-                    <S.DeleteComment onClick={() => handleDeteteComment(props.postId, reply.commentId)} />
-                  )} */}
-                </S.ReplyCommentWrapper>
-              ))}
+              {visibleRepliesId === comment.commentId &&
+                comment.commentChildrenResponses?.map((reply) => (
+                  <S.ReplyCommentWrapper key={reply.commentId}>
+                    <S.UserImg>
+                      <Image src={reply.userFeedResponse.userProfileUrl} layout="fill" />
+                    </S.UserImg>
+                    <S.UserInfo>
+                      <S.UserId>{reply.userFeedResponse.nickname}</S.UserId>
+                      <S.UserComment>{reply.content}</S.UserComment>
+                    </S.UserInfo>
+                    {reply.userFeedResponse.nickname === myNickname && (
+                      <S.DeleteComment onClick={() => handleDeteteComment(props.postId, reply.commentId)} />
+                    )}
+                  </S.ReplyCommentWrapper>
+                ))}
             </>
           ))}
         </S.ModalContainer>
