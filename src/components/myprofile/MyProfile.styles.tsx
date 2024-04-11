@@ -50,6 +50,21 @@ export const UserImg = styled.div`
   position: relative;
 `;
 
+export const EditImg = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #2e9afe;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
+
 export const NumBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -70,11 +85,48 @@ export const NumText = styled.span`
   font-size: 15px;
 `;
 
-export const Logout = styled.div`
+export const IntroduceWrapper = styled.div`
   width: 100%;
-  min-height: 40px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 3.5%;
+  margin-bottom: 2%;
+`;
+
+export const Name = styled.span`
+  font-weight: 600;
+`;
+
+export const Introduce = styled.span`
+  font-size: 14px;
+`;
+
+export const Website = styled.a`
+  font-size: 14px;
+  color: #81bef7;
+  text-decoration: none;
+  &:visited {
+    color: #81bef7;
+  }
+  &:hover {
+    color: #81bef7;
+  }
+  &:active {
+    color: #81bef7;
+  }
+`;
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+export const Button = styled.div`
+  width: 49%;
+  height: 40px;
   border-radius: 10px;
-  border: none;
+  border: 1px solid #f2f2f2;
   background-color: #f2f2f2;
   display: flex;
   align-items: center;

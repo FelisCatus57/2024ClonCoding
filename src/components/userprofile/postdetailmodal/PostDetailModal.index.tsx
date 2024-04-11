@@ -36,7 +36,7 @@ export default function PostDetailModal(props: PostBoardModalProps) {
   const handleModalClick = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
   };
-
+  //댓글 모달 on/off
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -48,6 +48,7 @@ export default function PostDetailModal(props: PostBoardModalProps) {
     setIsModalOpen(false);
   };
 
+  //댓글 등록
   const [comment, setComment] = useState('');
   const { postComment, isLoading } = usePostComment();
   const handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -59,6 +60,18 @@ export default function PostDetailModal(props: PostBoardModalProps) {
       setComment('');
     } catch (err) {
       console.error('Error posting comment:', err);
+    }
+  };
+
+  const handleKeyPress = async (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      if (!comment.trim()) return; // Prevent empty comments
+      try {
+        await postComment(props.postId, comment);
+        setComment('');
+      } catch (err) {
+        console.error('Error posting comment:', err);
+      }
     }
   };
   return (
@@ -108,6 +121,7 @@ export default function PostDetailModal(props: PostBoardModalProps) {
             <S.InputComment
               placeholder="댓글 달기..."
               onInput={handleResizeHeight}
+              onKeyPress={handleKeyPress}
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />

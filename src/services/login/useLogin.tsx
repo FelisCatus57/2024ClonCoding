@@ -41,6 +41,8 @@ export default function useLogin() {
         })
         .then((res) => {
           if (res.status === 200) {
+            setCookie('refreshToken', '', { path: '/', maxAge: -1 }); // 쿠키 삭제
+            setCookie('accessToken', '', { path: '/', maxAge: -1 }); // 쿠키 삭제
             // 응답에서 새로운 토큰을 받아 로컬 스토리지와 쿠키에 저장합니다.
             const accessToken = res.headers['authorization'];
             const refreshToken = res.headers['authorization-refresh'];

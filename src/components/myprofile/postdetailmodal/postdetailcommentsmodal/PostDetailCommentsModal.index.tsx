@@ -7,6 +7,7 @@ import { useDeleteComment } from '../../../../services/comment/useDeleteComment'
 import { useRecoilValue } from 'recoil';
 import { nickname } from '../../../../commons/globalstate/globalstate';
 import { usePostReply } from '../../../../services/comment/usePostReply';
+import { useInputResize } from '../../../../hooks/useInputResize';
 interface CommentsModalProps {
   isOpen: boolean;
   closeModal: () => void;
@@ -28,7 +29,7 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
   const handleModalClick = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
   };
-
+  const { handleResizeHeight } = useInputResize();
   const [shouldRender, setShouldRender] = useState<boolean>(props.isOpen);
   const myNickname = useRecoilValue(nickname);
   useEffect(() => {
@@ -95,6 +96,20 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
       console.error('Error posting comment:', err);
     }
   };
+
+  const handleKeyPress = async (event: React.KeyboardEvent, commentId: string) => {
+    if (event.key === 'Enter') {
+      if (!replyComment.trim()) return;
+      try {
+        await postReply(props.postId, commentId, replyComment);
+        setReplyComment('');
+        setOpenReplyInputId(null);
+      } catch (err) {
+        console.error('Error posting comment:', err);
+      }
+    }
+  };
+
   if (!shouldRender) return null;
   return (
     <S.ModalBackdrop onClick={props.closeModal}>
@@ -119,6 +134,8 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
                   {openReplyInputId === comment.commentId && (
                     <>
                       <S.InputReply
+                        onInput={handleResizeHeight}
+                        onKeyPress={(event) => handleKeyPress(event, comment.commentId)}
                         placeholder="답글 달기..."
                         value={replyComment}
                         onChange={(e) => setReplyComment(e.target.value)}

@@ -97,6 +97,7 @@ export default function UserProfile(): JSX.Element {
     }
   };
 
+  console.log(data);
   return (
     <>
       <S.Wrapper>
@@ -122,11 +123,18 @@ export default function UserProfile(): JSX.Element {
           </Link>
           <Link href={`/user/${userNickname}/following`}>
             <S.NumBox>
-              <S.Num>{data?.data?.userFollowerCount}</S.Num>
+              <S.Num>{data?.data?.userFollowCount}</S.Num>
               <S.NumText>팔로잉</S.NumText>
             </S.NumBox>
           </Link>
         </S.InfoWrapper>
+        <S.IntroduceWrapper>
+          <S.Name>{userNickname}</S.Name>
+          <S.Introduce>{data?.data?.userIntroduce}</S.Introduce>
+          <S.Website href={data?.data?.Website} target="_blank" rel="noopener noreferrer">
+            {data?.data?.Website}
+          </S.Website>
+        </S.IntroduceWrapper>
         <S.ButtonWrapper>
           {isFollowing ? (
             <S.Button onClick={() => handleUnFollow(userNickname)} disabled={ufIsLoading}>

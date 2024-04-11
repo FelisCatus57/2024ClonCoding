@@ -11,9 +11,8 @@ export const useEditBoard = () => {
     try {
       const response = await axios.put(
         `${process.env.NEXT_PUBLIC_API}/api/post/${postId}`,
-        // `/api/${postId}/comment`,
         {
-          content: content,
+          content: content.trim() ? content : ' ',
         },
         {
           headers: {

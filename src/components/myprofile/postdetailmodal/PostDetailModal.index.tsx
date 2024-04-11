@@ -70,6 +70,18 @@ export default function PostDetailModal(props: PostBoardModalProps) {
     }
   };
 
+  const handleKeyPress = async (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      if (!comment.trim()) return; // Prevent empty comments
+      try {
+        await postComment(props.postId, comment);
+        setComment('');
+      } catch (err) {
+        console.error('Error posting comment:', err);
+      }
+    }
+  };
+
   //게시글 삭제
   const { deleteBoard, isLoading: deleteLoading } = useDeleteBoard();
   const handleDeteteBoard = async (postId: string) => {
@@ -99,6 +111,7 @@ export default function PostDetailModal(props: PostBoardModalProps) {
       console.error(err);
     }
   };
+
   return (
     <S.ModalBackdrop onClick={props.closeModal}>
       <S.ModalContainer onClick={handleModalClick}>
@@ -165,6 +178,7 @@ export default function PostDetailModal(props: PostBoardModalProps) {
                 <S.InputComment
                   placeholder="댓글 달기..."
                   onInput={handleResizeHeight}
+                  onKeyPress={handleKeyPress}
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
                 />

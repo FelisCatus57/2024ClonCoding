@@ -10,6 +10,7 @@ import { useState } from 'react';
 import PostDetailModal from './postdetailmodal/PostDetailModal.index';
 import useLogout from '../../services/login/useLogout';
 import { useGetProfile } from '../../services/profile/useGetProfile';
+import EditImageModal from './editimagemodal/EditImageModal.index';
 
 interface PostImageResponse {
   image: {
@@ -28,6 +29,8 @@ interface Post {
 
 export default function MyProfile(): JSX.Element {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditImgModalOpen, setIsEditImgModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [selectedPostId, setSelectedPostId] = useState('');
   const myNickname = useRecoilValue(nickname);
   const myProfileImage = useRecoilValue(profileImageUrl);
@@ -36,6 +39,25 @@ export default function MyProfile(): JSX.Element {
   const userPosts = data?.data?.userPost;
   const logout = useLogout();
 
+  //프로필 사진 수정
+  const handleImageSelect = (image: File | null) => {
+    setSelectedImage(image);
+  };
+
+  const openEditImgModal = () => {
+    document.documentElement.style.overflowY = 'hidden';
+    document.body.style.overflowY = 'hidden';
+    setIsEditImgModalOpen(true);
+  };
+
+  const closeEditImgModal = () => {
+    document.documentElement.style.overflowY = '';
+    document.body.style.overflowY = '';
+    setSelectedImage(null); // 모달을 닫을 때 이미지 선택 상태 초기화
+    setIsEditImgModalOpen(false);
+  };
+
+  //게시물 모달 on/off
   const openModal = (postId: string) => {
     document.documentElement.style.overflowY = 'hidden';
     document.body.style.overflowY = 'hidden';
@@ -47,7 +69,7 @@ export default function MyProfile(): JSX.Element {
     document.body.style.overflowY = '';
     setIsModalOpen(false);
   };
-  console.log(data);
+  console.log(data?.data);
   return (
     <>
       <S.Wrapper>
@@ -60,6 +82,7 @@ export default function MyProfile(): JSX.Element {
         <S.InfoWrapper>
           <S.UserImg>
             <Image src={myProfileImage || '/user.png'} layout="fill" />
+            <S.EditImg onClick={() => openEditImgModal()}>+</S.EditImg>
           </S.UserImg>
           <S.NumBox>
             <S.Num>{data?.data?.userPostCount}</S.Num>
@@ -78,7 +101,19 @@ export default function MyProfile(): JSX.Element {
             </S.NumBox>
           </Link>
         </S.InfoWrapper>
-        <S.Logout onClick={() => logout()}>로그아웃</S.Logout>
+        <S.IntroduceWrapper>
+          <S.Name>{myNickname}</S.Name>
+          <S.Introduce>{data?.data?.userIntroduce}</S.Introduce>
+          <S.Website href={data?.data?.userWebsite} target="_blank" rel="noopener noreferrer">
+            {data?.data?.userWebsite}
+          </S.Website>
+        </S.IntroduceWrapper>
+        <S.ButtonWrapper>
+          <Link href={`/user/${myNickname}/edit`}>
+            <S.Button>프로필 편집</S.Button>
+          </Link>
+          <S.Button onClick={() => logout()}>로그아웃</S.Button>
+        </S.ButtonWrapper>
         <MyStory />
         <S.DivineLine />
         {postCount !== 0 && Array.isArray(userPosts) ? (
@@ -112,6 +147,14 @@ export default function MyProfile(): JSX.Element {
             userPosts.find((post: { postId: string }) => post.postId === selectedPostId)?.postImageResponse[0]?.image
               .imageUrl || ''
           }
+        />
+      )}
+      {isEditImgModalOpen && (
+        <EditImageModal
+          isOpen={isEditImgModalOpen}
+          closeModal={closeEditImgModal}
+          onImageSelect={handleImageSelect}
+          selectedImage={selectedImage}
         />
       )}
     </>
