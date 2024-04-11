@@ -56,7 +56,6 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
     }
   };
 
-  console.log(data);
   //대댓글 input
   const [openReplyInputId, setOpenReplyInputId] = useState<string | null>(null);
   const toggleReplyInput = (commentId: string) => {

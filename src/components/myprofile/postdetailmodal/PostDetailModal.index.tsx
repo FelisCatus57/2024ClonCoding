@@ -99,7 +99,6 @@ export default function PostDetailModal(props: PostBoardModalProps) {
       console.error(err);
     }
   };
-
   return (
     <S.ModalBackdrop onClick={props.closeModal}>
       <S.ModalContainer onClick={handleModalClick}>

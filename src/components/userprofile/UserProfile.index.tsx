@@ -114,14 +114,18 @@ export default function UserProfile(): JSX.Element {
             <S.Num>{data?.data?.userPostCount}</S.Num>
             <S.NumText>게시물</S.NumText>
           </S.NumBox>
-          <S.NumBox>
-            <S.Num>{userFollowCount}</S.Num>
-            <S.NumText>팔로워</S.NumText>
-          </S.NumBox>
-          <S.NumBox>
-            <S.Num>{data?.data?.userFollowerCount}</S.Num>
-            <S.NumText>팔로잉</S.NumText>
-          </S.NumBox>
+          <Link href={`/user/${userNickname}/follower`}>
+            <S.NumBox>
+              <S.Num>{userFollowCount}</S.Num>
+              <S.NumText>팔로워</S.NumText>
+            </S.NumBox>
+          </Link>
+          <Link href={`/user/${userNickname}/following`}>
+            <S.NumBox>
+              <S.Num>{data?.data?.userFollowerCount}</S.Num>
+              <S.NumText>팔로잉</S.NumText>
+            </S.NumBox>
+          </Link>
         </S.InfoWrapper>
         <S.ButtonWrapper>
           {isFollowing ? (

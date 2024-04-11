@@ -47,7 +47,7 @@ export default function MyProfile(): JSX.Element {
     document.body.style.overflowY = '';
     setIsModalOpen(false);
   };
-
+  console.log(data);
   return (
     <>
       <S.Wrapper>
@@ -65,14 +65,18 @@ export default function MyProfile(): JSX.Element {
             <S.Num>{data?.data?.userPostCount}</S.Num>
             <S.NumText>게시물</S.NumText>
           </S.NumBox>
-          <S.NumBox>
-            <S.Num>{data?.data?.userFollowerCount}</S.Num>
-            <S.NumText>팔로워</S.NumText>
-          </S.NumBox>
-          <S.NumBox>
-            <S.Num>{data?.data?.userFollowCount}</S.Num>
-            <S.NumText>팔로잉</S.NumText>
-          </S.NumBox>
+          <Link href={`/user/${myNickname}/follower`}>
+            <S.NumBox>
+              <S.Num>{data?.data?.userFollowerCount}</S.Num>
+              <S.NumText>팔로워</S.NumText>
+            </S.NumBox>
+          </Link>
+          <Link href={`/user/${myNickname}/following`}>
+            <S.NumBox>
+              <S.Num>{data?.data?.userFollowCount}</S.Num>
+              <S.NumText>팔로잉</S.NumText>
+            </S.NumBox>
+          </Link>
         </S.InfoWrapper>
         <S.Logout onClick={() => logout()}>로그아웃</S.Logout>
         <MyStory />
