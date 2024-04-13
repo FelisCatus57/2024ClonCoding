@@ -68,6 +68,7 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
       setOpenReplyInputId(commentId);
     }
   };
+
   //대댓글 보기
 
   const [visibleRepliesId, setVisibleRepliesId] = useState<string | null>(null);
@@ -87,7 +88,7 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
   const { postReply } = usePostReply();
   const handleReplySubmit = async (e: { preventDefault: () => void }, commentId: string) => {
     e.preventDefault();
-
+    if (!replyComment.trim()) return;
     try {
       await postReply(props.postId, commentId, replyComment);
       setReplyComment('');

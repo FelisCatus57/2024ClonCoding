@@ -43,8 +43,8 @@ export const UserImg = styled.div`
   width: 65px;
   height: 65px;
   border-radius: 50%;
-  border: 1px solid gray;
   cursor: pointer;
+  position: relative;
 `;
 
 export const NumBox = styled.div`
@@ -67,12 +67,44 @@ export const NumText = styled.span`
   font-size: 15px;
 `;
 
+export const IntroduceWrapper = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 3.5%;
+  margin-bottom: 2%;
+`;
+
+export const Name = styled.span`
+  font-weight: 600;
+`;
+
+export const Introduce = styled.span`
+  font-size: 14px;
+`;
+
+export const Website = styled.a`
+  font-size: 14px;
+  color: #81bef7;
+  text-decoration: none;
+  &:visited {
+    color: #81bef7;
+  }
+  &:hover {
+    color: #81bef7;
+  }
+  &:active {
+    color: #81bef7;
+  }
+`;
+
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
 `;
-export const Button = styled.div`
+export const Button = styled.button`
   width: 49%;
   height: 40px;
   border-radius: 10px;

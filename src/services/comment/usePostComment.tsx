@@ -1,19 +1,19 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { getCookie } from './useReactCookie';
+import { getCookie } from '../login/useReactCookie';
 
-export const usePostBoard = () => {
+export const usePostComment = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const accessToken = getCookie('accessToken');
-  const postComment = async (content: string, Image: FormData) => {
+  const postComment = async (postId: string, comment: string) => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/api/post`,
+        `${process.env.NEXT_PUBLIC_API}/api/${postId}/comment`,
+        // `/api/${postId}/comment`,
         {
-          content: content,
-          files: Image,
+          content: comment,
         },
         {
           headers: {
@@ -21,6 +21,7 @@ export const usePostBoard = () => {
           },
         }
       );
+      alert('댓글이 등록되었습니다.');
       setIsLoading(false);
       return response.data;
     } catch (err) {

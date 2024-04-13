@@ -6,7 +6,7 @@ export const StyledInput = styled.input`
 
 export const Header = styled.div`
   width: 100%;
-  min-height: 50px;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,16 +31,16 @@ export const UploadButton = styled.button`
 
 export const PreviewContainer = styled.div`
   width: 100%;
-  height: 400px;
+  height: 520px;
   position: relative;
   @media only screen and (max-width: 650px) {
-    min-height: 350px;
+    height: 470px;
   }
 `;
 
 export const FileInputLabel = styled.label`
   width: 100%;
-  height: 400px;
+  height: 520px;
   color: #585858;
   font-size: 20px;
   font-weight: 700;
@@ -55,7 +55,7 @@ export const FileInputLabel = styled.label`
     color: white;
   }
   @media only screen and (max-width: 650px) {
-    min-height: 350px;
+    height: 470px;
   }
 `;
 
@@ -74,30 +74,19 @@ export const ModalBackdrop = styled.div`
 
 export const ModalContainer = styled.div`
   width: 500px;
-  min-height: 570px;
-  height: auto;
+  height: 570px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
+
   @media only screen and (max-width: 650px) {
     width: 75vw;
     height: 520px;
   }
-`;
-
-export const InputText = styled.textarea`
-  width: 100%;
-  padding: 0 8px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  resize: none;
-  overflow-y: hidden;
-  font-size: 14px;
-  /* background-color: red; */
 `;
 
 export const CloseButton = styled.span`

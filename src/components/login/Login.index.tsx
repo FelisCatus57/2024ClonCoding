@@ -1,14 +1,10 @@
 import Link from 'next/link';
 import * as S from './Login.styles';
-import useLogin from '../../services/useLogin';
+
 import { useState } from 'react';
+import useLogin from '../../services/login/useLogin';
 
 export default function Login(): JSX.Element {
-  // const userInfo = {
-  //   username: 'test',
-  //   password: 'test123',
-  // };
-
   const { register, handleSubmit, errors } = useLogin();
 
   return (

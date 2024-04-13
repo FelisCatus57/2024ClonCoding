@@ -1,5 +1,5 @@
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import * as S from '../notify/Notify.styles';
+import * as S from './Notify.styles';
 import { useRouterBack } from '../../hooks/useRouterBack';
 
 export default function Notify(): JSX.Element {

@@ -50,7 +50,7 @@ const slideDown = keyframes`
 interface ModalContainerProps {
   $isOpen: boolean;
 }
-export const ModalContainer = styled.div<ModalContainerProps>`
+export const ModalContainerWrapper = styled.div<ModalContainerProps>`
   width: 468px;
   height: 70vh;
   position: fixed;
@@ -61,11 +61,31 @@ export const ModalContainer = styled.div<ModalContainerProps>`
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
   animation: ${({ $isOpen }) => ($isOpen ? slideUp : slideDown)} 0.4s forwards;
   @media only screen and (max-width: 475px) {
     width: 100vw;
     margin-left: 0;
+  }
+`;
+
+export const ModalContainer = styled.div`
+  width: 468px;
+  height: 64.6vh;
+
+  margin-top: 50px;
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  @media only screen and (max-width: 475px) {
+    width: 100vw;
+    margin-left: 0;
+    height: 64vh;
+  }
+  @media only screen and (max-width: 400px) {
+    height: 62.5vh;
   }
 `;
 export const CloseButton = styled.span`
@@ -80,7 +100,7 @@ export const CloseButton = styled.span`
 `;
 
 export const CommentWrapper = styled.div`
-  height: 38px;
+  height: auto;
   display: flex;
   padding: 0 3%;
   margin-top: 20px;
@@ -104,4 +124,13 @@ export const UserId = styled.span`
 export const UserComment = styled.span`
   font-size: 13px;
   font-weight: 700;
+  max-width: 370px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  @media only screen and (max-width: 475px) {
+    max-width: 80vw;
+  }
+  @media only screen and (max-width: 330px) {
+    max-width: 70vw;
+  }
 `;

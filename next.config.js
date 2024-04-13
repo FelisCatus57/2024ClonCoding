@@ -14,6 +14,18 @@ const nextConfig = {
   images: {
     domains: ['uncertain.shop'],
   },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: '/api/:postId/comment',
+  //       destination: `${process.env.NEXT_PUBLIC_API}api/:postId/comment`,
+  //     },
+  //     {
+  //       source: '/api/post',
+  //       destination: `${process.env.NEXT_PUBLIC_API}api/post`,
+  //     },
+  //   ];
+  // },
 };
 
 // export default nextConfig;

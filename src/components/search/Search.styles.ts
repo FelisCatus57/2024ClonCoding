@@ -62,15 +62,21 @@ export const UserBox = styled.div`
 export const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 1%;
+`;
+
+export const UserImgWrapper = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 1.5%;
 `;
 
 export const UserImg = styled.div`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 1px solid grey;
   margin-right: 1.5%;
+  position: absolute;
 `;
 
 export const UserId = styled.span`
