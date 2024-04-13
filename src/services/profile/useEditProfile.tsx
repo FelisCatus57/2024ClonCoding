@@ -32,6 +32,7 @@ export default function useEditProfile() {
       return response.data;
     } catch (err) {
       console.log(err);
+      alert('수정에 실패했습니다.');
       setIsLoading(false);
     }
   };

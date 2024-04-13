@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useGetSearch } from '../../services/search/useSearch';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Search(): JSX.Element {
   const [inputId, setInputId] = useState('');
@@ -19,6 +20,7 @@ export default function Search(): JSX.Element {
     setInputId(e.target.value);
   };
 
+  console.log(searchData);
   const clearInput = () => {
     setInputId('');
   };
@@ -42,18 +44,20 @@ export default function Search(): JSX.Element {
       {/* 검색 결과가 있을 때 결과 렌더링 */}
       {!isLoading &&
         searchData?.data?.length > 0 &&
-        searchData.data.map((user: any) => (
-          <S.UserBox key={user.id}>
-            <S.UserImgWrapper>
-              <S.UserImg>
-                <Image src={user.profileImgUrl || 'default_image_path'} layout="fill" />
-              </S.UserImg>
-            </S.UserImgWrapper>
-            <S.UserInfo>
-              <S.UserId>{user.nickname}</S.UserId>
-              <S.UserName>{user.name}</S.UserName>
-            </S.UserInfo>
-          </S.UserBox>
+        searchData.data.map((user: { nickname: string; Id: number; profileImgUrl: string; name: string }) => (
+          <Link href={`/user/${user.nickname}`} key={user.Id}>
+            <S.UserBox>
+              <S.UserImgWrapper>
+                <S.UserImg>
+                  <Image src={user.profileImgUrl || 'default_image_path'} layout="fill" />
+                </S.UserImg>
+              </S.UserImgWrapper>
+              <S.UserInfo>
+                <S.UserId>{user.nickname}</S.UserId>
+                <S.UserName>{user.name}</S.UserName>
+              </S.UserInfo>
+            </S.UserBox>
+          </Link>
         ))}
     </S.Wrapper>
   );

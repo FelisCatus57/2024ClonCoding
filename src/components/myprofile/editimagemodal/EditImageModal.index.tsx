@@ -41,8 +41,8 @@ export default function EditImageModal(props: EditImgModalProps) {
       props.closeModal();
       alert('사진이 등록되었습니다.');
       return response.data;
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      alert(err?.response?.data?.message);
       setIsLoading(false);
     }
   };
