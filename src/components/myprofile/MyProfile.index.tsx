@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil';
 import { nickname, profileImageUrl } from '../../commons/globalstate/globalstate';
 import Image from 'next/image';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PostDetailModal from './postdetailmodal/PostDetailModal.index';
 import useLogout from '../../services/login/useLogout';
 import { useGetProfile } from '../../services/profile/useGetProfile';
@@ -69,7 +69,6 @@ export default function MyProfile(): JSX.Element {
     document.body.style.overflowY = '';
     setIsModalOpen(false);
   };
-  console.log(data?.data);
   return (
     <>
       <S.Wrapper>

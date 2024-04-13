@@ -2,15 +2,15 @@ import { useState } from 'react';
 import axios from 'axios';
 import { getCookie } from '../login/useReactCookie';
 
-export const useFollow = () => {
+export const useLike = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const accessToken = getCookie('accessToken');
-  const postFollow = async (nickname: string) => {
+  const postLike = async (postId: string) => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/api/${nickname}/follow`,
+        `${process.env.NEXT_PUBLIC_API}/api/post/${postId}/like`,
         {},
         {
           headers: {
@@ -18,7 +18,7 @@ export const useFollow = () => {
           },
         }
       );
-      console.log('팔로우 완료');
+      console.log('좋아요 완료');
       setIsLoading(false);
       return response.data;
     } catch (err) {
@@ -28,5 +28,5 @@ export const useFollow = () => {
     }
   };
 
-  return { postFollow, isLoading };
+  return { postLike, isLoading };
 };

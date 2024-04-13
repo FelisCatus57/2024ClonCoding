@@ -22,8 +22,9 @@ export const useUnFollow = () => {
       setIsLoading(false);
       return response.data;
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setIsLoading(false);
+      throw err;
     }
   };
 

@@ -29,8 +29,7 @@ export default function EditImageModal(props: EditImgModalProps) {
     }
     setIsLoading(true);
     const formData = new FormData();
-    formData.append('files', Image);
-
+    formData.append('image', Image);
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/api/accounts/image`, formData, {
         headers: {
@@ -53,7 +52,7 @@ export default function EditImageModal(props: EditImgModalProps) {
       <S.ModalContainer onClick={handleModalClick}>
         <S.Header>
           프로필 사진 변경
-          <S.UploadButton onClick={() => editImage(props.selectedImage)} disabled={!props.selectedImage}>
+          <S.UploadButton onClick={() => editImage(props.selectedImage)} disabled={!props.selectedImage || isLoading}>
             게시
           </S.UploadButton>
         </S.Header>

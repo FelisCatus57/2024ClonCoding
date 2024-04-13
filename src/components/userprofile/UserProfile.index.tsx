@@ -42,7 +42,6 @@ export default function UserProfile(): JSX.Element {
   const { postUnFollow, isLoading: ufIsLoading } = useUnFollow();
   const [isFollowing, setIsFollowing] = useState(false);
   const [userFollowCount, setUserFollowCount] = useState<number | undefined>(undefined);
-
   // 팔로우 카운트 데이터로 초기화
   useEffect(() => {
     if (data?.data?.userFollowCount !== undefined) {
@@ -71,33 +70,33 @@ export default function UserProfile(): JSX.Element {
     setIsModalOpen(false);
   };
 
+  //팔로우, 언팔로우
   const handleFollow = async (nickname: string) => {
     const originalIsFollowing = isFollowing; // 원래 상태 저장
     setIsFollowing(true); // 옵티미스틱 업데이트 적용
+    setUserFollowCount((prevCount) => (prevCount !== undefined ? prevCount + 1 : 1)); // 팔로우 카운트 증가
     try {
       await postFollow(nickname);
-      setUserFollowCount((prevCount) => (prevCount !== undefined ? prevCount + 1 : 1)); // 팔로우 카운트 증가
-      // 성공적으로 팔로우 요청을 처리했다면, UI는 이미 업데이트된 상태임
     } catch (err) {
       console.error(err);
+      setUserFollowCount((prevCount) => (prevCount !== undefined ? prevCount - 1 : 0)); // 팔로우 카운트 감소
       setIsFollowing(originalIsFollowing); // 요청 실패 시, 원래 상태로 롤백
     }
   };
   const handleUnFollow = async (nickname: string) => {
     const originalIsFollowing = isFollowing; // 원래 상태 저장
     setIsFollowing(false); // 옵티미스틱 업데이트 적용
+    setUserFollowCount((prevCount) => (prevCount !== undefined ? prevCount - 1 : 0)); // 팔로우 카운트 감소
 
     try {
       await postUnFollow(nickname);
-      setUserFollowCount((prevCount) => (prevCount !== undefined ? prevCount - 1 : 0)); // 팔로우 카운트 감소
-      // 성공적으로 언팔로우 요청을 처리했다면, UI는 이미 업데이트된 상태임
     } catch (err) {
       console.error(err);
+      setUserFollowCount((prevCount) => (prevCount !== undefined ? prevCount + 1 : 1)); // 팔로우 카운트 증가
       setIsFollowing(originalIsFollowing); // 요청 실패 시, 원래 상태로 롤백
     }
   };
 
-  console.log(data);
   return (
     <>
       <S.Wrapper>

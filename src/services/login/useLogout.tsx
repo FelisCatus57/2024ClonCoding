@@ -24,6 +24,7 @@ export default function useLogout() {
     } else {
       localStorage.clear();
       setCookie('refreshToken', '', { path: '/', maxAge: -1 }); // 쿠키 삭제
+      setCookie('accessToken', '', { path: '/', maxAge: -1 }); // 쿠키 삭제
       window.location.href = '/login'; // 로그인 페이지로 이동
     }
   };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import * as S from '../postdetailmodal/PostDetailModal.styles';
 import { useRecoilValue } from 'recoil';
@@ -24,6 +24,9 @@ import { InputText } from '../../postboardmodal/PostBoardModal.styles';
 import { useDeleteBoard } from '../../../services/board/useDeleteBoard';
 import { useEditBoard } from '../../../services/board/useEditBoard';
 import { usePostComment } from '../../../services/comment/usePostComment';
+import { useGetLikeUsers } from '../../../services/like/useGetLikeUsers';
+import { useLike } from '../../../services/like/useLike';
+import { useUnLike } from '../../../services/like/useUnLike';
 
 interface PostBoardModalProps {
   isOpen: boolean;
@@ -43,6 +46,56 @@ export default function PostDetailModal(props: PostBoardModalProps) {
   const myNickname = useRecoilValue(nickname);
   const myProfileImage = useRecoilValue(profileImageUrl);
 
+  //좋아요
+  const { data: likeUsers } = useGetLikeUsers(props.postId);
+  const { postLike, isLoading: likeLoading } = useLike();
+  const { postUnLike, isLoading: unLikeLoading } = useUnLike();
+  const [isLike, setIsLike] = useState(false);
+  const [userLikeCount, setUserLikeCount] = useState<number | undefined>(undefined);
+
+  console.log(likeUsers);
+  console.log(isLike);
+  //좋아요 카운트 데이터로 초기화
+  useEffect(() => {
+    if (likeUsers?.data?.length !== undefined) {
+      setUserLikeCount(likeUsers.data.length);
+    }
+  }, [likeUsers?.data?.length]);
+
+  //좋아요 확인
+  useEffect(() => {
+    // myNickname이 data 배열 내에 존재하는지 확인합니다.
+    const checkLike = likeUsers?.data?.some((user) => user.nickname === myNickname);
+    setIsLike(checkLike);
+  }, [likeUsers, myNickname]);
+
+  console.log(props.postId);
+  // 좋아요 / 좋아요 취소
+  const handleLike = async (postId: string) => {
+    const originalIsLike = isLike; // 원래 상태 저장
+    setIsLike(true); // 옵티미스틱 업데이트 적용
+    setUserLikeCount((prevCount) => (prevCount !== undefined ? prevCount + 1 : 1)); // 팔로우 카운트 증가
+    try {
+      await postLike(postId);
+    } catch (err) {
+      console.error(err);
+      console.log('함수에러');
+      setUserLikeCount((prevCount) => (prevCount !== undefined ? prevCount - 1 : 0)); // 팔로우 카운트 감소
+      setIsLike(originalIsLike); // 요청 실패 시, 원래 상태로 롤백
+    }
+  };
+  const handleUnLike = async (postId: string) => {
+    const originalIsLike = isLike; // 원래 상태 저장
+    setIsLike(false); // 옵티미스틱 업데이트 적용
+    setUserLikeCount((prevCount) => (prevCount !== undefined ? prevCount - 1 : 1)); // 팔로우 카운트 증가
+    try {
+      await postUnLike(postId);
+    } catch (err) {
+      console.error(err);
+      setUserLikeCount((prevCount) => (prevCount !== undefined ? prevCount + 1 : 0)); // 팔로우 카운트 감소
+      setIsLike(originalIsLike); // 요청 실패 시, 원래 상태로 롤백
+    }
+  };
   //댓글 모달 on/off
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
@@ -151,9 +204,15 @@ export default function PostDetailModal(props: PostBoardModalProps) {
               <S.IconWrapper>
                 <S.IconBox>
                   <S.CursorPointer>
-                    <HeartOutlined style={{ fontSize: '26px' }} />
-                    {/* 유저가 하트 클릭시 */}
-                    {/* <HeartTwoTone twoToneColor="#eb2f96" style={{ fontSize: '24px' }} /> */}
+                    {isLike ? (
+                      <HeartTwoTone
+                        twoToneColor="#eb2f96"
+                        style={{ fontSize: '26px' }}
+                        onClick={() => handleUnLike(props.postId)}
+                      />
+                    ) : (
+                      <HeartOutlined style={{ fontSize: '26px' }} onClick={() => handleLike(props.postId)} />
+                    )}
                   </S.CursorPointer>
                   <S.CursorPointer style={{ marginLeft: '4%' }}>
                     <MessageOutlined onClick={openModal} style={{ fontSize: '24px' }} />
@@ -168,7 +227,7 @@ export default function PostDetailModal(props: PostBoardModalProps) {
                   {/* <TurnedInOutlinedIcon style={{ fontSize: '31px' }} /> */}
                 </S.CursorPointer>
               </S.IconWrapper>
-              <S.Like>좋아요 520개</S.Like>
+              <S.Like>좋아요 {userLikeCount}개</S.Like>
               <S.CommentBox>
                 <UserId>{myNickname}</UserId>
                 <S.Comment>{props.content}</S.Comment>

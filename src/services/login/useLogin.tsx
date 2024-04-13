@@ -28,43 +28,81 @@ export default function useLogin() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const refreshTokens = (accessToken: string, refreshToken: string) => {
-    if (refreshToken && accessToken) {
+  const refreshTokens = async (accessToken: string, refreshToken: string) => {
+    //   if (refreshToken && accessToken) {
+    //     const formData = new URLSearchParams();
+    //     formData.append('refreshToken', refreshToken);
+    //     axios
+    //       .post(`${process.env.NEXT_PUBLIC_API}/api/reissue`, formData.toString(), {
+    //         headers: {
+    //           'Content-Type': 'application/x-www-form-urlencoded',
+    //           Authorization: `Bearer ${accessToken}`,
+    //         },
+    //       })
+    //       .then((res) => {
+    //         if (res.status === 200) {
+    //           // 응답에서 새로운 토큰을 받아 로컬 스토리지와 쿠키에 저장합니다.
+    //           const accessToken = res.headers['authorization'];
+    //           const refreshToken = res.headers['authorization-refresh'];
+    //           // localStorage.setItem('accessToken', accessToken);
+    //           // setAccessToken(accessToken);
+    //           setCookie('accessToken', accessToken);
+    //           setCookie('refreshToken', refreshToken);
+    //           // 재발급 성공 시 59분 후에 다시 토큰을 재발급하도록 setTimeout 설정
+    //           // setTimeout(refreshTokens, 59 * 60 * 1000);
+    //           setTimeout(() => refreshTokens(accessToken, refreshToken), 59 * 60 * 1000);
+    //         }
+    //       })
+    //       .catch((error) => {
+    //         alert('다시 로그인 해주세요.');
+    //         localStorage.clear();
+    //         setCookie('refreshToken', '', { path: '/', maxAge: -1 }); // 쿠키 삭제
+    //         router.push('/login');
+    //       });
+    //   } else {
+    //     alert('다시 로그인 해주세요.');
+    //     localStorage.clear();
+    //     setCookie('refreshToken', '', { path: '/', maxAge: -1 }); // 쿠키 삭제
+    //     router.push('/login');
+    //   }
+    // };
+    if (refreshToken && accessToken && refreshToken !== 'undefined' && accessToken !== 'undefined') {
       const formData = new URLSearchParams();
       formData.append('refreshToken', refreshToken);
-      axios
-        .post(`${process.env.NEXT_PUBLIC_API}/api/reissue`, formData.toString(), {
+      try {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/api/reissue`, formData.toString(), {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             Authorization: `Bearer ${accessToken}`,
           },
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            setCookie('refreshToken', '', { path: '/', maxAge: -1 }); // 쿠키 삭제
-            setCookie('accessToken', '', { path: '/', maxAge: -1 }); // 쿠키 삭제
-            // 응답에서 새로운 토큰을 받아 로컬 스토리지와 쿠키에 저장합니다.
-            const accessToken = res.headers['authorization'];
-            const refreshToken = res.headers['authorization-refresh'];
-            // localStorage.setItem('accessToken', accessToken);
-            // setAccessToken(accessToken);
-            setCookie('accessToken', accessToken);
-            setCookie('refreshToken', refreshToken);
-            // 재발급 성공 시 59분 후에 다시 토큰을 재발급하도록 setTimeout 설정
-            // setTimeout(refreshTokens, 59 * 60 * 1000);
-            setTimeout(() => refreshTokens(accessToken, refreshToken), 59 * 60 * 1000);
-          }
-        })
-        .catch((error) => {
-          alert('다시 로그인 해주세요.');
-          localStorage.clear();
-          setCookie('refreshToken', '', { path: '/', maxAge: -1 }); // 쿠키 삭제
-          router.push('/login');
         });
+
+        if (response.status === 200) {
+          // 쿠키를 순차적으로 삭제하고 새로 설정
+          setCookie('refreshToken', '', { path: '/', maxAge: -1 });
+          setCookie('accessToken', '', { path: '/', maxAge: -1 });
+
+          // 새로운 토큰으로 쿠키를 설정
+          const newAccessToken = response.headers['authorization'];
+          const newRefreshToken = response.headers['authorization-refresh'];
+          setCookie('accessToken', newAccessToken, { path: '/', maxAge: 3600 });
+          setCookie('refreshToken', newRefreshToken, { path: '/', maxAge: 3600 * 24 * 30 });
+
+          // 토큰 재발급 성공 시, 59분 후 재실행
+          setTimeout(refreshTokens, 59 * 60 * 1000);
+        }
+      } catch (error) {
+        alert('다시 로그인 해주세요.');
+        localStorage.clear();
+        setCookie('refreshToken', '', { path: '/', maxAge: -1 });
+        setCookie('accessToken', '', { path: '/', maxAge: -1 });
+        router.push('/login');
+      }
     } else {
       alert('다시 로그인 해주세요.');
       localStorage.clear();
-      setCookie('refreshToken', '', { path: '/', maxAge: -1 }); // 쿠키 삭제
+      setCookie('refreshToken', '', { path: '/', maxAge: -1 });
+      setCookie('accessToken', '', { path: '/', maxAge: -1 });
       router.push('/login');
     }
   };

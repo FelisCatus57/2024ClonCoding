@@ -2,23 +2,23 @@ import { useState } from 'react';
 import axios from 'axios';
 import { getCookie } from '../login/useReactCookie';
 
-export const useFollow = () => {
+export const useUnLike = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const accessToken = getCookie('accessToken');
-  const postFollow = async (nickname: string) => {
+  const postUnLike = async (postId: string) => {
     setIsLoading(true);
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/api/${nickname}/follow`,
-        {},
+      const response = await axios.delete(
+        `${process.env.NEXT_PUBLIC_API}/api/post/${postId}/unlike`,
+
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         }
       );
-      console.log('팔로우 완료');
+      console.log('좋아요 취소');
       setIsLoading(false);
       return response.data;
     } catch (err) {
@@ -28,5 +28,5 @@ export const useFollow = () => {
     }
   };
 
-  return { postFollow, isLoading };
+  return { postUnLike, isLoading };
 };
