@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import * as S from './Explore.styles';
+import * as S from '../explore/Explore.styles';
 import { SearchOutlined } from '@ant-design/icons';
 export default function Explore(): JSX.Element {
   const test = Array.from({ length: 15 }, (_, index) => index);

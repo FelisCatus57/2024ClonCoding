@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import * as S from './ContentsFooter.styles';
+import * as S from '../footer/ContentsFooter.styles';
 import { UserId } from '../header/ContentsHeader.styles';
 import { useInputResize } from '../../../../hooks/useInputResize';
 import {
