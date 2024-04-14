@@ -25,7 +25,7 @@ export const StoryBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 1.45vw;
+  margin-right: 1.8vw;
 `;
 export const StoryCircle = styled.div`
   width: 58px;

@@ -53,8 +53,6 @@ export default function PostDetailModal(props: PostBoardModalProps) {
   const [isLike, setIsLike] = useState(false);
   const [userLikeCount, setUserLikeCount] = useState<number | undefined>(undefined);
 
-  console.log(likeUsers);
-  console.log(isLike);
   //좋아요 카운트 데이터로 초기화
   useEffect(() => {
     if (likeUsers?.data?.length !== undefined) {
@@ -65,11 +63,10 @@ export default function PostDetailModal(props: PostBoardModalProps) {
   //좋아요 확인
   useEffect(() => {
     // myNickname이 data 배열 내에 존재하는지 확인합니다.
-    const checkLike = likeUsers?.data?.some((user) => user.nickname === myNickname);
+    const checkLike = likeUsers?.data?.some((user: { nickname: string }) => user.nickname === myNickname);
     setIsLike(checkLike);
   }, [likeUsers, myNickname]);
 
-  console.log(props.postId);
   // 좋아요 / 좋아요 취소
   const handleLike = async (postId: string) => {
     const originalIsLike = isLike; // 원래 상태 저장
@@ -120,18 +117,6 @@ export default function PostDetailModal(props: PostBoardModalProps) {
       setComment('');
     } catch (err) {
       console.error('Error posting comment:', err);
-    }
-  };
-
-  const handleKeyPress = async (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter') {
-      if (!comment.trim()) return; // Prevent empty comments
-      try {
-        await postComment(props.postId, comment);
-        setComment('');
-      } catch (err) {
-        console.error('Error posting comment:', err);
-      }
     }
   };
 
@@ -237,7 +222,6 @@ export default function PostDetailModal(props: PostBoardModalProps) {
                 <S.InputComment
                   placeholder="댓글 달기..."
                   onInput={handleResizeHeight}
-                  onKeyPress={handleKeyPress}
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
                 />

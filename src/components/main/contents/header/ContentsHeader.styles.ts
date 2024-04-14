@@ -12,8 +12,9 @@ export const UserImg = styled.div`
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 1px solid #ff0080;
   margin-right: 1.5%;
+  position: relative;
+  cursor: pointer;
 `;
 
 export const UserInfo = styled.div`
@@ -24,6 +25,7 @@ export const UserInfo = styled.div`
 export const UserId = styled.span`
   font-size: 14px;
   font-weight: 700;
+  cursor: pointer;
 `;
 
 export const UserLoc = styled.span`

@@ -97,19 +97,6 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
     }
   };
 
-  const handleKeyPress = async (event: React.KeyboardEvent, commentId: string) => {
-    if (event.key === 'Enter') {
-      if (!replyComment.trim()) return;
-      try {
-        await postReply(props.postId, commentId, replyComment);
-        setReplyComment('');
-        setOpenReplyInputId(null);
-      } catch (err) {
-        console.error('Error posting comment:', err);
-      }
-    }
-  };
-
   if (!shouldRender) return null;
   return (
     <S.ModalBackdrop onClick={props.closeModal}>
@@ -135,7 +122,6 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
                     <>
                       <S.InputReply
                         onInput={handleResizeHeight}
-                        onKeyPress={(event) => handleKeyPress(event, comment.commentId)}
                         placeholder="답글 달기..."
                         value={replyComment}
                         onChange={(e) => setReplyComment(e.target.value)}

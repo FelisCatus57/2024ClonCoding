@@ -156,14 +156,7 @@ export const GuideTextWrapper = styled.div`
   justify-content: center;
 `;
 
-export const GuideText1 = styled.span`
+export const GuideText = styled.span`
   font-size: 18px;
   font-weight: 800;
-`;
-
-export const GuideText2 = styled.span`
-  font-size: 16px;
-  margin-top: 4%;
-  color: #0080ff;
-  cursor: pointer;
 `;

@@ -3,7 +3,16 @@ import ContentsHeader from './header/ContentsHeader.index';
 import ContentsBody from './body/ContentsBody.index';
 import ContentsFooter from './footer/ContentsFooter.index';
 
-export default function Contents(): JSX.Element {
+export interface PostData {
+  commentCount: number;
+  postId: string;
+  content: string;
+  postImage: string;
+  nickname: string;
+  userProfileImage: string;
+}
+
+export default function Contents(props: PostData): JSX.Element {
   const Wrapper = styled.div`
     width: 468px;
     height: auto;
@@ -14,11 +23,17 @@ export default function Contents(): JSX.Element {
     }
   `;
 
+  console.log(props.postId);
   return (
     <Wrapper>
-      <ContentsHeader />
-      <ContentsBody />
-      <ContentsFooter />
+      <ContentsHeader userProfileImage={props.userProfileImage} nickname={props.nickname} />
+      <ContentsBody postImage={props.postImage} />
+      <ContentsFooter
+        commentCount={props.commentCount}
+        postId={props.postId}
+        content={props.content}
+        nickname={props.nickname}
+      />
     </Wrapper>
   );
 }

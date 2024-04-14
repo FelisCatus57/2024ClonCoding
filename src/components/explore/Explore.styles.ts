@@ -48,6 +48,7 @@ export const Post = styled.div`
   width: 33.333%;
   padding-top: 33.333%;
   position: relative;
+  cursor: pointer;
 `;
 
 export const Img = styled.div`

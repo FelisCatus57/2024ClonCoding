@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import * as S from '../postdetailcommentsmodal/PostDetailCommentsModal.styles';
-
 import Image from 'next/image';
-import { useGetComments } from '../../../../services/comment/useGetComments';
-import { useDeleteComment } from '../../../../services/comment/useDeleteComment';
+import * as S from '../commentsmodal/CommentsModal.styles';
+import { useInputResize } from '../../../../../hooks/useInputResize';
 import { useRecoilValue } from 'recoil';
-import { nickname } from '../../../../commons/globalstate/globalstate';
-import { usePostReply } from '../../../../services/comment/usePostReply';
-import { useInputResize } from '../../../../hooks/useInputResize';
+import { useGetComments } from '../../../../../services/comment/useGetComments';
+import { nickname } from '../../../../../commons/globalstate/globalstate';
+import { useDeleteComment } from '../../../../../services/comment/useDeleteComment';
+import { usePostReply } from '../../../../../services/comment/usePostReply';
+
 interface CommentsModalProps {
   isOpen: boolean;
   closeModal: () => void;
@@ -25,10 +25,11 @@ interface Comment {
   nickname: string;
   content: string;
 }
-export default function PostDetailCommentsModal(props: CommentsModalProps) {
+export default function CommentsModal(props: CommentsModalProps) {
   const handleModalClick = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
   };
+
   const { handleResizeHeight } = useInputResize();
   const [shouldRender, setShouldRender] = useState<boolean>(props.isOpen);
   const myNickname = useRecoilValue(nickname);
@@ -50,9 +51,7 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
   const handleDeteteComment = async (postId: string, commentId: string) => {
     try {
       await deleteComment(postId, commentId);
-      // props.closeModal();
     } catch (err) {
-      // props.closeModal();
       console.error(err);
     }
   };
@@ -68,7 +67,6 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
       setOpenReplyInputId(commentId);
     }
   };
-
   //대댓글 보기
 
   const [visibleRepliesId, setVisibleRepliesId] = useState<string | null>(null);
@@ -88,7 +86,7 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
   const { postReply } = usePostReply();
   const handleReplySubmit = async (e: { preventDefault: () => void }, commentId: string) => {
     e.preventDefault();
-    if (!replyComment.trim()) return;
+
     try {
       await postReply(props.postId, commentId, replyComment);
       setReplyComment('');

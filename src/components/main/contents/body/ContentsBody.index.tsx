@@ -1,11 +1,14 @@
 import Image from 'next/image';
 import * as S from './ContentsBody.styles';
 
-export default function ContentsBody(): JSX.Element {
+export interface PostData {
+  postImage: string;
+}
+
+export default function ContentsBody(props: PostData): JSX.Element {
   return (
     <S.Wrapper>
-      {/* 테스트 이미지입니다. */}
-      <Image src={'/contentstest.jpeg'} height={500} width={468} />
+      <Image src={props.postImage || '/navicon/user.png'} alt="이미지가 없습니다" height={500} width={468} />
     </S.Wrapper>
   );
 }

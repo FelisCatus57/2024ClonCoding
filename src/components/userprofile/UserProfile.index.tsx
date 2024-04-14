@@ -164,8 +164,7 @@ export default function UserProfile(): JSX.Element {
           </S.PostWrapper>
         ) : (
           <S.GuideTextWrapper>
-            <S.GuideText1>친구들과의 소중한 순간을 남겨보세요</S.GuideText1>
-            <S.GuideText2>첫 게시물을 만들어보세요</S.GuideText2>
+            <S.GuideText>게시물이 없습니다.</S.GuideText>
           </S.GuideTextWrapper>
         )}
       </S.Wrapper>
