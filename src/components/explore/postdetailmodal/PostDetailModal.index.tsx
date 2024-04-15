@@ -63,8 +63,6 @@ export default function PostDetailModal(props: PostBoardModalProps) {
     setIsLike(checkLike);
   }, [likeUsers, myNickname]);
 
-  console.log(likeUsers);
-  console.log(isLike);
   // 좋아요 / 좋아요 취소
   const handleLike = async (postId: string) => {
     const originalIsLike = isLike; // 원래 상태 저장
@@ -131,7 +129,6 @@ export default function PostDetailModal(props: PostBoardModalProps) {
           </S.UserInfo>
         </S.Header>
         <S.ImageWrapper>
-          {/* 테스트 이미지입니다. */}
           <Image src={props.postImage || '/navicon/user.png'} layout="fill" />
         </S.ImageWrapper>
         <S.FooterWrapper>

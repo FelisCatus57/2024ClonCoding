@@ -43,7 +43,6 @@ export default function Explore(): JSX.Element {
   };
   const userPosts = data?.data;
 
-  console.log(userPosts);
   return (
     <>
       <S.Wrapper>

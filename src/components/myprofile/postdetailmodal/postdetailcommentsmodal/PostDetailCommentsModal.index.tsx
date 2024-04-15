@@ -44,7 +44,7 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
     }
   }, [props.isOpen]);
 
-  const { data } = useGetComments(props.postId);
+  const { data: comments } = useGetComments(props.postId);
   const { deleteComment } = useDeleteComment();
   //댓글 삭제
   const handleDeteteComment = async (postId: string, commentId: string) => {
@@ -103,7 +103,7 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
       <S.ModalContainerWrapper $isOpen={props.isOpen} onClick={handleModalClick}>
         <S.Header>댓글</S.Header>
         <S.ModalContainer>
-          {data?.data.map((comment: Comment) => (
+          {comments?.data.map((comment: Comment) => (
             <>
               <S.CommentWrapper key={comment.commentId}>
                 <S.UserImg>

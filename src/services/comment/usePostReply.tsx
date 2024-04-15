@@ -21,7 +21,6 @@ export const usePostReply = () => {
           },
         }
       );
-
       alert('답글이 등록되었습니다.');
       setIsLoading(false);
       return response.data;

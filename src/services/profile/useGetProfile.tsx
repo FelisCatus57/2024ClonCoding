@@ -4,7 +4,6 @@ import { getCookie } from '../login/useReactCookie';
 import { nickname, profileImageUrl } from '../../commons/globalstate/globalstate';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 
 export function useGetProfile(userNickname: string) {
   const [profileImage, setProfileImage] = useRecoilState<string | null | undefined>(profileImageUrl);
@@ -20,7 +19,6 @@ export function useGetProfile(userNickname: string) {
     });
     if (myNickname === router.query.userid && data?.data?.userImage?.imageUrl !== profileImage) {
       setProfileImage(data?.data?.userImage?.imageUrl);
-      console.log('ㅊ');
     }
     return data;
   };

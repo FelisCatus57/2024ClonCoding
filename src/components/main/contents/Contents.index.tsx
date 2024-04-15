@@ -23,7 +23,6 @@ export default function Contents(props: PostData): JSX.Element {
     }
   `;
 
-  console.log(props.postId);
   return (
     <Wrapper>
       <ContentsHeader userProfileImage={props.userProfileImage} nickname={props.nickname} />

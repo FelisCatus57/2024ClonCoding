@@ -34,7 +34,7 @@ export default function Main(): JSX.Element {
     align-items: center;
   `;
 
-  const { data } = useGetFollowingBoard();
+  const { data: Board } = useGetFollowingBoard();
 
   const Notice = styled.span`
     margin-top: 10%;
@@ -46,7 +46,7 @@ export default function Main(): JSX.Element {
     <>
       <Wrapper>
         <Story />
-        {data?.data?.map((post: PostData) => (
+        {Board?.data?.map((post: PostData) => (
           <Contents
             commentCount={post.commentCount}
             postId={post.postId}
@@ -56,7 +56,7 @@ export default function Main(): JSX.Element {
             userProfileImage={post.userFeedResponse?.userProfileUrl}
           />
         ))}
-        {data?.data?.length === 0 && (
+        {Board?.data?.length === 0 && (
           <Notice>
             게시물이 없습니다.
             <br />

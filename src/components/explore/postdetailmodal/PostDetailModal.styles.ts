@@ -12,7 +12,6 @@ export const Header = styled.div`
   font-size: 15px;
   font-weight: 700;
   padding: 0 3%;
-  /* border-bottom: 1px solid #d8d8d8; */
 `;
 
 export const UserImg = styled.div`
@@ -88,7 +87,6 @@ export const ImageWrapper = styled.div`
   }
 `;
 
-////
 export const FooterWrapper = styled.div`
   width: 100%;
   padding: 0 3%;
@@ -161,7 +159,6 @@ export const InputComment = styled.textarea`
 
 export const Button = styled.button`
   width: 50px;
-  /* height: 20px; */
   margin-bottom: 20px;
   border: none;
   color: #3498db;

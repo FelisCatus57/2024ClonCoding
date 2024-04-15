@@ -36,7 +36,7 @@ export default function UserProfile(): JSX.Element {
   const myNickname = useRecoilValue(nickname);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState('');
-  const { data } = useGetProfile(userNickname);
+  const { data: profile } = useGetProfile(userNickname);
   const { data: followers } = useGetFollowers(userNickname);
   const { postFollow, isLoading } = useFollow();
   const { postUnFollow, isLoading: ufIsLoading } = useUnFollow();
@@ -44,10 +44,10 @@ export default function UserProfile(): JSX.Element {
   const [userFollowCount, setUserFollowCount] = useState<number | undefined>(undefined);
   // 팔로우 카운트 데이터로 초기화
   useEffect(() => {
-    if (data?.data?.userFollowCount !== undefined) {
-      setUserFollowCount(data.data.userFollowCount);
+    if (profile?.data?.userFollowCount !== undefined) {
+      setUserFollowCount(profile.data.userFollowCount);
     }
-  }, [data?.data?.userFollowCount]);
+  }, [profile?.data?.userFollowCount]);
 
   useEffect(() => {
     // followers 배열을 순회하여 myNickname이 존재하는지 확인
@@ -56,8 +56,8 @@ export default function UserProfile(): JSX.Element {
     );
     setIsFollowing(checkFollowing);
   }, [followers, myNickname]);
-  const postCount = data?.data?.userPostCount;
-  const userPosts = data?.data?.userPost;
+  const postCount = profile?.data?.userPostCount;
+  const userPosts = profile?.data?.userPost;
   const openModal = (postId: string) => {
     document.documentElement.style.overflowY = 'hidden';
     document.body.style.overflowY = 'hidden';
@@ -108,10 +108,10 @@ export default function UserProfile(): JSX.Element {
         </S.Header>
         <S.InfoWrapper>
           <S.UserImg>
-            <Image src={data?.data?.userImage.imageUrl || '/user.png'} layout="fill" />
+            <Image src={profile?.data?.userImage.imageUrl || '/user.png'} layout="fill" />
           </S.UserImg>
           <S.NumBox>
-            <S.Num>{data?.data?.userPostCount}</S.Num>
+            <S.Num>{profile?.data?.userPostCount}</S.Num>
             <S.NumText>게시물</S.NumText>
           </S.NumBox>
           <Link href={`/user/${userNickname}/follower`}>
@@ -122,16 +122,16 @@ export default function UserProfile(): JSX.Element {
           </Link>
           <Link href={`/user/${userNickname}/following`}>
             <S.NumBox>
-              <S.Num>{data?.data?.userFollowCount}</S.Num>
+              <S.Num>{profile?.data?.userFollowCount}</S.Num>
               <S.NumText>팔로잉</S.NumText>
             </S.NumBox>
           </Link>
         </S.InfoWrapper>
         <S.IntroduceWrapper>
           <S.Name>{userNickname}</S.Name>
-          <S.Introduce>{data?.data?.userIntroduce}</S.Introduce>
-          <S.Website href={data?.data?.Website} target="_blank" rel="noopener noreferrer">
-            {data?.data?.Website}
+          <S.Introduce>{profile?.data?.userIntroduce}</S.Introduce>
+          <S.Website href={profile?.data?.Website} target="_blank" rel="noopener noreferrer">
+            {profile?.data?.Website}
           </S.Website>
         </S.IntroduceWrapper>
         <S.ButtonWrapper>
@@ -171,7 +171,7 @@ export default function UserProfile(): JSX.Element {
       {isModalOpen && (
         <PostDetailModal
           userNickname={userNickname}
-          userImage={data?.data?.userImage.imageUrl || '/user.png'}
+          userImage={profile?.data?.userImage.imageUrl || '/user.png'}
           isOpen={isModalOpen}
           closeModal={closeModal}
           postId={selectedPostId}
