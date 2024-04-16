@@ -118,17 +118,6 @@ export default function PostDetailModal(props: PostBoardModalProps) {
     }
   };
 
-  const handleKeyPress = async (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter') {
-      if (!comment.trim()) return;
-      try {
-        await postComment(props.postId, comment);
-        setComment('');
-      } catch (err) {
-        console.error('Error posting comment:', err);
-      }
-    }
-  };
   return (
     <S.ModalBackdrop onClick={props.closeModal}>
       <S.ModalContainer onClick={handleModalClick}>
@@ -182,7 +171,6 @@ export default function PostDetailModal(props: PostBoardModalProps) {
             <S.InputComment
               placeholder="댓글 달기..."
               onInput={handleResizeHeight}
-              onKeyPress={handleKeyPress}
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />

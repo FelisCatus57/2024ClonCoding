@@ -72,9 +72,10 @@ export const InputComment = styled.textarea`
   font-size: 14px;
 `;
 
-export const Button = styled.div`
-  width: 40px;
-  height: 42px;
+export const Button = styled.button`
+  width: 42px;
+  padding-bottom: 20px;
+  background-color: white;
   border: none;
   color: #3498db;
   cursor: pointer;

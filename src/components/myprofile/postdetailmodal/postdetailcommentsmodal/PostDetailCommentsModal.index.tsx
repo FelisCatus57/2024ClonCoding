@@ -44,7 +44,7 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
     }
   }, [props.isOpen]);
 
-  const { data } = useGetComments(props.postId);
+  const { data: comments } = useGetComments(props.postId);
   const { deleteComment } = useDeleteComment();
   //댓글 삭제
   const handleDeteteComment = async (postId: string, commentId: string) => {
@@ -97,26 +97,13 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
     }
   };
 
-  const handleKeyPress = async (event: React.KeyboardEvent, commentId: string) => {
-    if (event.key === 'Enter') {
-      if (!replyComment.trim()) return;
-      try {
-        await postReply(props.postId, commentId, replyComment);
-        setReplyComment('');
-        setOpenReplyInputId(null);
-      } catch (err) {
-        console.error('Error posting comment:', err);
-      }
-    }
-  };
-
   if (!shouldRender) return null;
   return (
     <S.ModalBackdrop onClick={props.closeModal}>
       <S.ModalContainerWrapper $isOpen={props.isOpen} onClick={handleModalClick}>
         <S.Header>댓글</S.Header>
         <S.ModalContainer>
-          {data?.data.map((comment: Comment) => (
+          {comments?.data.map((comment: Comment) => (
             <>
               <S.CommentWrapper key={comment.commentId}>
                 <S.UserImg>
@@ -135,7 +122,6 @@ export default function PostDetailCommentsModal(props: CommentsModalProps) {
                     <>
                       <S.InputReply
                         onInput={handleResizeHeight}
-                        onKeyPress={(event) => handleKeyPress(event, comment.commentId)}
                         placeholder="답글 달기..."
                         value={replyComment}
                         onChange={(e) => setReplyComment(e.target.value)}

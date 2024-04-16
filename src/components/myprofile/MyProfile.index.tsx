@@ -34,9 +34,9 @@ export default function MyProfile(): JSX.Element {
   const [selectedPostId, setSelectedPostId] = useState('');
   const myNickname = useRecoilValue(nickname);
   const myProfileImage = useRecoilValue(profileImageUrl);
-  const { data } = useGetProfile(myNickname);
-  const postCount = data?.data?.userPostCount;
-  const userPosts = data?.data?.userPost;
+  const { data: profile } = useGetProfile(myNickname);
+  const postCount = profile?.data?.userPostCount;
+  const userPosts = profile?.data?.userPost;
   const logout = useLogout();
 
   //프로필 사진 수정
@@ -84,27 +84,27 @@ export default function MyProfile(): JSX.Element {
             <S.EditImg onClick={() => openEditImgModal()}>+</S.EditImg>
           </S.UserImg>
           <S.NumBox>
-            <S.Num>{data?.data?.userPostCount}</S.Num>
+            <S.Num>{profile?.data?.userPostCount}</S.Num>
             <S.NumText>게시물</S.NumText>
           </S.NumBox>
           <Link href={`/user/${myNickname}/follower`}>
             <S.NumBox>
-              <S.Num>{data?.data?.userFollowerCount}</S.Num>
+              <S.Num>{profile?.data?.userFollowerCount}</S.Num>
               <S.NumText>팔로워</S.NumText>
             </S.NumBox>
           </Link>
           <Link href={`/user/${myNickname}/following`}>
             <S.NumBox>
-              <S.Num>{data?.data?.userFollowCount}</S.Num>
+              <S.Num>{profile?.data?.userFollowCount}</S.Num>
               <S.NumText>팔로잉</S.NumText>
             </S.NumBox>
           </Link>
         </S.InfoWrapper>
         <S.IntroduceWrapper>
           <S.Name>{myNickname}</S.Name>
-          <S.Introduce>{data?.data?.userIntroduce}</S.Introduce>
-          <S.Website href={data?.data?.userWebsite} target="_blank" rel="noopener noreferrer">
-            {data?.data?.userWebsite}
+          <S.Introduce>{profile?.data?.userIntroduce}</S.Introduce>
+          <S.Website href={profile?.data?.userWebsite} target="_blank" rel="noopener noreferrer">
+            {profile?.data?.userWebsite}
           </S.Website>
         </S.IntroduceWrapper>
         <S.ButtonWrapper>

@@ -19,8 +19,6 @@ export default function Search(): JSX.Element {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputId(e.target.value);
   };
-
-  console.log(searchData);
   const clearInput = () => {
     setInputId('');
   };
