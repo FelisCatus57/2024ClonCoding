@@ -10,8 +10,8 @@ import Link from 'next/link';
 export default function Search(): JSX.Element {
   const [inputId, setInputId] = useState('');
   const router = useRouter();
-  const { data: searchData, isLoading } = useGetSearch(inputId); // 검색어에 따른 결과를 받아옴
-
+  const { data, isLoading } = useGetSearch(inputId); // 검색어에 따른 결과를 받아옴
+  const searchData = data?.data;
   const handleBack = () => {
     router.back();
   };
@@ -41,8 +41,8 @@ export default function Search(): JSX.Element {
 
       {/* 검색 결과가 있을 때 결과 렌더링 */}
       {!isLoading &&
-        searchData?.data?.length > 0 &&
-        searchData.data.map((user: { nickname: string; Id: number; profileImgUrl: string; name: string }) => (
+        searchData?.length > 0 &&
+        searchData.map((user: { nickname: string; Id: number; profileImgUrl: string; name: string }) => (
           <Link href={`/user/${user.nickname}`} key={user.Id}>
             <S.UserBox>
               <S.UserImgWrapper>

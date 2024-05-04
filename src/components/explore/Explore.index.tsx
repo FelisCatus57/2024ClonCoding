@@ -42,7 +42,6 @@ export default function Explore(): JSX.Element {
     setIsModalOpen(false);
   };
   const userPosts = data?.data;
-
   return (
     <>
       <S.Wrapper>
@@ -55,7 +54,7 @@ export default function Explore(): JSX.Element {
           </Link>
         </S.Header>
         <S.PostWrapper>
-          {data?.data?.map((post: PostData) => (
+          {userPosts?.map((post: PostData) => (
             <S.Post key={post.postId} onClick={() => openModal(post.postId)}>
               <S.Img>
                 <Image src={post.postImageResponse[0]?.image?.imageUrl || '/navicon/user.png'} layout="fill" />

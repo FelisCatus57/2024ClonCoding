@@ -47,7 +47,8 @@ export default function PostDetailModal(props: PostBoardModalProps) {
   const myProfileImage = useRecoilValue(profileImageUrl);
 
   //좋아요
-  const { data: likeUsers } = useGetLikeUsers(props.postId);
+  const { data } = useGetLikeUsers(props.postId);
+  const likeUsers = data?.data;
   const { postLike, isLoading: likeLoading } = useLike();
   const { postUnLike, isLoading: unLikeLoading } = useUnLike();
   const [isLike, setIsLike] = useState(false);
@@ -55,15 +56,15 @@ export default function PostDetailModal(props: PostBoardModalProps) {
 
   //좋아요 카운트 데이터로 초기화
   useEffect(() => {
-    if (likeUsers?.data?.length !== undefined) {
-      setUserLikeCount(likeUsers.data.length);
+    if (likeUsers?.length !== undefined) {
+      setUserLikeCount(likeUsers.length);
     }
-  }, [likeUsers?.data?.length]);
+  }, [likeUsers.length]);
 
   //좋아요 확인
   useEffect(() => {
     // myNickname이 data 배열 내에 존재하는지 확인합니다.
-    const checkLike = likeUsers?.data?.some((user: { nickname: string }) => user.nickname === myNickname);
+    const checkLike = likeUsers?.some((user: { nickname: string }) => user.nickname === myNickname);
     setIsLike(checkLike);
   }, [likeUsers, myNickname]);
 

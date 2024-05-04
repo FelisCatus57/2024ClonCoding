@@ -17,8 +17,8 @@ export default function FollowingPage(): JSX.Element {
   const goBack = useRouterBack();
   const router = useRouter();
   const userNickname = router.query.userid as string;
-  const { data: followUsers } = useGetFollowing(userNickname);
-
+  const { data } = useGetFollowing(userNickname);
+  const followUsers = data?.data;
   return (
     <S.Wrapper>
       <S.Header>
@@ -26,7 +26,7 @@ export default function FollowingPage(): JSX.Element {
         팔로잉
       </S.Header>
 
-      {followUsers?.data?.map((user: User) => (
+      {followUsers?.map((user: User) => (
         <Link href={`/user/${user.response.nickname}`} key={user.response.userId}>
           <S.UserBox>
             <S.UserImg>

@@ -18,7 +18,7 @@ export default function FollowerPage(): JSX.Element {
   const router = useRouter();
   const userNickname = router.query.userid as string;
   const { data } = useGetFollowers(userNickname);
-
+  const followerUsers = data?.data;
   return (
     <S.Wrapper>
       <S.Header>
@@ -26,7 +26,7 @@ export default function FollowerPage(): JSX.Element {
         팔로워
       </S.Header>
 
-      {data?.data?.map((user: User) => (
+      {followerUsers?.map((user: User) => (
         <Link href={`/user/${user.response.nickname}`} key={user.response.userId}>
           <S.UserBox key={user.response.userId}>
             <S.UserImg>
